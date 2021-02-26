@@ -6,7 +6,6 @@
 int main()
 {
     // declaration and input of vars
-    printf("Hel");
     float base_a, base_b;
     float phi;
     scanf("%f%f%f", &base_a, &base_b, &phi);
@@ -27,4 +26,6 @@ int main()
     float square = height * (base_a + base_b) / 2;
 
     printf("%f", square);
+
+    return 0;
 }
