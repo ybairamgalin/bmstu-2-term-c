@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define EPS 1e-10
+#define EPS 1e-15
 
 
 int main()
