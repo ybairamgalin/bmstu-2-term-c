@@ -7,6 +7,9 @@
 
 #include <stdio.h>
 
+#define EPS 1e-10
+
+
 int main()
 {
     float x_a, y_a, x_b, y_b, x_c, y_c;
@@ -21,7 +24,7 @@ int main()
     square = det / 2;
     
     // check if the points are in the same line
-    if (det == 0)
+    if (det < EPS)
         return 10;
     
     // using det formula determinant may and up being negative
