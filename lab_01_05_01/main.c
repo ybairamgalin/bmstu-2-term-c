@@ -11,7 +11,7 @@ int main()
 {
     int num, denom;
     int corr_input = scanf("%d%d", &num, &denom);
-    if (corr_input < 2)
+    if (corr_input < 2 || corr_input == EOF)
         return 10;
     if (num < 0 || denom <= 0)
         return 10;
