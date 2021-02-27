@@ -16,7 +16,7 @@ int main()
     if (corr_input < 2)
         return 10;
     // due to the task
-    if (eps <=0 || eps > 1)
+    if (eps <= 0 || eps > 1)
         return 10;
     
     double precise_value = sin(x);
