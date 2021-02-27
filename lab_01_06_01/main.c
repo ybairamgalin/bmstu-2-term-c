@@ -24,7 +24,7 @@ int main()
     square = det / 2;
     
     // check if the points are in the same line
-    if (det < EPS)
+    if (square < EPS)
         return 10;
     
     // using det formula determinant may and up being negative
