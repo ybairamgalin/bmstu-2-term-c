@@ -16,10 +16,13 @@ int main()
     if (corr_input < 6)
         return 10;
     
-    
     // solve for signed square using det formula
     det = (x_a - x_c) * (y_b - y_c) - (x_b - x_c) * (y_a - y_c);
     square = det / 2;
+    
+    // check if the points are in the same line
+    if (det == 0)
+        return 10;
     
     // using det formula determinant may and up being negative
     square = square > 0 ? square: -square;
