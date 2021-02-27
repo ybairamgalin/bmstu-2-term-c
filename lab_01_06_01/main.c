@@ -25,7 +25,8 @@ int main()
         return 10;
     
     // using det formula determinant may and up being negative
-    square = (square > 0) ? square: -square;
+    if (square < 0)
+        square = -square;
     
     printf("%f", square);
     return 0;
