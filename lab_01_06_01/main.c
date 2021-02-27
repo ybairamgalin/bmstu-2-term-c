@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define EPS 1e-15
+#define EPS 1e-10
 
 
 int main()
@@ -23,13 +23,13 @@ int main()
     det = (x_a - x_c) * (y_b - y_c) - (x_b - x_c) * (y_a - y_c);
     square = det / 2;
     
-    // check if the points are in the same line
-    if (square < EPS)
-        return 10;
-    
     // using det formula determinant may and up being negative
     if (square < 0)
         square = -square;
+    
+    // check if the points are in the same line
+    if (square < EPS)
+        return 10;
     
     printf("%f", square);
     return 0;
