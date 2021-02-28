@@ -36,4 +36,6 @@ int main()
     double relative_error = absolute_error / precise_value;
     
     printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
+
+    return 0;
 }
