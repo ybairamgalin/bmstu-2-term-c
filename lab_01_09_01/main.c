@@ -27,6 +27,7 @@ int main()
         return INCORRECT_INPUT;
 
     double sum = 0;
+    int count = 1;
     // until appears negative element
     while (true)
     {
@@ -35,9 +36,11 @@ int main()
             return INCORRECT_INPUT;
 
         if (element >= 0)
-            sum += element;
+            sum += sqrt(element / count);
         else
             break;
+        
+        count++;
     }
 
     double result = g_func(sum);
