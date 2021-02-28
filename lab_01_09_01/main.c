@@ -12,37 +12,38 @@
 // function receives sum and returns sin value of this sum
 double g_func(double x)
 {
-	double result = sin(x);
-	return result;
+    double result = sin(x);
+    return result;
 }
 
 int main()
 {
-	double element;
+    double element;
 
-	int corr_input = scanf("%lf", &element);
-	if (corr_input != 1)
-		return INCORRECT_INPUT;
-	if (element > 0)
-		return INCORRECT_INPUT;
+    int corr_input = scanf("%lf", &element);
+    if (corr_input != 1)
+        return INCORRECT_INPUT;
+    if (element < 0)
+        return INCORRECT_INPUT;
 
-	double sum = 0;
-	// until appears negative element
-	while (true)
-	{
-		int corr_input = scanf("%lf", &element);
-		if (corr_input != 1)
-			return INCORRECT_INPUT;
+    double sum = 0;
+    // until appears negative element
+    while (true)
+    {
+        int corr_input = scanf("%lf", &element);
+        if (corr_input != 1)
+            return INCORRECT_INPUT;
 
-		if (element >= 0)
-			sum += element;
-		else
-			break;
-	}
+        if (element >= 0)
+            sum += element;
+        else
+            break;
+    }
 
-	double result = g_func(sum);
-	printf("%lf", result);
+    double result = g_func(sum);
+    printf("%lf", result);
 
-	return EXEC_OK;
+    return EXEC_OK;
 }
+
 
