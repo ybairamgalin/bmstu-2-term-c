@@ -26,7 +26,7 @@ int main()
     if (element < 0)
         return INCORRECT_INPUT;
 
-    double sum = element;
+    double sum = sqrt(element);
     
     // set count = 2 as the first element has already been given
     int count = 2;
