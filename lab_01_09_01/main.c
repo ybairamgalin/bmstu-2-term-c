@@ -26,8 +26,11 @@ int main()
     if (element < 0)
         return INCORRECT_INPUT;
 
-    double sum = 0;
-    int count = 1;
+    double sum = element;
+    
+    // set count = 2 as the first element has already been given
+    int count = 2;
+    
     // until appears negative element
     while (true)
     {
@@ -39,7 +42,6 @@ int main()
             sum += sqrt(element / count);
         else
             break;
-        
         count++;
     }
 
