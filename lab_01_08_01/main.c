@@ -8,10 +8,7 @@
 
 // function recieves 4 bytes and returns 4 bytes packed into a single var
 // all vars type is unsigned long int
-unsigned long int pack(unsigned long int byte_1,
-                       unsigned long int byte_2,
-                       unsigned long int byte_3,
-                       unsigned long int byte_4)
+unsigned long int pack(unsigned long int byte_1, unsigned long int byte_2, unsigned long int byte_3, unsigned long int byte_4)
 {
     unsigned long int res = byte_1 | byte_2 | byte_3 | byte_4;
     return res;
