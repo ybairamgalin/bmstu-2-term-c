@@ -13,9 +13,15 @@ int main()
     unsigned long int byte_a, byte_b, byte_c, byte_d;
     unsigned long int corr_input = scanf("%lu%lu%lu%lu", &byte_a, &byte_b, &byte_c, &byte_d);
     if (corr_input != 4)
+    {
+        printf("Error: input error");
         return INCORRECT_INPUT;
+    }
     if (byte_a > 255 || byte_b > 255 || byte_c > 255 || byte_d > 255)
+    {
+        printf("Error: input error");
         return INCORRECT_INPUT;
+    }
     
     //
     unsigned long int byte_a_left_24 = byte_a << 24;
@@ -24,10 +30,11 @@ int main()
     
     unsigned long int packed = byte_a_left_24 | byte_b_left_16 | byte_c_left_8 | byte_d;
     
+    printf("Result: ");
     for (int i = 31; i >= 0; i--)
         printf("%lu", (packed >> i) % 2);
     
-    printf("\n");
+    printf(" ");
     
     for (int i = 3; i >= 0; i--)
         printf("%lu ", (packed >> (i * 8)) % 256);
