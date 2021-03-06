@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define INCORRECT_INPUT 10
+#define INCORRECT_INPUT 5
 #define EXEC_OK 0
 
 // prints two double vars
