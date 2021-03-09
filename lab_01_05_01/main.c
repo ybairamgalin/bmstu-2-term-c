@@ -11,7 +11,7 @@
 #define EXEC_OK 0
 
 // prints two double vars
-void print_output(double first, double second)
+void print_output(int first, int second)
 {
     printf("%d %d", first, second);
 }
