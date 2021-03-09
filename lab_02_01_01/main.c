@@ -10,14 +10,12 @@ int main()
     int arr[ARRAY_SIZE];
     // prod - final product
     int prod = 1;
-    for (int i = 0; i < ARRAY_SIZE; i++)
+    int i = 0;
+    while (scanf("%d", arr + i))
     {
-        int corr_input = scanf("%d", arr + i);
-        if (corr_input != 1)
-            return INCORRECT_INPUT;
-        
         if (i % 2 == 1)
             prod *= arr[i];
+        i++;
     }
     
     printf("%d", prod);
