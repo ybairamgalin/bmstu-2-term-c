@@ -71,8 +71,13 @@ int main()
         }
     }
     
+    if (count_new_array == 0)
+        return INCORRECT_INPUT;
+    
     for (int i = 0; i < count_new_array; i++)
     {
         printf("%d ", result_array[i]);
     }
+    
+    return EXEC_OK;
 }
