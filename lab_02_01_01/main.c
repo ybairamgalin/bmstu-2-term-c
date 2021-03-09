@@ -4,8 +4,8 @@
 #define INCORRECT_INPUT 10
 
 #define ARRAY_SIZE 10
-#define CONTAINS 1
-#define DOES_NOT_CONTAIN 0
+#define YES 1
+#define NO 0
 
 int main()
 {
@@ -15,11 +15,10 @@ int main()
     int corr_input = scanf("%d", &number_of_elements);
     if (corr_input != 1 || number_of_elements < 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_INPUT;
+    int CONTAINS_ODD = NO;
     
     // prod - final product
     int prod = 1;
-    // 0 - false; 1 - true
-    int array_contains_even = DOES_NOT_CONTAIN;
     for (int i = 0; i < number_of_elements; i++)
     {
         corr_input = scanf("%d", arr + i);
@@ -27,11 +26,13 @@ int main()
             return INCORRECT_INPUT;
         // != to avoid problems with negative elements
         if (arr[i] % 2 != 0)
-            array_contains_even = CONTAINS;
+        {
             prod *= arr[i];
+            CONTAINS_ODD = YES;
+        }
     }
     
-    if (array_contains_even == DOES_NOT_CONTAIN)
+    if (CONTAINS_ODD == NO)
         return INCORRECT_INPUT;
  
     printf("%d", prod);
