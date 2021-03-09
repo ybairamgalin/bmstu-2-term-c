@@ -37,7 +37,7 @@ int main()
     
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);
-    if (corr_input != 1 || number_of_elements < 0 || number_of_elements > ARRAY_SIZE)
+    if (corr_input != 1 || number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_INPUT;
     
     // prod - final product
