@@ -21,7 +21,8 @@ int main()
         corr_input = scanf("%d", arr + i);
         if (corr_input != 1)
             return INCORRECT_INPUT;
-        if (i % 2 == 1)
+        // != to avoid problems with negative elements
+        if (arr[i] % 2 != 0)
             prod *= arr[i];
     }
  
