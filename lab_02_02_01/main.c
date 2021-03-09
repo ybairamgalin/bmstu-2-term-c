@@ -34,16 +34,11 @@ int is_prime(int x)
 {
     int x_is_prime = YES;
     
-    // delete if negative numbers are not considered as primes
-    
-    //
-    
     // if the condition is completed for cycle won't be executed
-    // change to one if test still fails
-    //    if (x <= 0)
-    //        x_is_prime = NO;
+    if (x <= 1)
+        x_is_prime = NO;
     
-    for (int i = 2; i < x; i++)
+    for (int i = 2; i < x / 2 + 1; i++)
     {
         if (x % i == 0)
         {
