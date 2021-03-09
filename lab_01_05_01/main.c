@@ -19,11 +19,9 @@ void print_output(double first, double second)
 
 int main()
 {
-    // !!! double is set only to complete pipeline
-    // once fixed, should be turned into int !!!
-    double num, denom;
+    int num, denom;
     int corr_input = scanf("%lf%lf", &num, &denom);
-    if (corr_input != 2 || num < 0 || denom <= 0)
+    if (corr_input != 2 || num < 0 || denom < 0)
         return INCORRECT_INPUT;
     
     int quo = 0;
