@@ -11,16 +11,15 @@
 #define EXEC_OK 0
 
 // prints two double vars
-// input vars should be turned into int when pipeline is fixed
 void print_output(double first, double second)
 {
-    printf("%lf %lf", first, second);
+    printf("%d %d", first, second);
 }
 
 int main()
 {
     int num, denom;
-    int corr_input = scanf("%lf%lf", &num, &denom);
+    int corr_input = scanf("%d%d", &num, &denom);
     if (corr_input != 2 || num < 0 || denom < 0)
         return INCORRECT_INPUT;
     
