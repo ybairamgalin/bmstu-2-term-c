@@ -25,7 +25,7 @@ int solve(int *array, int arr_lng, int *product)
     return contains_odd;
 }
 
-// function printa int number
+// function prints an int number
 void print_output(int number)
 {
     printf("%d", number);

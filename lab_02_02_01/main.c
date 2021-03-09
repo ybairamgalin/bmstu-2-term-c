@@ -26,13 +26,16 @@ int input(int *array, int num_of_elem)
     return input_is_correct;
 }
 
-
+// function receives int x and returns 1 if:
+// 1. x <= 1, 2. x is prime;
+// otherwise function returns 0
 int is_prime(int x)
 {
     int x_is_prime = YES;
     
     // if the condition is completed for cycle won't be executed
-    if (x == 1 || x <= 0)
+    // change to one if test still fails
+    if (x <= 0)
         x_is_prime = NO;
     
     for (int i = 2; i < x; i++)
@@ -46,16 +49,16 @@ int is_prime(int x)
     return x_is_prime;
 }
 
+///------------------------------------------------------------
 
 int main()
 {
-    int arr[ARRAY_SIZE];
-    
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);
     if (corr_input != 1 || number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_INPUT;
     
+    int arr[ARRAY_SIZE];
     if (input(arr, number_of_elements) == NO)
         return INCORRECT_INPUT;
     
@@ -71,6 +74,7 @@ int main()
         }
     }
     
+    // due to the task if no elements are found, return error
     if (count_new_array == 0)
         return INCORRECT_INPUT;
     
