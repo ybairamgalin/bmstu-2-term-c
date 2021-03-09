@@ -8,16 +8,23 @@
 int main()
 {
     int arr[ARRAY_SIZE];
+    
+    int number_of_elements;
+    int corr_input = scanf("%d", &number_of_elements);
+    if (corr_input != 1 || number_of_elements < 0 || number_of_elements > ARRAY_SIZE)
+        return INCORRECT_INPUT;
+    
     // prod - final product
     int prod = 1;
-    int i = 0;
-    while (scanf("%d", arr + i))
+    for (int i = 0; i < number_of_elements; i++)
     {
+        corr_input = scanf("%d", arr + i);
+        if (corr_input != 1)
+            return INCORRECT_INPUT;
         if (i % 2 == 1)
             prod *= arr[i];
-        i++;
     }
-    
+ 
     printf("%d", prod);
 
     return EXEC_OK;
