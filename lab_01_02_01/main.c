@@ -3,6 +3,7 @@
 
 #define EXEC_OK 0
 
+// TO_RAD = PI / 180
 #define TO_RAD 0.017453292519943
 
 int main()

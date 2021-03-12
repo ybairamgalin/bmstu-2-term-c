@@ -52,5 +52,5 @@ int main()
     
     printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
 
-    return 0;
+    return EXEC_OK;
 }

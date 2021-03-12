@@ -8,6 +8,7 @@
 #define EXEC_OK 0
 #define INCORRECT_INPUT 10
 
+#define EXPECTED_ARGS 4
 
 // function receives sum and returns sin value of this sum
 double g_func(double x)
@@ -21,7 +22,7 @@ int main()
     double element;
 
     int corr_input = scanf("%lf", &element);
-    if (corr_input != 1)
+    if (corr_input != EXPECTED_ARGS)
         return INCORRECT_INPUT;
     if (element < 0)
         return INCORRECT_INPUT;

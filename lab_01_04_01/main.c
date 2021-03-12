@@ -2,6 +2,9 @@
 
 #define EXEC_OK 0
 
+#define APARTMENTS_IN_PORCH 36
+#define APARTMENTS_IN_FLOOR 4
+
 int main()
 {
     int apart_num;
@@ -11,8 +14,8 @@ int main()
 
     // enumerate apartments, porches, floors from 0, then add 1 to each result
     apart_num--;
-    porch = apart_num / 36;
-    floor = (apart_num - 36 * porch) / 4;
+    porch = apart_num / APARTMENTS_IN_PORCH;
+    floor = (apart_num - APARTMENTS_IN_PORCH * porch) / APARTMENTS_IN_FLOOR;
 
     porch++;
     floor++;
