@@ -7,7 +7,7 @@
 #define YES 1
 #define NO 0
 
-// function finds the product of all negative elements and puts in into *product
+// function finds the product of all negative elements and them in into *product
 // if no such elements exist returns 0
 // else returns 1
 int solve(int *array, int arr_lng, int *product)
