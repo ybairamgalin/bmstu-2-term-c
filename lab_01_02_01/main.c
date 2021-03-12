@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <math.h>
 
-#define M_PI 3.14159265358979323846
+#define EXEC_OK 0
+
+#define TO_RAD 0.017453292519943
 
 int main()
 {
@@ -19,13 +21,13 @@ int main()
     }
 
     // convert phi to rad
-    phi = phi * (M_PI / 180);
+    phi = phi * TO_RAD;
 
-    // first fond height, sedond square
+    // first fond height, second square
     float height = tan(phi) * (base_a - base_b) / 2;
     float square = height * (base_a + base_b) / 2;
 
     printf("%f", square);
 
-    return 0;
+    return EXEC_OK;
 }

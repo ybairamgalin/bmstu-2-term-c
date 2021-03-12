@@ -11,7 +11,9 @@
 #define INCORRECT_INPUT 10
 #define EXEC_OK 0
 
-// function recives two parametrs: double expected -
+#define EXPECTED_ARGS 2
+
+// function receives two parameters: double expected -
 // the precise value, double measured - measured or
 // approximated value
 // function returns abs error of the given data
@@ -26,7 +28,7 @@ int main()
     double x;
     double eps;
     int corr_input = scanf("%lf%lf", &x, &eps);
-    if (corr_input < 2)
+    if (corr_input != EXPECTED_ARGS)
         return INCORRECT_INPUT;
     // due to the task
     if (eps <= 0 || eps > 1)

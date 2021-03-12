@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define EXEC_OK 0
+
 int main()
 {
     // declaration and input of vars
@@ -12,5 +14,5 @@ int main()
     temp_out = (volume_1 * temp_1 + volume_2 * temp_2) / volume_out;
 
     printf("%f %f", volume_out, temp_out);
-    return 0;
+    return EXEC_OK;
 }

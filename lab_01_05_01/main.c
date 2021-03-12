@@ -10,6 +10,8 @@
 #define INCORRECT_INPUT 5
 #define EXEC_OK 0
 
+#define EXPECTED_ARGS 2
+
 // prints two double vars
 void print_output(int first, int second)
 {
@@ -20,7 +22,7 @@ int main()
 {
     int num, denom;
     int corr_input = scanf("%d%d", &num, &denom);
-    if (corr_input != 2 || num <= 0 || denom <= 0)
+    if (corr_input != EXPECTED_ARGS || num <= 0 || denom <= 0)
         return INCORRECT_INPUT;
     
     int quo = 0;

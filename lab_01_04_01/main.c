@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#define EXEC_OK 0
+
 int main()
 {
     int apart_num;
@@ -7,7 +9,7 @@ int main()
     int floor;
     scanf("%d", &apart_num);
 
-    // enumerate apartaments, porches, floors from 0, then add 1 to each result
+    // enumerate apartments, porches, floors from 0, then add 1 to each result
     apart_num--;
     porch = apart_num / 36;
     floor = (apart_num - 36 * porch) / 4;
@@ -16,5 +18,5 @@ int main()
     floor++;
 
     printf("%d %d", porch, floor);
-    return 0;
+    return EXEC_OK;
 }
