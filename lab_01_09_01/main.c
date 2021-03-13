@@ -8,7 +8,7 @@
 #define EXEC_OK 0
 #define INCORRECT_INPUT 10
 
-#define EXPECTED_ARGS 4
+#define EXPECTED_ARGS 1
 
 // function receives sum and returns sin value of this sum
 double g_func(double x)
