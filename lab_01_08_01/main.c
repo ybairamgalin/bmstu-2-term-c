@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 
 #define EXPECTED_ARGS 4
@@ -16,8 +16,7 @@
 // all vars type is unsigned long int
 unsigned long int pack(unsigned long int byte_1, unsigned long int byte_2, unsigned long int byte_3, unsigned long int byte_4)
 {
-    unsigned long int res = byte_1 | byte_2 | byte_3 | byte_4;
-    return res;
+    return byte_1 | byte_2 | byte_3 | byte_4;
 }
 
 
