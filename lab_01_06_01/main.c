@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 #define EXPECTED_ARGS 6
 
@@ -21,7 +21,7 @@ float absolute_value(float x)
     return x;
 }
 
-int main()
+int main(void)
 {
     float x_a, y_a, x_b, y_b, x_c, y_c;
     float det, square;
@@ -42,5 +42,5 @@ int main()
         return INCORRECT_INPUT;
     
     printf("%f", square);
-    return EXEC_OK;
+    return OK;
 }

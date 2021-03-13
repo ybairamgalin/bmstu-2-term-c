@@ -17,7 +17,7 @@ double g_func(double x)
     return result;
 }
 
-int main()
+int main(void)
 {
     double element;
 
@@ -49,7 +49,7 @@ int main()
     double result = g_func(sum);
     printf("%lf", result);
 
-    return EXEC_OK;
+    return OK;
 }
 
 

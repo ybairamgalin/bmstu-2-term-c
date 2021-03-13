@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 #define INCORRECT_INPUT 5
-#define EXEC_OK 0
+#define OK 0
 
 #define EXPECTED_ARGS 2
 
@@ -18,7 +18,7 @@ void print_output(int first, int second)
     printf("%d %d", first, second);
 }
 
-int main()
+int main(void)
 {
     int num, denom;
     int corr_input = scanf("%d%d", &num, &denom);
@@ -35,5 +35,5 @@ int main()
     
     print_output(quo, num);
     
-    return EXEC_OK;
+    return OK;
 }

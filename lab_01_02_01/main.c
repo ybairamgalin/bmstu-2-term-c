@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <math.h>
 
-#define EXEC_OK 0
+#define OK 0
 
 // TO_RAD = PI / 180
 #define TO_RAD 0.017453292519943
 
-int main()
+
+// function receives float x in degrees
+// returns the equivalent value in degrees
+float to_rad(float x)
+{
+    return x * TO_RAD;
+}
+
+int main(void)
 {
     // declaration and input of vars
     float base_a, base_b;
@@ -30,5 +38,5 @@ int main()
 
     printf("%f", square);
 
-    return EXEC_OK;
+    return OK;
 }

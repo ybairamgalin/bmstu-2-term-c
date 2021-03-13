@@ -9,7 +9,7 @@
 #include <math.h>
 
 #define INCORRECT_INPUT 10
-#define EXEC_OK 0
+#define OK 0
 
 #define EXPECTED_ARGS 2
 
@@ -19,11 +19,10 @@
 // function returns abs error of the given data
 double abs_error(double expected, double measured)
 {
-    double result = fabs(expected - measured);
-    return result;
+    return fabs(expected - measured);
 }
 
-int main()
+int main(void)
 {
     double x;
     double eps;
@@ -52,5 +51,5 @@ int main()
     
     printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
 
-    return EXEC_OK;
+    return OK;
 }

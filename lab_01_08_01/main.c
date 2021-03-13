@@ -5,6 +5,7 @@
 
 #define EXEC_OK 0
 #define INCORRECT_INPUT 10
+
 #define EXPECTED_ARGS 4
 
 #define MAX_BYTE_VALUE 255
@@ -20,7 +21,7 @@ unsigned long int pack(unsigned long int byte_1, unsigned long int byte_2, unsig
 }
 
 
-int main()
+int main(void)
 {
     // input data check
     unsigned long int byte_a, byte_b, byte_c, byte_d;
@@ -52,5 +53,5 @@ int main()
     for (int i = 3; i >= 0; i--)
         printf("%lu ", (packed >> (i * 8)) % (MAX_BYTE_VALUE + 1));
     
-    return EXEC_OK;
+    return OK;
 }

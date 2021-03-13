@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 
-int main()
+int main(void)
 {
     // declaration and input of vars
     float volume_1, volume_2, volume_out;
@@ -14,5 +14,5 @@ int main()
     temp_out = (volume_1 * temp_1 + volume_2 * temp_2) / volume_out;
 
     printf("%f %f", volume_out, temp_out);
-    return EXEC_OK;
+    return OK;
 }

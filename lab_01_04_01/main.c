@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 
 #define APARTMENTS_IN_PORCH 36
 #define APARTMENTS_IN_FLOOR 4
 
-int main()
+int main(void)
 {
     int apart_num;
     int porch;
@@ -21,5 +21,5 @@ int main()
     floor++;
 
     printf("%d %d", porch, floor);
-    return EXEC_OK;
+    return OK;
 }
