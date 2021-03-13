@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 
 #define EXPECTED_ARGS 1
