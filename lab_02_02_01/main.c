@@ -12,12 +12,12 @@
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
 // 0, if input in not correct
-int input(int *array, int num_of_elem)
+int input(long long int *array, int num_of_elem)
 {
     int input_is_correct = YES;
     for (int i = 0; i < num_of_elem; i++)
     {
-        int read_elements = scanf("%d", array + i);
+        int read_elements = scanf("%lld", array + i);
         if (read_elements != 1)
         {
             input_is_correct = NO;
@@ -30,7 +30,7 @@ int input(int *array, int num_of_elem)
 // function receives int x and returns 1 if:
 // 1. x <= 1, 2. x is prime;
 // otherwise function returns 0
-int is_prime(int x)
+int is_prime(long long int x)
 {
     int x_is_prime = YES;
     
@@ -58,12 +58,11 @@ int main()
     if (corr_input != 1 || number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_INPUT;
     
-    int arr[ARRAY_SIZE];
+    long long int arr[ARRAY_SIZE];
     if (input(arr, number_of_elements) == NO)
         return INCORRECT_INPUT;
     
-    int result_array[ARRAY_SIZE];
-    
+    long long int result_array[ARRAY_SIZE];
     int count_new_array = 0;
     for (int i = 0; i < number_of_elements; i++)
     {
@@ -80,7 +79,7 @@ int main()
     
     for (int i = 0; i < count_new_array; i++)
     {
-        printf("%d ", result_array[i]);
+        printf("%lld ", result_array[i]);
     }
     
     return EXEC_OK;
