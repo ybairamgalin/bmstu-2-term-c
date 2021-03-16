@@ -16,12 +16,10 @@ float to_rad(float x)
 
 int main(void)
 {
-    // declaration and input of vars
     float base_a, base_b;
     float phi;
     scanf("%f%f%f", &base_a, &base_b, &phi);
 
-    // in order to make a > b
     if (base_a < base_b)
     {
         float buf = base_a;
@@ -29,8 +27,7 @@ int main(void)
         base_b = buf;
     }
 
-    // convert phi to rad
-    phi = phi * TO_RAD;
+    phi = to_rad(phi);
 
     // first fond height, second square
     float height = tan(phi) * (base_a - base_b) / 2;
