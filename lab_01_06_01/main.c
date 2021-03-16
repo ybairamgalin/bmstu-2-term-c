@@ -16,7 +16,7 @@
 
 
 // function elements of 2x2 matrix and returns its determinant
-float det_2x2(int m11, int m12, int m21, int m22)
+float det_2x2(float m11, float m12, float m21, float m22)
 {
     return m11 * m22 - m21 * m12;
 }
