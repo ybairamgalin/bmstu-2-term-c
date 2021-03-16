@@ -59,7 +59,7 @@ int main()
     if (input(arr, number_of_elements) == NO)
         return INCORRECT_INPUT;
 
-    // iterate to numberOfElements - 1, as the next element has to ve changed
+    // iterate to numberOfElements - 1, as the next element has to be changed
     // next - the element to be placed in the next position
     int next = arr[0];
     for (int i = 0; i < number_of_elements; i++)

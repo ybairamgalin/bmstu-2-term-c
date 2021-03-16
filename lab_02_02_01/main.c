@@ -49,7 +49,6 @@ int is_prime(long long int x)
     return x_is_prime;
 }
 
-///------------------------------------------------------------
 
 int main()
 {
