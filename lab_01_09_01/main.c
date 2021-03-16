@@ -6,7 +6,8 @@
 #include <stdbool.h>
 
 #define OK 0
-#define INCORRECT_INPUT 10
+#define INCORRECT_TYPE 10
+#define INCORRECT_VALUE 5
 
 #define EXPECTED_ARGS 1
 
@@ -25,7 +26,7 @@ int main(void)
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_INPUT;
     if (element < 0)
-        return INCORRECT_INPUT;
+        return INCORRECT_VALUE;
 
     double sum = sqrt(element);
     
