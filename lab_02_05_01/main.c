@@ -29,6 +29,20 @@ int input(int *array, int num_of_elem)
 }
 
 
+int find_expected_sum(int *a_first, int *a_last, int *b_first)
+{
+    long size = a_last - a_first;
+    int sum = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        sum += *(a_first + i) * *(b_first + i);
+    }
+
+    return sum;
+}
+
+
 int main(void)
 {
     int number_of_elements;
@@ -68,11 +82,7 @@ int main(void)
     if (iterate_to == 0)
         return VALUE_CANNOT_BE_DEFINED;
 
-    int sum = 0;
-
-    for (int i = 0; i < iterate_to; i++)
-        sum += *(pos_array + i) * *(neg_array + i);
-
+    int sum = find_expected_sum(neg_array, neg_array + iterate_to, pos_array);
     printf("%d", sum);
 
     return OK;
