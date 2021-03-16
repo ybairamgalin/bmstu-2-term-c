@@ -29,7 +29,9 @@ int input(int *first, int *last)
     return input_is_correct;
 }
 
-
+// function receives pointer to the first and last+1 element of an array and one more pointer to an array
+// it is expected that in b_array exist elements to (a_last - a_first)
+// function returns sum of product of respective elements of 2 given arrays
 int find_expected_sum(int *a_first, int *a_last, int *b_first)
 {
     long size = a_last - a_first;
