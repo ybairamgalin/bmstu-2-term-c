@@ -12,8 +12,12 @@ int input(int *array)
 {
     int number_of_elements = 0;
 
-    while (number_of_elements != ARRAY_SIZE && scanf("%d", array + number_of_elements) == 1)
+    while (number_of_elements != (ARRAY_SIZE) && scanf("%d", array + number_of_elements) == 1)
         number_of_elements++;
+
+    int check_element;
+    int added_new = scanf("%d", &check_element);
+    number_of_elements = number_of_elements + added_new;
 
     return number_of_elements;
 }
@@ -39,7 +43,8 @@ void sort(int *array, int number_of_elements)
 int main(void)
 {
     int arr[ARRAY_SIZE];
-    int number_of_elements = input(arr);
+    int number_of_input_elements = input(arr);
+    int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ? number_of_input_elements : number_of_input_elements - 1;
 
     if (number_of_elements == 0)
         return INCORRECT_INPUT;
@@ -49,7 +54,7 @@ int main(void)
     for (int i = 0; i < number_of_elements; i++)
         printf("%d ", arr[i]);
 
-    if (number_of_elements == ARRAY_SIZE)
+    if (number_of_input_elements > ARRAY_SIZE)
         return REACHED_MAX_ARRAY_SIZE;
 
     return OK;
