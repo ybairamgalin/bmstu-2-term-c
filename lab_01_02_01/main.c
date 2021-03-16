@@ -1,14 +1,15 @@
 #include <stdio.h>
+
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 #define OK 0
 
-// TO_RAD = PI / 180
-#define TO_RAD 0.017453292519943
+#define TO_RAD (M_PI / 180)
 
 
 // function receives float x in degrees
-// returns the equivalent value in degrees
+// returns the equivalent value in rad
 float to_rad(float x)
 {
     return x * TO_RAD;
