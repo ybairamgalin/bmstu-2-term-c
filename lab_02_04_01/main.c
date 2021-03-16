@@ -10,12 +10,12 @@
 // returns number of elements that were scanned
 int input(int *array)
 {
-    int numberOfElements = 0;
+    int number_of_elements = 0;
 
-    while (numberOfElements != ARRAY_SIZE && scanf("%d", array + numberOfElements) == 1)
-        numberOfElements++;
+    while (number_of_elements != ARRAY_SIZE && scanf("%d", array + number_of_elements) == 1)
+        number_of_elements++;
 
-    return numberOfElements;
+    return number_of_elements;
 }
 
 // function receives pointer to an array and sorts it
@@ -39,14 +39,17 @@ void sort(int *array, int numberOfElements)
 int main(void)
 {
     int arr[ARRAY_SIZE];
-    int numberOfElements = input(arr);
+    int number_of_elements = input(arr);
 
-    sort(arr, numberOfElements);
+    if (number_of_elements == 0)
+        return INCORRECT_INPUT;
 
-    for (int i = 0; i < numberOfElements; i++)
+    sort(arr, number_of_elements);
+
+    for (int i = 0; i < number_of_elements; i++)
         printf("%d ", arr[i]);
 
-    if (numberOfElements == ARRAY_SIZE)
+    if (number_of_elements == ARRAY_SIZE)
         return REACHED_MAX_ARRAY_SIZE;
     return OK;
 }
