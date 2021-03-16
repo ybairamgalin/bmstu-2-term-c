@@ -4,7 +4,8 @@
 #include <stdio.h>
 
 #define OK 0
-#define INCORRECT_INPUT 10
+#define INCORRECT_TYPE 10
+#define INCORRECT_VALUE 5
 
 #define EXPECTED_ARGS 4
 
@@ -33,7 +34,7 @@ int main(void)
     if (byte_a > MAX_BYTE_VALUE || byte_b > MAX_BYTE_VALUE || byte_c > MAX_BYTE_VALUE || byte_d > MAX_BYTE_VALUE)
     {
         printf("Error: input error");
-        return INCORRECT_INPUT;
+        return INCORRECT_VALUE;
     }
     
     //
