@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 
 #define ARRAY_SIZE 10
@@ -53,5 +53,5 @@ int main()
         return INCORRECT_INPUT;
         
     print_output(prod);
-    return EXEC_OK;
+    return OK;
 }

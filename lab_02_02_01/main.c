@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 
 #define ARRAY_SIZE 10
@@ -17,7 +17,7 @@ int input(int *array, int num_of_elem)
     int input_is_correct = YES;
     for (int i = 0; i < num_of_elem; i++)
     {
-        int read_elements = scanf("%lld", array + i);
+        int read_elements = scanf("%d", array + i);
         if (read_elements != 1)
         {
             input_is_correct = NO;
@@ -78,8 +78,8 @@ int main()
     
     for (int i = 0; i < count_new_array; i++)
     {
-        printf("%lld ", result_array[i]);
+        printf("%d ", result_array[i]);
     }
     
-    return EXEC_OK;
+    return OK;
 }

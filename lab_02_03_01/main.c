@@ -1,7 +1,7 @@
 <<<<<<< HEAD
 #include <stdio.h>
 
-#define EXEC_OK 0
+#define OK 0
 #define INCORRECT_INPUT 10
 
 #define ARRAY_SIZE 10
@@ -78,5 +78,5 @@ int main()
         printf("%d ", arr[i]);
     }
 
-    return EXEC_OK;
+    return OK;
 }
