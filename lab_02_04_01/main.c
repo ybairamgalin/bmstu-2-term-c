@@ -20,11 +20,11 @@ int input(int *array)
 
 // function receives pointer to an array and sorts it
 // sort method - bubble sort
-void sort(int *array, int numberOfElements)
+void sort(int *array, int number_of_elements)
 {
-    for (int i = 0; i < numberOfElements; i++)
+    for (int i = 0; i < number_of_elements; i++)
     {
-        for (int j = 1; j < numberOfElements - i; j++)
+        for (int j = 1; j < number_of_elements - i; j++)
         {
             if (*(array + j - 1) > *(array + j))
             {
@@ -51,5 +51,6 @@ int main(void)
 
     if (number_of_elements == ARRAY_SIZE)
         return REACHED_MAX_ARRAY_SIZE;
+
     return OK;
 }

@@ -31,7 +31,7 @@ void print_output(int number)
     printf("%d", number);
 }
 
-int main()
+int main(void)
 {
     int arr[ARRAY_SIZE];
     

@@ -50,7 +50,7 @@ int is_prime(int x)
 }
 
 
-int main()
+int main(void)
 {
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);

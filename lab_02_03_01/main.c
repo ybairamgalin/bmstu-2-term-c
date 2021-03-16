@@ -70,7 +70,7 @@ int main()
         {
             // move all the following elements 1 forward
             for (int i = ARRAY_SIZE - 1; i > count + 1; i--)
-                arr[i] = arr[i-1];
+                arr[i] = arr[i - 1];
 
             arr[count + 1] = get_next_fibonacci();
             number_of_elements++;
