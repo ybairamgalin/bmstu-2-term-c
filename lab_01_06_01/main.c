@@ -6,6 +6,7 @@
 //
 
 #include <stdio.h>
+#include <math.h>
 
 #define OK 0
 #define INCORRECT_INPUT 10
@@ -13,12 +14,11 @@
 
 #define EPS 1e-10
 
-// function receives float x and returns its absolute value
-float absolute_value(float x)
+
+// function elements of 2x2 matrix and returns its determinant
+float det_2x2(int m11, int m12, int m21, int m22)
 {
-    if (x < 0)
-        x = -x;
-    return x;
+    return m11 * m22 - m21 * m12;
 }
 
 int main(void)
@@ -31,11 +31,8 @@ int main(void)
         return INCORRECT_INPUT;
     
     // solve for signed square using det formula
-    det = (x_a - x_c) * (y_b - y_c) - (x_b - x_c) * (y_a - y_c);
-    square = det / 2;
-    
-    // using det formula determinant may and up being negative
-    square = absolute_value(square);
+    det = det_2x2(x_a - x_c, y_a - y_c, x_b - x_c, y_b - y_c);
+    square = fabs(det / 2);
     
     // check if the points are in the same line
     if (square < EPS)
