@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 
 #define EXEC_OK 0
