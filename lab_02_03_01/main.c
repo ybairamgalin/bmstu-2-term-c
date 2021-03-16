@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 #include <stdio.h>
 
 #define OK 0
 #define INCORRECT_INPUT 10
 
-#define ARRAY_SIZE 10
+#define ARRAY_SIZE 21
+#define BORDER_VALUE -1000000
 #define YES 1
 #define NO 0
 
@@ -57,26 +57,32 @@ int main()
         return INCORRECT_INPUT;
 
     int arr[ARRAY_SIZE];
+    for (int i = 0; i < ARRAY_SIZE; i++)
+        arr[i] = BORDER_VALUE;
+
     if (input(arr, number_of_elements) == NO)
         return INCORRECT_INPUT;
 
-    // iterate to numberOfElements - 1, as the next element has to be changed
-    // next - the element to be placed in the next position
-    int next = arr[0];
-    for (int i = 0; i < number_of_elements; i++)
+    int count = 0;
+    while (arr[count] != BORDER_VALUE)
     {
-        int prev = next;
-        if (arr[i] %  3 == 0 && i != number_of_elements - 1)
-            next = get_next_fibonacci();
+        if (arr[count] % 3 == 0)
+        {
+            // move all the following elements 1 forward
+            for (int i = ARRAY_SIZE - 1; i > count + 1; i--)
+                arr[i] = arr[i-1];
+
+            arr[count + 1] = get_next_fibonacci();
+            number_of_elements++;
+            count += 2;
+        }
         else
-            next = arr[i+1];
-        arr[i] = prev;
+            count++;
     }
 
+
     for (int i = 0; i < number_of_elements; i++)
-    {
         printf("%d ", arr[i]);
-    }
 
     return OK;
 }
