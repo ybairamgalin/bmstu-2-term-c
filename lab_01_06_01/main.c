@@ -10,6 +10,8 @@
 
 #define OK 0
 #define INCORRECT_INPUT 10
+#define IN_THE_SAME_LINE 11
+
 #define EXPECTED_ARGS 6
 
 #define EPS 1e-10
@@ -36,7 +38,7 @@ int main(void)
     
     // check if the points are in the same line
     if (square < EPS)
-        return INCORRECT_INPUT;
+        return IN_THE_SAME_LINE;
     
     printf("%f", square);
     return OK;
