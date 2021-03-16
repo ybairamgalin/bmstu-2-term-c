@@ -29,7 +29,7 @@ int main(void)
     if (corr_input != EXPECTED_ARGS)
     {
         printf("Error: input error");
-        return INCORRECT_INPUT;
+        return INCORRECT_TYPE;
     }
     if (byte_a > MAX_BYTE_VALUE || byte_b > MAX_BYTE_VALUE || byte_c > MAX_BYTE_VALUE || byte_d > MAX_BYTE_VALUE)
     {

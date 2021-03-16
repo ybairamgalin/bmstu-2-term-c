@@ -24,7 +24,7 @@ int main(void)
 
     int corr_input = scanf("%lf", &element);
     if (corr_input != EXPECTED_ARGS)
-        return INCORRECT_INPUT;
+        return INCORRECT_TYPE;
     if (element < 0)
         return INCORRECT_VALUE;
 
@@ -38,7 +38,7 @@ int main(void)
     {
         int corr_input = scanf("%lf", &element);
         if (corr_input != 1)
-            return INCORRECT_INPUT;
+            return INCORRECT_TYPE;
 
         if (element >= 0)
             sum += sqrt(element / count);
