@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define OK 0
 #define INCORRECT_INPUT 10
@@ -38,7 +39,7 @@ int is_prime(int x)
     if (x <= 1)
         x_is_prime = NO;
     
-    for (int i = 2; i < x / 2 + 1; i++)
+    for (int i = 2; i <= (int)sqrt(x); i++)
     {
         if (x % i == 0)
         {
