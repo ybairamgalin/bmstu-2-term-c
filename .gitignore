@@ -5,3 +5,4 @@
 *.gch
 *.gcno
 *.gcda
+*.gcov
