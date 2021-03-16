@@ -13,12 +13,13 @@
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
 // 0, if input in not correct
-int input(int *array, int num_of_elem)
+int input(int *first, int *last)
 {
+    long num_of_elem = last - first;
     int input_is_correct = YES;
     for (int i = 0; i < num_of_elem; i++)
     {
-        int read_elements = scanf("%d", array + i);
+        int read_elements = scanf("%d", first + i);
         if (read_elements != 1)
         {
             input_is_correct = NO;
@@ -51,7 +52,7 @@ int main(void)
         return INCORRECT_INPUT;
 
     int input_array[ARRAY_SIZE];
-    if (input(input_array, number_of_elements) == NO)
+    if (input(input_array, input_array + number_of_elements) == NO)
         return INCORRECT_INPUT;
 
     int neg_array[ARRAY_SIZE];
