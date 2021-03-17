@@ -34,7 +34,7 @@ int main(void)
     
     // solve for signed square using det formula
     det = det_2x2(x_a - x_c, y_a - y_c, x_b - x_c, y_b - y_c);
-    square = fabs(det / 2);
+    square = fabsf(det / 2);
     
     // check if the points are in the same line
     if (square < EPS)
