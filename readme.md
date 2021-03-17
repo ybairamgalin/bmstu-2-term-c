@@ -1,3 +1,34 @@
-* [C](https://ru.wikipedia.org/wiki/%D0%A1%D0%B8_(%D1%8F%D0%B7%D1%8B%D0%BA_%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F))
-* [Moodle ИУ7](http://e-learning.bmstu.ru/portal_iu7/course/view.php?id=13)
-* [Gitlab ИУ7](https://git.iu7.bmstu.ru)
+# Отчет по лабораторной работе 1
+
+## Функциональные тесты
+
+### Задача 5
+
+##### Входные данные
+
+- int num
+- int denom
+
+##### Выходные данные
+
+- int quo
+- int num
+
+###### Positive tests
+
+- 01 - обычные данные
+    - покрытие gcov - 87.5%
+- 02 - два одинаковых числа
+  - покрытие gcov - 87.5%
+- 03 - деление без остатка
+  - покрытие gcov - 87.5%
+
+###### Negative tests
+
+- 01 - введена буква
+  - покрытие gcov - 93.75%
+- 02 - первое число отрицательное
+  - покрытие gcov - 100%
+- 03 - второе число 0
+  - покрытие gcov - 100%
+
