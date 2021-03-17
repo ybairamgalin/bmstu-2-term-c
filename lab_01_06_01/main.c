@@ -17,7 +17,7 @@
 #define EPS 1e-10
 
 
-// function elements of 2x2 matrix and returns its determinant
+// function receives elements of 2x2 matrix and returns its determinant
 float det_2x2(float m11, float m12, float m21, float m22)
 {
     return m11 * m22 - m21 * m12;
