@@ -12,10 +12,9 @@
 #define EXPECTED_ARGS 1
 
 // function receives sum and returns sin value of this sum
-double g_func(double x)
+double g_term(double x, int count)
 {
-    double result = sin(x);
-    return result;
+    return sqrt(x / count);
 }
 
 int main(void)
@@ -41,13 +40,13 @@ int main(void)
             return INCORRECT_TYPE;
 
         if (element >= 0)
-            sum += sqrt(element / count);
+            sum += g_term(element, count);
         else
             break;
         count++;
     }
 
-    double result = g_func(sum);
+    double result = sin(sum);
     printf("%lf", result);
 
     return OK;
