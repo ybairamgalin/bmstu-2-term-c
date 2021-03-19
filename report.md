@@ -1,5 +1,116 @@
 # Отчет по лабораторной работе 1
+## Задача 1
+### Краткая формулировка задачи
+Найти и исправить ошибки в программе.
+```C
+include studio.h
+main{}
+(
+int s;
+s: = 56;
+print (Year has s weeks)
+)
+```
 
+### Установка ПО
+
+Для выполнения лабораторной работы было установлено все необходимое программное обеспечение.
+Трудностей при установке не возникло.
+
+### Сборка
+
+```bash
+gcc -std=c99 -Wall -Werror main.c -o main.exe
+```
+
+### Ошибки
+
+1.  
+    ```bash
+    main.c:1:1: error: unknown type name 'include'
+    1 | include studio.h
+    ```
+    - Причина: отсутствует символ '#' перед ключевым словом include
+    - Решение: добавить #
+2.
+     ```bash
+    main.c:1:10: error: #include expects "FILENAME" or <FILENAME>
+    1 | #include studio.h
+     ```
+    - Причина: неверный синтаксис подключения заголовочного файла
+    - Решение: добвить <>
+3. 
+    ```bash
+   main.c:1:10: fatal error: studio.h: No such file or directory
+   1 | #include <studio.h>
+    ```
+    - Причина: ошибка в имени заголовочного файла
+    - Решение: изменить на stdio.h
+4. 
+    ```bash
+   main.c:3:5: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+   3 | main{}
+    ```
+    - Причина: компилятор не смог распознать функцию
+    - Решение: добавить перед именем функции тип возвращаемого ей значения, а также скобки для аргументов
+5. 
+    ```bash
+   main.c:5:1: error: expected identifier or '(' before 'int'
+   5 | int s;
+    ```
+    - Причина: отсутствует тело функции `main`
+    - Решение: добавить скобки `{...}`
+6. 
+    ```bash
+   main.c:5:8: error: expected expression before '=' token
+   5 |     s: = 56;
+    ```
+    - Причина: неправильное присваивание
+    - Решение: исправить присваивание на `s = 56;`
+7. 
+    ```bash
+   main.c:6:5: error: implicit declaration of function 'print'; did you mean 'printf'? [-Werror=implicit-function-declaration]
+   6 |     print (Year has s weeks)
+    ```
+    - Причина: ошибка в имени функции
+    - Решение: заменить на `printf()`
+8. 
+    ```bash
+   main.c:6:12: error: 'Year' undeclared (first use in this function)
+   6 |     printf(Year has s weeks)
+    ```
+    - Причина: неправильный вывод строки
+    - Решение: добавить двойные кавычки
+9. 
+    ```bash
+   main.c:6:31: error: expected ';' before '}' token
+   6 |     printf("Year has s weeks")
+    ```
+    - Причина: отсутствует точка с запятой
+    - Решение: добавить точку с запятой
+10. 123
+    ```bash
+    main.c:4:9: error: variable 's' set but not used [-Werror=unused-but-set-variable]
+    4 |     int s;
+    ```
+    - Причина: не используется переменная
+    - Решение: добавить переменную в вывод
+
+### Итоговый код
+```C
+#include <stdio.h>
+
+int main(void) {
+    int s;
+    s = 56;
+    printf("Year has %d weeks", s);
+}
+```
+
+### QT Creator
+
+Выполнение задачи 1 помогло мне научиться создавать проект, настраивать сборку, анализировать сообщения
+об ошибках компиляции, использовать отладчик в IDE QT Creator.
 
 ## Задача 5
 
