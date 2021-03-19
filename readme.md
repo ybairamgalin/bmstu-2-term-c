@@ -298,7 +298,7 @@ s(x) - ряд Тейлора для синуса
         -:   57:    // errors
         3:   58:    double absolute_error = abs_error(precise_value, approx_value);
         -:   59:
-        3:   60:    if (fabs(precise_value) <  EPS)
+        3:   60:    if (fabs(precise_value) < EPS)
         1:   61:        return DIVISION_BY_ZERO;
         2:   62:    double relative_error = absolute_error / precise_value;
         -:   63:

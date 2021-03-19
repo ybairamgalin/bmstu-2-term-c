@@ -57,7 +57,7 @@ int main(void)
     // errors
     double absolute_error = abs_error(precise_value, approx_value);
 
-    if (fabs(precise_value) <  EPS)
+    if (fabs(precise_value) < EPS)
         return DIVISION_BY_ZERO;
     double relative_error = absolute_error / precise_value;
 
