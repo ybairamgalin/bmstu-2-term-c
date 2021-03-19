@@ -10,9 +10,13 @@
 
 #define OK 0
 #define INCORRECT_TYPE 10
+#define EPS_IS_TOO_LOW 9
 #define INCORRECT_VALUE 5
+#define DIVISION_BY_ZERO 3
 
 #define EXPECTED_ARGS 2
+
+#define MAX_CYCLES 1000
 
 // function receives two parameters: double expected -
 // the precise value, double measured - measured or
@@ -39,17 +43,23 @@ int main(void)
     double current = approx_value;
     int count = 1; // for managing the power of x
     
-    while (fabs(precise_value - approx_value) > eps)
+    while (fabs(precise_value - approx_value) > eps && count <= MAX_CYCLES)
     {
         current *= - (x * x) / ((count + 1) * (count + 2));
         approx_value += current;
         count += 2;
     }
+
+    if (count >= MAX_CYCLES)
+        return EPS_IS_TOO_LOW;
     
     // errors
     double absolute_error = abs_error(precise_value, approx_value);
+
+    if (precise_value == 0)
+        return DIVISION_BY_ZERO;
     double relative_error = absolute_error / precise_value;
-    
+
     printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
 
     return OK;
