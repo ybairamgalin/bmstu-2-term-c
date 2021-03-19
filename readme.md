@@ -257,55 +257,55 @@ s(x) - ряд Тейлора для синуса
         -:   16:
         -:   17:#define EXPECTED_ARGS 2
         -:   18:
-        -:   19:#define MAX_CYCLES 1000
-        -:   20:
-        -:   21:// function receives two parameters: double expected -
-        -:   22:// the precise value, double measured - measured or
-        -:   23:// approximated value
-        -:   24:// function returns abs error of the given data
-        3:   25:double abs_error(double expected, double measured)
-        -:   26:{
-        3:   27:    return fabs(expected - measured);
-        -:   28:}
-        -:   29:
-        7:   30:int main(void)
-        -:   31:{
-        -:   32:    double x;
-        -:   33:    double eps;
-        7:   34:    int corr_input = scanf("%lf%lf", &x, &eps);
-        7:   35:    if (corr_input != EXPECTED_ARGS)
-        1:   36:        return INCORRECT_TYPE;
-        -:   37:    // due to the task
-        6:   38:    if (eps <= 0 || eps > 1)
-        2:   39:        return INCORRECT_VALUE;
-        -:   40:    
-        4:   41:    double precise_value = sin(x);
-        4:   42:    double approx_value = x;
-        4:   43:    double current = approx_value;
-        4:   44:    int count = 1; // for managing the power of x
-        -:   45:    
-      507:   46:    while (fabs(precise_value - approx_value) > eps && count <= MAX_CYCLES)
-        -:   47:    {
-      503:   48:        current *= - (x * x) / ((count + 1) * (count + 2));
-      503:   49:        approx_value += current;
-      503:   50:        count += 2;
-        -:   51:    }
-        -:   52:
-        4:   53:    if (count >= MAX_CYCLES)
-        1:   54:        return EPS_IS_TOO_LOW;
-        -:   55:    
-        -:   56:    // errors
-        3:   57:    double absolute_error = abs_error(precise_value, approx_value);
-        -:   58:
-        3:   59:    if (precise_value == 0)
-        1:   60:        return DIVISION_BY_ZERO;
-        2:   61:    double relative_error = absolute_error / precise_value;
-        -:   62:
-        2:   63:    printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
-        -:   64:
-        2:   65:    return OK;
-        7:   66:}
-
+        -:   19:#define EPS 1e-10
+        -:   20:#define MAX_CYCLES 1000
+        -:   21:
+        -:   22:// function receives two parameters: double expected -
+        -:   23:// the precise value, double measured - measured or
+        -:   24:// approximated value
+        -:   25:// function returns abs error of the given data
+        3:   26:double abs_error(double expected, double measured)
+        -:   27:{
+        3:   28:    return fabs(expected - measured);
+        -:   29:}
+        -:   30:
+        7:   31:int main(void)
+        -:   32:{
+        -:   33:    double x;
+        -:   34:    double eps;
+        7:   35:    int corr_input = scanf("%lf%lf", &x, &eps);
+        7:   36:    if (corr_input != EXPECTED_ARGS)
+        1:   37:        return INCORRECT_TYPE;
+        -:   38:    // due to the task
+        6:   39:    if (eps <= 0 || eps > 1)
+        2:   40:        return INCORRECT_VALUE;
+        -:   41:    
+        4:   42:    double precise_value = sin(x);
+        4:   43:    double approx_value = x;
+        4:   44:    double current = approx_value;
+        4:   45:    int count = 1; // for managing the power of x
+        -:   46:    
+      507:   47:    while (fabs(precise_value - approx_value) > eps && count <= MAX_CYCLES)
+        -:   48:    {
+      503:   49:        current *= - (x * x) / ((count + 1) * (count + 2));
+      503:   50:        approx_value += current;
+      503:   51:        count += 2;
+        -:   52:    }
+        -:   53:
+        4:   54:    if (count >= MAX_CYCLES)
+        1:   55:        return EPS_IS_TOO_LOW;
+        -:   56:    
+        -:   57:    // errors
+        3:   58:    double absolute_error = abs_error(precise_value, approx_value);
+        -:   59:
+        3:   60:    if (fabs(precise_value) <  EPS)
+        1:   61:        return DIVISION_BY_ZERO;
+        2:   62:    double relative_error = absolute_error / precise_value;
+        -:   63:
+        2:   64:    printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);
+        -:   65:
+        2:   66:    return OK;
+        7:   67:}
 
 
 Каждая строка была выполнена хотя бы 1 раз, поэтому тесты описанные выше

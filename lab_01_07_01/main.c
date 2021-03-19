@@ -16,6 +16,7 @@
 
 #define EXPECTED_ARGS 2
 
+#define EPS 1e-10
 #define MAX_CYCLES 1000
 
 // function receives two parameters: double expected -
@@ -56,7 +57,7 @@ int main(void)
     // errors
     double absolute_error = abs_error(precise_value, approx_value);
 
-    if (precise_value == 0)
+    if (fabs(precise_value) <  EPS)
         return DIVISION_BY_ZERO;
     double relative_error = absolute_error / precise_value;
 
