@@ -23,7 +23,6 @@ unsigned long int pack(unsigned long int byte_1, unsigned long int byte_2, unsig
 
 int main(void)
 {
-    // input data check
     unsigned long int byte_a, byte_b, byte_c, byte_d;
     unsigned long int corr_input = scanf("%lu%lu%lu%lu", &byte_a, &byte_b, &byte_c, &byte_d);
     if (corr_input != EXPECTED_ARGS)
@@ -36,8 +35,7 @@ int main(void)
         printf("Error: input error");
         return INCORRECT_VALUE;
     }
-    
-    //
+
     unsigned long int byte_a_left_24 = byte_a << BYTE_DIGITS * 3;
     unsigned long int byte_b_left_16 = byte_b << BYTE_DIGITS * 2;
     unsigned long int byte_c_left_8 = byte_c << BYTE_DIGITS;
@@ -50,8 +48,8 @@ int main(void)
     
     printf(" ");
     
-    for (int i = 3; i >= 0; i--)
-        printf("%lu ", (packed >> (i * 8)) % (MAX_BYTE_VALUE + 1));
+    for (int i = EXPECTED_ARGS - 1; i >= 0; i--)
+        printf("%lu ", (packed >> (i * BYTE_DIGITS)) % (MAX_BYTE_VALUE + 1));
     
     return OK;
 }
