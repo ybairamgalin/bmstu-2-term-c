@@ -18,7 +18,7 @@
 
 
 // function receives elements of 2x2 matrix and returns its determinant
-float det_2x2(float m11, float m12, float m21, float m22)
+float det_2x2(const float m11, const float m12, const float m21, const float m22)
 {
     return m11 * m22 - m21 * m12;
 }

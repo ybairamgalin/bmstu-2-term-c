@@ -12,7 +12,7 @@
 #define EXPECTED_ARGS 1
 
 // function receives sum and returns sin value of this sum
-double g_term(double x, int count)
+double g_term(double const x, int const count)
 {
     return sqrt(x / count);
 }

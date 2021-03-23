@@ -23,7 +23,7 @@
 // the precise value, double measured - measured or
 // approximated value
 // function returns abs error of the given data
-double abs_error(double expected, double measured)
+double abs_error(double const expected, double const measured)
 {
     return fabs(expected - measured);
 }
