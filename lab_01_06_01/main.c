@@ -29,6 +29,7 @@ int main(void)
     float det, square;
     
     int corr_input = scanf("%f%f%f%f%f%f", &x_a, &y_a, &x_b, &y_b, &x_c, &y_c);
+
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_INPUT;
     

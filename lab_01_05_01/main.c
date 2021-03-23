@@ -30,6 +30,7 @@ int main(void)
 {
     int num, denom;
     int corr_input = scanf("%d%d", &num, &denom);
+
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 

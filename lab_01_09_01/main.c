@@ -22,8 +22,10 @@ int main(void)
     double element;
 
     int corr_input = scanf("%lf", &element);
+
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_TYPE;
+
     if (element < 0)
         return INCORRECT_VALUE;
 
@@ -36,6 +38,7 @@ int main(void)
     while (true)
     {
         int corr_input = scanf("%lf", &element);
+
         if (corr_input != 1)
             return INCORRECT_TYPE;
 
