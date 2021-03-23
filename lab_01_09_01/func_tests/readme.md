@@ -25,6 +25,37 @@
 - 03 - введена буква после ввода нескольких элементов
     - покрытие gcov - 100%
 
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:86.36% of 22
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:86.36% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:90.91% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:95.45% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 22
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
 После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C

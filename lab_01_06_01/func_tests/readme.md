@@ -36,6 +36,52 @@
 - 05 - три точки совпадают
     - покрытие gcov - 100%
 
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Positive test 3
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:92.31% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:92.31% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 4
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 5
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
 После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C

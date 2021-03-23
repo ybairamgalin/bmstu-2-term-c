@@ -34,6 +34,47 @@
 - 05 - деление на ноль при вычислении относительной погрешности
     - покрытие gcov - 100%
 
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:84.00% of 25
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:84.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:88.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:92.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:92.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 4
+File 'main.c'
+Lines executed:96.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 5
+File 'main.c'
+Lines executed:100.00% of 25
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
 После выполнения тестов файл main.c.gcov имеет вид:
 ```C
         -:    0:Source:main.c

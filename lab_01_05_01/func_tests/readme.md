@@ -27,7 +27,38 @@
     - покрытие gcov - 100%
 - 03 - второе число 0
     - покрытие gcov - 100%
+    
+#### gcov
+##### Вывод после каждого теста
 
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:87.50% of 16
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:87.50% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:93.75% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:100.00% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 16
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
 После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C
