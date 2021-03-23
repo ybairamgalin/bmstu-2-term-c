@@ -1,4 +1,3 @@
-# Отчет по лабораторной работе 1
 ## Задача 1
 ### Краткая формулировка задачи
 Найти и исправить ошибки в программе.
@@ -177,7 +176,38 @@ int main(void)
 
 ### Тестирование
 
-Листинг gcov:
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:87.50% of 16
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:87.50% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:93.75% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:100.00% of 16
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 16
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
+После выполнения тестов файл main.c.gcov имеет вид:
 ```C
         -:    0:Source:main.c
         -:    0:Graph:main.gcno
@@ -298,7 +328,53 @@ int main(void)
 
 ### Тестирование
 
-Листинг gcov:
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Positive test 3
+File 'main.c'
+Lines executed:84.62% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:92.31% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:92.31% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 4
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+
+Negative test 5
+File 'main.c'
+Lines executed:100.00% of 13
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
+После выполнения тестов файл main.c.gcov имеет вид:
 ```C
         -:    0:Source:main.c
         -:    0:Graph:main.gcno
@@ -442,7 +518,48 @@ int main(void)
 
 ### Тестирование
 
-Листинг gcov:
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:84.00% of 25
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:84.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:88.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:92.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:92.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 4
+File 'main.c'
+Lines executed:96.00% of 25
+main.c:creating 'main.c.gcov'
+
+Negative test 5
+File 'main.c'
+Lines executed:100.00% of 25
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
+После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C
         -:    0:Source:main.c
@@ -598,7 +715,38 @@ int main(void)
 
 ### Тестирование
 
-Листинг gcov:
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:81.82% of 22
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:81.82% of 22
+main.c:creating 'main.c.gcov'
+
+Positive test 3
+File 'main.c'
+Lines executed:81.82% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:90.91% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:100.00% of 22
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
+После выполнения тестов файл main.c.gcov имеет вид:
 ```C
         -:    0:Source:main.c
         -:    0:Graph:main.gcno
@@ -742,7 +890,38 @@ int main(void)
 
 ### Тестирование
 
-Листинг gcov:
+#### gcov
+##### Вывод после каждого теста
+
+```bash
+Positive test 1
+File 'main.c'
+Lines executed:86.36% of 22
+main.c:creating 'main.c.gcov'
+
+Positive test 2
+File 'main.c'
+Lines executed:86.36% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 1
+File 'main.c'
+Lines executed:90.91% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 2
+File 'main.c'
+Lines executed:95.45% of 22
+main.c:creating 'main.c.gcov'
+
+Negative test 3
+File 'main.c'
+Lines executed:100.00% of 22
+main.c:creating 'main.c.gcov'
+```
+
+##### Литстинг
+После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C
         -:    0:Source:main.c
