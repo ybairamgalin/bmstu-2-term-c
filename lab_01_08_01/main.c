@@ -45,6 +45,7 @@ int main(void)
     unsigned long int packed = pack(byte_a_left_24, byte_b_left_16, byte_c_left_8, byte_d);
     
     printf("Result: ");
+
     for (int i = INT_DIGITS - 1; i >= 0; i--)
         printf("%lu", (packed >> i) % 2);
     
