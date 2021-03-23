@@ -59,66 +59,70 @@ main.c:creating 'main.c.gcov'
 После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C
-        -:    0:Source:main.c
-        -:    0:Graph:main.gcno
-        -:    0:Data:main.gcda
-        -:    0:Runs:5
-        -:    0:Programs:1
-        -:    1://  Created by Yaroslav Bairamgalin on 28.02.2021.
-        -:    2://
-        -:    3:
-        -:    4:#include <stdio.h>
-        -:    5:#include <math.h>
-        -:    6:#include <stdbool.h>
-        -:    7:
-        -:    8:#define OK 0
-        -:    9:#define INCORRECT_TYPE 10
-        -:   10:#define INCORRECT_VALUE 5
-        -:   11:
-        -:   12:#define EXPECTED_ARGS 1
-        -:   13:
-        -:   14:// function receives sum and returns sin value of this sum
-       10:   15:double g_term(double x, int count)
-        -:   16:{
-       10:   17:    return sqrt(x / count);
-        -:   18:}
-        -:   19:
-        5:   20:int main(void)
-        -:   21:{
-        -:   22:    double element;
-        -:   23:
-        5:   24:    int corr_input = scanf("%lf", &element);
-        5:   25:    if (corr_input != EXPECTED_ARGS)
-        1:   26:        return INCORRECT_TYPE;
-        4:   27:    if (element < 0)
-        1:   28:        return INCORRECT_VALUE;
-        -:   29:
-        3:   30:    double sum = sqrt(element);
-        -:   31:    
-        -:   32:    // set count = 2 as the first element has already been given
-        3:   33:    int count = 2;
-        -:   34:    
-        -:   35:    // until appears negative element
-       13:   36:    while (true)
-        -:   37:    {
-       13:   38:        int corr_input = scanf("%lf", &element);
-       13:   39:        if (corr_input != 1)
-        1:   40:            return INCORRECT_TYPE;
-        -:   41:
-       12:   42:        if (element >= 0)
-       10:   43:            sum += g_term(element, count);
-        -:   44:        else
-        2:   45:            break;
-       10:   46:        count++;
-        -:   47:    }
-        -:   48:
-        2:   49:    double result = sin(sum);
-        2:   50:    printf("%lf", result);
-        -:   51:
-        2:   52:    return OK;
-        5:   53:}
-        -:   54:
-        -:   55:
+-:    0:Source:main.c
+-:    0:Graph:main.gcno
+-:    0:Data:main.gcda
+-:    0:Runs:5
+-:    0:Programs:1
+-:    1://  Created by Yaroslav Bairamgalin on 28.02.2021.
+-:    2://
+-:    3:
+-:    4:#include <stdio.h>
+-:    5:#include <math.h>
+-:    6:#include <stdbool.h>
+-:    7:
+-:    8:#define OK 0
+-:    9:#define INCORRECT_TYPE 10
+-:   10:#define INCORRECT_VALUE 5
+-:   11:
+-:   12:#define EXPECTED_ARGS 1
+-:   13:
+-:   14:// function receives sum and returns sin value of this sum
+10:   15:double g_term(double const x, int const count)
+-:   16:{
+10:   17:    return sqrt(x / count);
+-:   18:}
+-:   19:
+5:   20:int main(void)
+-:   21:{
+-:   22:    double element;
+-:   23:
+5:   24:    int corr_input = scanf("%lf", &element);
+-:   25:
+5:   26:    if (corr_input != EXPECTED_ARGS)
+1:   27:        return INCORRECT_TYPE;
+-:   28:
+4:   29:    if (element < 0)
+1:   30:        return INCORRECT_VALUE;
+-:   31:
+3:   32:    double sum = sqrt(element);
+-:   33:
+-:   34:    // set count = 2 as the first element has already been given
+3:   35:    int count = 2;
+-:   36:
+-:   37:    // until appears negative element
+13:   38:    while (true)
+-:   39:    {
+13:   40:        int corr_input = scanf("%lf", &element);
+-:   41:
+13:   42:        if (corr_input != 1)
+1:   43:            return INCORRECT_TYPE;
+-:   44:
+12:   45:        if (element >= 0)
+10:   46:            sum += g_term(element, count);
+-:   47:        else
+2:   48:            break;
+10:   49:        count++;
+-:   50:    }
+-:   51:
+2:   52:    double result = sin(sum);
+2:   53:    printf("%lf", result);
+-:   54:
+2:   55:    return OK;
+5:   56:}
+-:   57:
+-:   58:
+
 ```
 
 Каждая строка была выполнена хотя бы 1 раз, поэтому тесты описанные выше

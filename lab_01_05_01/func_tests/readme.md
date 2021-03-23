@@ -62,56 +62,57 @@ main.c:creating 'main.c.gcov'
 После выполнения тестов файл main.c.gcov имеет вид:
 
 ```C
-        -:    0:Source:main.c
-        -:    0:Graph:main.gcno
-        -:    0:Data:main.gcda
-        -:    0:Runs:6
-        -:    0:Programs:1
-        -:    1://
-        -:    2://  main.c
-        -:    3://  lab01task0501
-        -:    4://
-        -:    5://  Created by Yaroslav Bairamgalin on 27.02.2021.
-        -:    6://
-        -:    7:
-        -:    8:#include <stdio.h>
-        -:    9:
-        -:   10:#define OK 0
-        -:   11:#define INCORRECT_TYPE 10
-        -:   12:#define INCORRECT_VALUE 5
-        -:   13:
-        -:   14:#define EXPECTED_ARGS 2
-        -:   15:
-        -:   16:
-        -:   17:// function puts in quo and num the whole part and the rest of
-        -:   18:// division of num by denom
-        3:   19:void integer_division(int *quo, int *num, int denom)
-        -:   20:{
-        -:   21:    // num finally equals rest
-       10:   22:    while (*num >= denom)
-        -:   23:    {
-        7:   24:        (*quo)++;
-        7:   25:        *num -= denom;
-        -:   26:    }
-        3:   27:}
-        -:   28:
-        6:   29:int main(void)
-        -:   30:{
-        -:   31:    int num, denom;
-        6:   32:    int corr_input = scanf("%d%d", &num, &denom);
-        6:   33:    if (corr_input != EXPECTED_ARGS)
-        1:   34:        return INCORRECT_TYPE;
-        -:   35:
-        5:   36:    if (num <= 0 || denom <= 0)
-        2:   37:        return INCORRECT_VALUE;
-        -:   38:    
-        3:   39:    int quo = 0;
-        3:   40:    integer_division(&quo, &num, denom);
-        -:   41:
-        3:   42:    printf("%d %d", quo, num);
-        -:   43:    
-        3:   44:    return OK;
-        6:   45:}
+-:    0:Source:main.c
+-:    0:Graph:main.gcno
+-:    0:Data:main.gcda
+-:    0:Runs:5
+-:    0:Programs:1
+-:    1://
+-:    2://  main.c
+-:    3://  lab01task0501
+-:    4://
+-:    5://  Created by Yaroslav Bairamgalin on 27.02.2021.
+-:    6://
+-:    7:
+-:    8:#include <stdio.h>
+-:    9:
+-:   10:#define OK 0
+-:   11:#define INCORRECT_TYPE 10
+-:   12:#define INCORRECT_VALUE 5
+-:   13:
+-:   14:#define EXPECTED_ARGS 2
+-:   15:
+-:   16:
+-:   17:// function puts in quo and num the whole part and the rest of
+-:   18:// division of num by denom
+2:   19:void integer_division(int *quo, int *num, const int denom)
+-:   20:{
+-:   21:    // num finally equals rest
+6:   22:    while (*num >= denom)
+-:   23:    {
+4:   24:        (*quo)++;
+4:   25:        *num -= denom;
+-:   26:    }
+2:   27:}
+-:   28:
+5:   29:int main(void)
+-:   30:{
+-:   31:    int num, denom;
+5:   32:    int corr_input = scanf("%d%d", &num, &denom);
+-:   33:
+5:   34:    if (corr_input != EXPECTED_ARGS)
+1:   35:        return INCORRECT_TYPE;
+-:   36:
+4:   37:    if (num <= 0 || denom <= 0)
+2:   38:        return INCORRECT_VALUE;
+-:   39:
+2:   40:    int quo = 0;
+2:   41:    integer_division(&quo, &num, denom);
+-:   42:
+2:   43:    printf("%d %d", quo, num);
+-:   44:
+2:   45:    return OK;
+5:   46:}
 ```
 
 Каждая строка была выполнена хотя бы 1 раз, поэтому тесты описанные выше
