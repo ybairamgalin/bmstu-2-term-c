@@ -7,3 +7,5 @@
 *.gcno
 *.DS_STORE
 .idea/
+createtests
+runtests
