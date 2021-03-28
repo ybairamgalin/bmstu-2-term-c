@@ -1,7 +1,9 @@
 #include <stdio.h>
 
 #define OK 0
-#define INCORRECT_INPUT 10
+#define INCORRECT_TYPE 2
+#define INCORRECT_VALUE 3
+
 #define VALUE_CANNOT_BE_DEFINED 20
 
 #define YES 1
@@ -17,15 +19,18 @@ int input(int *first, int *last)
 {
     long num_of_elem = last - first;
     int input_is_correct = YES;
+
     for (int i = 0; i < num_of_elem; i++)
     {
         int read_elements = scanf("%d", first + i);
+
         if (read_elements != 1)
         {
             input_is_correct = NO;
             break;
         }
     }
+
     return input_is_correct;
 }
 
@@ -38,9 +43,7 @@ int find_expected_sum(int *a_first, int *a_last, int *b_first)
     int sum = 0;
 
     for (int i = 0; i < size; i++)
-    {
         sum += *(a_first + i) * *(b_first + i);
-    }
 
     return sum;
 }
@@ -50,12 +53,17 @@ int main(void)
 {
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);
-    if (corr_input != 1 || number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
-        return INCORRECT_INPUT;
+
+    if (corr_input != 1)
+        return INCORRECT_TYPE;
+
+    if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
+        return INCORRECT_VALUE;
 
     int input_array[ARRAY_SIZE];
+
     if (input(input_array, input_array + number_of_elements) == NO)
-        return INCORRECT_INPUT;
+        return INCORRECT_TYPE;
 
     int neg_array[ARRAY_SIZE];
     int count_neg_elements = 0;
@@ -82,10 +90,12 @@ int main(void)
     }
 
     int iterate_to = (count_neg_elements > count_pos_elements) ? count_pos_elements : count_neg_elements;
+
     if (iterate_to == 0)
         return VALUE_CANNOT_BE_DEFINED;
 
     int sum = find_expected_sum(neg_array, neg_array + iterate_to, pos_array);
+
     printf("%d", sum);
 
     return OK;
