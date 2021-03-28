@@ -18,9 +18,11 @@
 int input(int *array, const int num_of_elem)
 {
     int input_is_correct = YES;
+
     for (int i = 0; i < num_of_elem; i++)
     {
         int read_elements = scanf("%d", array + i);
+
         if (read_elements != 1)
         {
             input_is_correct = NO;
