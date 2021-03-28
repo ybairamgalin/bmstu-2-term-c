@@ -4,6 +4,8 @@
 #define INCORRECT_INPUT 10
 #define REACHED_MAX_ARRAY_SIZE 100
 
+#define READ_CORRECTLY 1
+
 #define ARRAY_SIZE 10
 
 // function receives pointer to an array and scans the user input
@@ -12,7 +14,7 @@ int input(int *array)
 {
     int number_of_elements = 0;
 
-    while (number_of_elements != (ARRAY_SIZE) && scanf("%d", array + number_of_elements) == 1)
+    while (number_of_elements != ARRAY_SIZE && scanf("%d", array + number_of_elements) == READ_CORRECTLY)
         number_of_elements++;
 
     int check_element;
