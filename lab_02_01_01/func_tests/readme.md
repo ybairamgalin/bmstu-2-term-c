@@ -81,7 +81,7 @@ Creating 'main.c.gcov'
 -:   10:#define NO 0
 -:   11:
 -:   12:
-5:   13:int input(int *array, int num_of_elem)
+5:   13:int input(int *array, const int num_of_elem)
 -:   14:{
 5:   15:    int input_is_correct = YES;
 -:   16:
@@ -102,7 +102,7 @@ Creating 'main.c.gcov'
 -:   31:// function finds the product of all negative elements and them in into *product
 -:   32:// if no such elements exist returns 0
 -:   33:// else returns 1
-4:   34:int solve(int *array, int arr_lng, int *product)
+4:   34:int solve(int *array, const int arr_lng, int *product)
 -:   35:{
 4:   36:    int contains_odd = NO;
 -:   37:

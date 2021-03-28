@@ -3,7 +3,9 @@
 #include <math.h>
 
 #define OK 0
-#define INCORRECT_INPUT 10
+#define INCORRECT_TYPE 2
+#define INCORRECT_VALUE 3
+#define NO_PRIME_ELEMENTS_IN_ARRAY 4
 
 #define ARRAY_SIZE 10
 #define YES 1
@@ -13,7 +15,7 @@
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
 // 0, if input in not correct
-int input(int *array, int num_of_elem)
+int input(int *array, const int num_of_elem)
 {
     int input_is_correct = YES;
     for (int i = 0; i < num_of_elem; i++)
@@ -31,7 +33,7 @@ int input(int *array, int num_of_elem)
 // function receives int x and returns 1 if:
 // 1. x <= 1, 2. x is prime;
 // otherwise function returns 0
-int is_prime(int x)
+int is_prime(const int x)
 {
     int x_is_prime = YES;
     
@@ -55,15 +57,21 @@ int main(void)
 {
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);
-    if (corr_input != 1 || number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
-        return INCORRECT_INPUT;
+
+    if (corr_input != 1 )
+        return INCORRECT_TYPE;
+
+    if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
+        return INCORRECT_VALUE;
     
     int arr[ARRAY_SIZE];
+
     if (input(arr, number_of_elements) == NO)
-        return INCORRECT_INPUT;
+        return INCORRECT_TYPE;
     
     int result_array[ARRAY_SIZE];
     int count_new_array = 0;
+
     for (int i = 0; i < number_of_elements; i++)
     {
         if (is_prime(arr[i]) == YES)
@@ -75,12 +83,10 @@ int main(void)
     
     // due to the task if no elements are found, return error
     if (count_new_array == 0)
-        return INCORRECT_INPUT;
+        return NO_PRIME_ELEMENTS_IN_ARRAY;
     
     for (int i = 0; i < count_new_array; i++)
-    {
         printf("%d ", result_array[i]);
-    }
     
     return OK;
 }

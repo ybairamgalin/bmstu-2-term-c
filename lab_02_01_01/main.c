@@ -10,7 +10,7 @@
 #define NO 0
 
 
-int input(int *array, int num_of_elem)
+int input(int *array, const int num_of_elem)
 {
     int input_is_correct = YES;
 
@@ -31,7 +31,7 @@ int input(int *array, int num_of_elem)
 // function finds the product of all negative elements and them in into *product
 // if no such elements exist returns 0
 // else returns 1
-int solve(int *array, int arr_lng, int *product)
+int solve(int *array, const int arr_lng, int *product)
 {
     int contains_odd = NO;
 

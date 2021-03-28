@@ -9,3 +9,5 @@
 .idea/
 createtests
 runtests
+report.md
+*.gcov
