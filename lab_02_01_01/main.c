@@ -44,6 +44,7 @@ int solve(int *array, const int arr_lng, int *product)
             contains_odd = YES;
         }
     }
+
     return contains_odd;
 }
 

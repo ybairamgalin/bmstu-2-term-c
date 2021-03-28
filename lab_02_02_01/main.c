@@ -51,6 +51,7 @@ int is_prime(const int x)
             break;
         }
     }
+
     return x_is_prime;
 }
 
