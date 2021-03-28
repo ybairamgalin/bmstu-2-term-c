@@ -24,7 +24,7 @@ int input(int *array)
 
 // function receives pointer to an array and sorts it
 // sort method - bubble sort
-void sort(int *array, int number_of_elements)
+void sort(int *array, const int number_of_elements)
 {
     for (int i = 0; i < number_of_elements; i++)
     {
