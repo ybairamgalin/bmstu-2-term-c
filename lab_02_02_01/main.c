@@ -61,7 +61,7 @@ int main(void)
     int number_of_elements;
     int corr_input = scanf("%d", &number_of_elements);
 
-    if (corr_input != 1 )
+    if (corr_input != 1)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
