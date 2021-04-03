@@ -87,9 +87,6 @@ int main(void)
     if (input_check == NO)
         return INCORRECT_TYPE;
 
-    for (int i = 0 ; i < cols; i++)
-        printf("%d ", array[i]);
-
     int elements_found[MAX_ARRAY_SIZE];
     int number_of_unique_elements = 0;
 
@@ -115,7 +112,6 @@ int main(void)
     }
 
     printf("%d", number_of_unique_elements);
-
 
     return OK;
 
