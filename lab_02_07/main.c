@@ -1,4 +1,3 @@
-// Copy of task4 from ../lab_02_04_01/main.c
 
 #include <stdio.h>
 

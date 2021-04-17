@@ -11,6 +11,8 @@
 
 #define ARRAY_SIZE 10
 
+#define EXPECTED_ARGS 1
+
 
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
@@ -24,7 +26,7 @@ int input(int *first, int *last)
     {
         int read_elements = scanf("%d", first + i);
 
-        if (read_elements != 1)
+        if (read_elements != EXPECTED_ARGS)
         {
             input_is_correct = NO;
             break;
@@ -48,46 +50,56 @@ int find_expected_sum(int *a_first, int *a_last, int *b_first)
     return sum;
 }
 
+int get_subarray_of_neg(int *array, const int number_of_elements, int *subarray)
+{
+    int count = 0;
+
+    for (int i = 0; i < number_of_elements; i++)
+    {
+        if (*(array + i) < 0)
+        {
+            *(subarray + count) = *(array + i);
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int get_subarray_of_pos(int *array, int number_of_elements, int *subarray)
+{
+    int count = 0;
+
+    for (int i = number_of_elements - 1; i >= 0; i--)
+    {
+        if (*(array + i) > 0)
+        {
+            *(subarray + count) = *(array + i);
+            count++;
+        }
+    }
+
+    return count;
+}
 
 int main(void)
 {
     int number_of_elements;
-    int corr_input = scanf("%d", &number_of_elements);
+    int input_array[ARRAY_SIZE];
+    int neg_array[ARRAY_SIZE];
+    int pos_array[ARRAY_SIZE];
 
-    if (corr_input != 1)
+    if (scanf("%d", &number_of_elements) != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_VALUE;
 
-    int input_array[ARRAY_SIZE];
-
     if (input(input_array, input_array + number_of_elements) == NO)
         return INCORRECT_TYPE;
 
-    int neg_array[ARRAY_SIZE];
-    int count_neg_elements = 0;
-
-    for (int i = 0; i < number_of_elements; i++)
-    {
-        if (*(input_array + i) < 0)
-        {
-            *(neg_array + count_neg_elements) = *(input_array + i);
-            count_neg_elements++;
-        }
-    }
-
-    int pos_array[ARRAY_SIZE];
-    int count_pos_elements = 0;
-
-    for (int i = number_of_elements - 1; i >= 0; i--)
-    {
-        if (*(input_array + i) > 0)
-        {
-            *(pos_array + count_pos_elements) = *(input_array + i);
-            count_pos_elements++;
-        }
-    }
+    int count_neg_elements = get_subarray_of_neg(input_array, number_of_elements, neg_array);
+    int count_pos_elements = get_subarray_of_pos(input_array, number_of_elements, pos_array);
 
     int iterate_to = (count_neg_elements > count_pos_elements) ? count_pos_elements : count_neg_elements;
 

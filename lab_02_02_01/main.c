@@ -11,6 +11,8 @@
 #define YES 1
 #define NO 0
 
+#define EXPECTED_ARGS 1
+
 
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
@@ -23,7 +25,7 @@ int input(int *array, const int num_of_elem)
     {
         int read_elements = scanf("%d", array + i);
 
-        if (read_elements != 1)
+        if (read_elements != EXPECTED_ARGS)
         {
             input_is_correct = NO;
             break;
@@ -55,13 +57,36 @@ int is_prime(const int x)
     return x_is_prime;
 }
 
+void print_array(int *array, const int number_of_elements)
+{
+    for (int i = 0; i < number_of_elements; i++)
+        printf("%d ", *(array + i));
+}
+
+// function receives to pointers to an array
+// copies prime elements from from_array to to_array
+// returns to_array size
+int copy_primes(int *from_array, int from_array_size, int *to_array)
+{
+    int to_array_size = 0;
+
+    for (int i = 0; i < from_array_size; i++)
+    {
+        if (is_prime(*(from_array + i)) == YES)
+        {
+            *(to_array + to_array_size) = *(from_array + i);
+            to_array_size++;
+        }
+    }
+
+    return to_array_size;
+}
 
 int main(void)
 {
     int number_of_elements;
-    int corr_input = scanf("%d", &number_of_elements);
 
-    if (corr_input != 1)
+    if (scanf("%d", &number_of_elements) != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
@@ -73,23 +98,13 @@ int main(void)
         return INCORRECT_TYPE;
     
     int result_array[ARRAY_SIZE];
-    int count_new_array = 0;
-
-    for (int i = 0; i < number_of_elements; i++)
-    {
-        if (is_prime(arr[i]) == YES)
-        {
-            result_array[count_new_array] = arr[i];
-            count_new_array++;
-        }
-    }
+    int count_new_array = copy_primes(arr, number_of_elements, result_array);
     
     // due to the task if no elements are found, return error
     if (count_new_array == 0)
         return NO_PRIME_ELEMENTS_IN_ARRAY;
     
-    for (int i = 0; i < count_new_array; i++)
-        printf("%d ", result_array[i]);
+    print_array(result_array, count_new_array);
     
     return OK;
 }

@@ -6,8 +6,11 @@
 
 #define ARRAY_SIZE 21
 #define BORDER_VALUE -1000000
+
 #define YES 1
 #define NO 0
+
+#define EXPECTED_ARGS 1
 
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
@@ -18,9 +21,7 @@ int input(int *array, const int num_of_elem)
 
     for (int i = 0; i < num_of_elem; i++)
     {
-        int read_elements = scanf("%d", array + i);
-
-        if (read_elements != 1)
+        if (scanf("%d", array + i) != EXPECTED_ARGS)
         {
             input_is_correct = NO;
             break;
@@ -57,12 +58,38 @@ int get_next_fibonacci()
     return result;
 }
 
-int main()
+void print_array(int *array, const int number_of_elements)
+{
+    for (int i = 0; i < number_of_elements; i++)
+        printf("%d ", *(array + i));
+}
+
+void insert_fibonacci(int *array, int *number_of_elements)
+{
+    int count = 0;
+
+    while (*(array + count) != BORDER_VALUE)
+    {
+        if (*(array + count) % 3 == 0)
+        {
+            // move elements 1 forward
+            for (int i = ARRAY_SIZE - 1; i > count + 1; i--)
+                *(array + i) = *(array + (i - 1));
+
+            *(array + count + 1) = get_next_fibonacci();
+            (*number_of_elements)++;
+            count += 2;
+        }
+        else
+            count++;
+    }
+}
+
+int main(void)
 {
     int number_of_elements;
-    int corr_input = scanf("%d", &number_of_elements);
 
-    if (corr_input != 1)
+    if (scanf("%d", &number_of_elements) != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
@@ -76,26 +103,9 @@ int main()
     if (input(arr, number_of_elements) == NO)
         return INCORRECT_TYPE;
 
-    int count = 0;
+    insert_fibonacci(arr, &number_of_elements);
 
-    while (arr[count] != BORDER_VALUE)
-    {
-        if (arr[count] % 3 == 0)
-        {
-            // move all the following elements 1 forward
-            for (int i = ARRAY_SIZE - 1; i > count + 1; i--)
-                arr[i] = arr[i - 1];
-
-            arr[count + 1] = get_next_fibonacci();
-            number_of_elements++;
-            count += 2;
-        }
-        else
-            count++;
-    }
-
-    for (int i = 0; i < number_of_elements; i++)
-        printf("%d ", arr[i]);
+    print_array(arr, number_of_elements);
 
     return OK;
 }

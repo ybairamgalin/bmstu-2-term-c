@@ -9,6 +9,8 @@
 #define YES 1
 #define NO 0
 
+#define EXPECTED_ARGS 1
+
 
 int input(int *array, const int num_of_elem)
 {
@@ -18,7 +20,7 @@ int input(int *array, const int num_of_elem)
     {
         int read_elements = scanf("%d", array + i);
 
-        if (read_elements != 1)
+        if (read_elements != EXPECTED_ARGS)
         {
             input_is_correct = NO;
             break;
@@ -31,7 +33,7 @@ int input(int *array, const int num_of_elem)
 // function finds the product of all negative elements and them in into *product
 // if no such elements exist returns 0
 // else returns 1
-int solve(int *array, const int arr_lng, int *product)
+int odd_elements_product(int *array, const int arr_lng, int *product)
 {
     int contains_odd = NO;
 
@@ -51,9 +53,8 @@ int solve(int *array, const int arr_lng, int *product)
 int main(void)
 {
     int number_of_elements;
-    int corr_input = scanf("%d", &number_of_elements);
 
-    if (corr_input != 1)
+    if (scanf("%d", &number_of_elements) != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
@@ -67,7 +68,7 @@ int main(void)
     // prod - final product
     int product = 1;
     
-    if (solve(arr, number_of_elements, &product) == 0)
+    if (odd_elements_product(arr, number_of_elements, &product) == 0)
         return NO_ODD_ELEMENTS_IN_ARRAY;
 
     printf("%d", product);

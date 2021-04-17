@@ -26,7 +26,7 @@ int input(int *array)
 
 // function receives pointer to an array and sorts it
 // sort method - bubble sort
-void sort(int *array, const int number_of_elements)
+void bubble_sort(int *array, const int number_of_elements)
 {
     for (int i = 0; i < number_of_elements; i++)
     {
@@ -51,7 +51,7 @@ int main(void)
     if (number_of_elements == 0)
         return INCORRECT_INPUT;
 
-    sort(arr, number_of_elements);
+    bubble_sort(arr, number_of_elements);
 
     for (int i = 0; i < number_of_elements; i++)
         printf("%d ", arr[i]);

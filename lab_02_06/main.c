@@ -12,6 +12,9 @@
 #define ARRAY_SIZE 10000
 #define MAX_NUMBER_OF_CYCLES 10000
 
+#define EXPECTED_ARGS_INPUT 1
+#define EXPECTED_ARGS_MAIN 2
+
 // function receives pointer to an array and number of elements in this array
 // function returns 1, if input is correct
 // 0, if input in not correct
@@ -24,7 +27,7 @@ int input(int *first, int *last)
     {
         int read_elements = scanf("%d", first + i);
 
-        if (read_elements != 1)
+        if (read_elements != EXPECTED_ARGS_INPUT)
         {
             input_is_correct = NO;
             break;
@@ -120,7 +123,7 @@ int main(void) {
     int number_of_cycles;
     int corr_input = scanf("%d%d", &number_of_elements, &number_of_cycles);
 
-    if (corr_input != 2)
+    if (corr_input != EXPECTED_ARGS_MAIN)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
