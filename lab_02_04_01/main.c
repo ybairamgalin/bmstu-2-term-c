@@ -47,7 +47,8 @@ int main(void)
 {
     int arr[ARRAY_SIZE];
     int number_of_input_elements = input(arr);
-    int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ? number_of_input_elements : number_of_input_elements - 1;
+    int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ?
+            number_of_input_elements : number_of_input_elements - 1;
 
     if (number_of_elements == 0)
         return INCORRECT_INPUT;

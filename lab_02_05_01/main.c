@@ -48,7 +48,8 @@ int find_expected_sum(int *a_first, int *a_last, int *b_first)
     return sum;
 }
 
-int get_subarray_of_neg(int *array, const int number_of_elements, int *subarray)
+int get_subarray_of_neg(int *array, const int number_of_elements,
+                        int *subarray)
 {
     int count = 0;
 
