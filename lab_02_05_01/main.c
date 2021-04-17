@@ -24,9 +24,7 @@ int input(int *first, int *last)
 
     for (int i = 0; i < num_of_elem; i++)
     {
-        int read_elements = scanf("%d", first + i);
-
-        if (read_elements != EXPECTED_ARGS)
+        if (scanf("%d", first + i) != EXPECTED_ARGS)
         {
             input_is_correct = NO;
             break;

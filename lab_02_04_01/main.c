@@ -14,7 +14,8 @@ int input(int *array)
 {
     int number_of_elements = 0;
 
-    while (number_of_elements != ARRAY_SIZE && scanf("%d", array + number_of_elements) == READ_CORRECTLY)
+    while (number_of_elements != ARRAY_SIZE &&
+           scanf("%d", array + number_of_elements) == READ_CORRECTLY)
         number_of_elements++;
 
     int check_element;
