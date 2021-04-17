@@ -118,12 +118,29 @@ int process_3(int *arr, int number_of_elements)
     return sum;
 }
 
+void measure_time(int *array, int number_of_elements, int (*process)(int *arr, int num), int number_of_cycles)
+{
+    struct timeval tv_start, tv_stop;
+    int64_t elapsed_time = 0;
+    gettimeofday(&tv_start, NULL);
+    gettimeofday(&tv_stop, NULL);
+
+    for (int i = 0; i < number_of_cycles; i++)
+    {
+        gettimeofday(&tv_start, NULL);
+        process(array, number_of_elements);
+        gettimeofday(&tv_stop, NULL);
+        elapsed_time += (tv_stop.tv_sec - tv_start.tv_sec) * 1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
+    }
+
+    printf("%" PRId64 "\tmicroseconds (sec * (1e-6))\n", elapsed_time);
+}
+
 int main(void) {
     int number_of_elements;
     int number_of_cycles;
-    int corr_input = scanf("%d%d", &number_of_elements, &number_of_cycles);
 
-    if (corr_input != EXPECTED_ARGS_MAIN)
+    if (scanf("%d%d", &number_of_elements, &number_of_cycles) != EXPECTED_ARGS_MAIN)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
@@ -137,43 +154,7 @@ int main(void) {
     if (input(input_array, input_array + number_of_elements) == NO)
         return INCORRECT_TYPE;
 
-    struct timeval tv_start, tv_stop;
-    // elapsed_time_N - время выполнения функции process_N,
-    int64_t elapsed_time_1 = 0, elapsed_time_2 = 0, elapsed_time_3 = 0;
-
-    // measure process_1
-    gettimeofday(&tv_start, NULL);
-    gettimeofday(&tv_stop, NULL);
-    for (int i = 0; i < number_of_cycles; i++)
-    {
-        gettimeofday(&tv_start, NULL);
-        process_1(input_array, number_of_elements);
-        gettimeofday(&tv_stop, NULL);
-        elapsed_time_1 += (tv_stop.tv_sec - tv_start.tv_sec) * 1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
-    }
-
-    // measure process_2
-    for (int i = 0; i < number_of_cycles; i++)
-    {
-        gettimeofday(&tv_start, NULL);
-        process_2(input_array, number_of_elements);
-        gettimeofday(&tv_stop, NULL);
-        elapsed_time_2 += (tv_stop.tv_sec - tv_start.tv_sec) * 1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
-    }
-
-    // measure process_2
-    for (int i = 0; i < number_of_cycles; i++)
-    {
-        gettimeofday(&tv_start, NULL);
-        process_3(input_array, number_of_elements);
-        gettimeofday(&tv_stop, NULL);
-        elapsed_time_3 += (tv_stop.tv_sec - tv_start.tv_sec) * 1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
-    }
-
-
-
-    printf("%" PRId64 "\tmicroseconds (sec * (1e-6))\n", elapsed_time_1);
-    printf("%" PRId64 "\tmicroseconds (sec * (1e-6))\n", elapsed_time_2);
-    printf("%" PRId64 "\tmicroseconds (sec * (1e-6))\n", elapsed_time_3);
-
+    measure_time(input_array, number_of_elements, process_1, number_of_cycles);
+    measure_time(input_array, number_of_elements, process_2, number_of_cycles);
+    measure_time(input_array, number_of_elements, process_3, number_of_cycles);
 }
