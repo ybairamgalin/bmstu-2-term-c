@@ -8,8 +8,7 @@
 
 #define ARRAY_SIZE 10
 
-// function receives pointer to an array and scans the user input
-// returns number of elements that were scanned
+
 int input(int *array)
 {
     int number_of_elements = 0;
@@ -25,8 +24,7 @@ int input(int *array)
     return number_of_elements;
 }
 
-// function receives pointer to an array and sorts it
-// sort method - bubble sort
+
 void bubble_sort(int *array, const int number_of_elements)
 {
     for (int i = 0; i < number_of_elements; i++)
@@ -43,12 +41,13 @@ void bubble_sort(int *array, const int number_of_elements)
     }
 }
 
+
 int main(void)
 {
     int arr[ARRAY_SIZE];
     int number_of_input_elements = input(arr);
     int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ?
-            number_of_input_elements : number_of_input_elements - 1;
+        number_of_input_elements : number_of_input_elements - 1;
 
     if (number_of_elements == 0)
         return INCORRECT_INPUT;

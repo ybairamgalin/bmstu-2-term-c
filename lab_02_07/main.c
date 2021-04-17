@@ -1,19 +1,20 @@
-
 #include <stdio.h>
 
 #define OK 0
 #define INCORRECT_INPUT 10
 #define REACHED_MAX_ARRAY_SIZE 100
 
-#define ARRAY_SIZE 1000
+#define READ_CORRECTLY 1
 
-// function receives pointer to an array and scans the user input
+#define ARRAY_SIZE 10
+
 // returns number of elements that were scanned
 int input(int *array)
 {
     int number_of_elements = 0;
 
-    while (number_of_elements != (ARRAY_SIZE) && scanf("%d", array + number_of_elements) == 1)
+    while (number_of_elements != ARRAY_SIZE &&
+           scanf("%d", array + number_of_elements) == READ_CORRECTLY)
         number_of_elements++;
 
     int check_element;
@@ -23,9 +24,7 @@ int input(int *array)
     return number_of_elements;
 }
 
-// function receives pointer to an array and sorts it
-// sort method - bubble sort
-void sort(int *array, int number_of_elements)
+void bubble_sort(int *array, const int number_of_elements)
 {
     for (int i = 0; i < number_of_elements; i++)
     {
@@ -45,12 +44,13 @@ int main(void)
 {
     int arr[ARRAY_SIZE];
     int number_of_input_elements = input(arr);
-    int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ? number_of_input_elements : number_of_input_elements - 1;
+    int number_of_elements = (number_of_input_elements <= ARRAY_SIZE) ?
+        number_of_input_elements : number_of_input_elements - 1;
 
     if (number_of_elements == 0)
         return INCORRECT_INPUT;
 
-    sort(arr, number_of_elements);
+    bubble_sort(arr, number_of_elements);
 
     for (int i = 0; i < number_of_elements; i++)
         printf("%d ", arr[i]);

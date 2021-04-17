@@ -12,9 +12,6 @@
 
 #define EXPECTED_ARGS 1
 
-// function receives pointer to an array and number of elements in this array
-// function returns 1, if input is correct
-// 0, if input in not correct
 int input(int *array, const int num_of_elem)
 {
     int input_is_correct = YES;
@@ -32,7 +29,8 @@ int input(int *array, const int num_of_elem)
 }
 
 
-// the functions returns fib_i,, where i is the number of times, the function was previously called
+// the functions returns fib_i,, where i is the number of times
+// the function was previously called
 int get_next_fibonacci()
 {
     static int fib_first = 0;

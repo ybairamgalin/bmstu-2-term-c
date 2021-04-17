@@ -15,9 +15,7 @@
 #define EXPECTED_ARGS_INPUT 1
 #define EXPECTED_ARGS_MAIN 2
 
-// function receives pointer to an array and number of elements in this array
-// function returns 1, if input is correct
-// 0, if input in not correct
+
 int input(int *first, int *last)
 {
     long num_of_elem = last - first;
@@ -116,7 +114,8 @@ int process_3(int *arr, int number_of_elements)
     return sum;
 }
 
-void measure_time(int *array, int number_of_elements, int (*process)(int *arr, int num), int number_of_cycles)
+void measure_time(int *array, int number_of_elements,
+int (*process)(int *arr, int num), int number_of_cycles)
 {
     struct timeval tv_start, tv_stop;
     int64_t elapsed_time = 0;
@@ -128,23 +127,23 @@ void measure_time(int *array, int number_of_elements, int (*process)(int *arr, i
         gettimeofday(&tv_start, NULL);
         process(array, number_of_elements);
         gettimeofday(&tv_stop, NULL);
-        elapsed_time += (tv_stop.tv_sec - tv_start.tv_sec) * 1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
+        elapsed_time += (tv_stop.tv_sec - tv_start.tv_sec) *
+                1000000LL + (tv_stop.tv_usec - tv_start.tv_usec);
     }
 
     printf("%" PRId64 "\tmicroseconds (sec * (1e-6))\n", elapsed_time);
 }
 
 int main(void) {
-    int number_of_elements;
-    int number_of_cycles;
+    int number_of_elements, cycles;
 
-    if (scanf("%d%d", &number_of_elements, &number_of_cycles) != EXPECTED_ARGS_MAIN)
+    if (scanf("%d%d", &number_of_elements, &cycles) != EXPECTED_ARGS_MAIN)
         return INCORRECT_TYPE;
 
     if (number_of_elements <= 0 || number_of_elements > ARRAY_SIZE)
         return INCORRECT_VALUE;
 
-    if (number_of_cycles <= 0 || number_of_cycles > MAX_NUMBER_OF_CYCLES)
+    if (cycles <= 0 || cycles > MAX_NUMBER_OF_CYCLES)
         return INCORRECT_VALUE;
 
     int input_array[ARRAY_SIZE];
@@ -152,7 +151,7 @@ int main(void) {
     if (input(input_array, input_array + number_of_elements) == NO)
         return INCORRECT_TYPE;
 
-    measure_time(input_array, number_of_elements, process_1, number_of_cycles);
-    measure_time(input_array, number_of_elements, process_2, number_of_cycles);
-    measure_time(input_array, number_of_elements, process_3, number_of_cycles);
+    measure_time(input_array, number_of_elements, process_1, cycles);
+    measure_time(input_array, number_of_elements, process_2, cycles);
+    measure_time(input_array, number_of_elements, process_3, cycles);
 }

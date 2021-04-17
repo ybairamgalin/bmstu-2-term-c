@@ -14,9 +14,6 @@
 #define EXPECTED_ARGS 1
 
 
-// function receives pointer to an array and number of elements in this array
-// function returns 1, if input is correct
-// 0, if input in not correct
 int input(int *array, const int num_of_elem)
 {
     int input_is_correct = YES;
@@ -32,9 +29,6 @@ int input(int *array, const int num_of_elem)
     return input_is_correct;
 }
 
-// function receives int x and returns 1 if:
-// 1. x <= 1, 2. x is prime;
-// otherwise function returns 0
 int is_prime(const int x)
 {
     int x_is_prime = YES;
@@ -61,9 +55,6 @@ void print_array(int *array, const int number_of_elements)
         printf("%d ", *(array + i));
 }
 
-// function receives to pointers to an array
-// copies prime elements from from_array to to_array
-// returns to_array size
 int copy_primes(int *from_array, int from_array_size, int *to_array)
 {
     int to_array_size = 0;

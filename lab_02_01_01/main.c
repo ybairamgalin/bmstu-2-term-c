@@ -28,9 +28,6 @@ int input(int *array, const int num_of_elem)
     return input_is_correct;
 }
 
-// function finds the product of all negative elements and them in into *product
-// if no such elements exist returns 0
-// else returns 1
 int odd_elements_product(int *array, const int arr_lng, int *product)
 {
     int contains_odd = NO;
