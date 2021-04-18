@@ -13,7 +13,7 @@
 
 #define INT_MIN -2147483647
 
-int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
+int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
@@ -35,13 +35,15 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(const int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void matrix_print(int (* const matrix)[MAX_COLUMNS], const int rows,
 const int columns)
 {
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < columns; j++)
             printf("%d ", matrix[i][j]);
+
+        printf("\n");
     }
 }
 
@@ -73,7 +75,7 @@ void swap_rows(int *row_1, int *row_2, const int size)
     }
 }
 
-void sort_rows(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void sort_rows(int (*matrix)[MAX_COLUMNS], const int rows,
 const int cols)
 {
     int max_elements[MAX_COLUMNS];
