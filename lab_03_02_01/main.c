@@ -114,4 +114,6 @@ int main(void)
     columns = columns - 1;
 
     matrix_print(array, rows, columns);
+
+    return OK;
 }

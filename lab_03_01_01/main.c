@@ -91,4 +91,6 @@ int main(void)
     }
 
     array_print(result, rows);
+
+    return OK;
 }
