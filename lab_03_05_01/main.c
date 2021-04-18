@@ -54,7 +54,7 @@ int sum_of_digits(int num)
 }
 
 void matrix_print(int (*const matrix)[MAX_COLUMNS], const int rows,
-                  const int columns)
+const int columns)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -83,7 +83,6 @@ int *array)
 
 void move_3_left(int *array, const int size)
 {
-
     for (int i = 0; i < CYCLE_MARGIN; i++)
     {
         int buf = *array;
@@ -112,7 +111,7 @@ const int cols, const int *arr)
         for (int j = 0; j < cols; j++)
         {
             matrix[i][j] = sum_of_digits(matrix[i][j]) > 10 ?
-        arr[count] : matrix[i][j];
+                arr[count] : matrix[i][j];
             count += sum_of_digits(matrix[i][j]) > 10 ? 1 : 0;
         }
 }
