@@ -48,21 +48,18 @@ const int columns)
     }
 }
 
-int row_is_symmetrical(const int *row, const int number_of_elements)
+int row_is_symmetrical(const int *row, const int size)
 {
-    int i = 0, j = number_of_elements - 1;
     int symmetry = IS_SYMMETRICAL;
 
-    while (i < j)
+    for (int i = 0, j = size - 1; i < j; i++, j--)
     {
+        printf("\n%d, %d\n", i, j);
         if (*(row + i) != *(row + j))
         {
             symmetry = IS_NOT_SYMMETRICAL;
             break;
         }
-
-        i++;
-        j--;
     }
 
     return symmetry;
@@ -88,7 +85,7 @@ int main(void)
 
     for (int i = 0; i < rows; i++)
     {
-        if (row_is_symmetrical(array[i], rows) == IS_SYMMETRICAL)
+        if (row_is_symmetrical(array[i], columns) == IS_SYMMETRICAL)
             result[i] = IS_SYMMETRICAL;
         else
             result[i] = IS_NOT_SYMMETRICAL;
