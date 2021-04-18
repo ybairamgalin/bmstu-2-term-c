@@ -14,7 +14,7 @@
 
 #define INT_MAX 2147483647
 
-int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
+int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
@@ -36,7 +36,7 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(const int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void matrix_print(int (* const matrix)[MAX_COLUMNS], const int rows,
 const int columns)
 {
     for (int i = 0; i < rows; i++)
@@ -48,7 +48,7 @@ const int columns)
     }
 }
 
-void delete_row(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void delete_row(int (*matrix)[MAX_COLUMNS], const int rows,
 const int cols, const int row_to_delete)
 {
     for (int i = row_to_delete; i < rows - 1; i++)
@@ -56,7 +56,7 @@ const int cols, const int row_to_delete)
             matrix[i][j] = matrix[i + 1][j];
 }
 
-void delete_column(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void delete_column(int (*matrix)[MAX_COLUMNS], const int rows,
 const int cols, const int col_to_delete)
 {
     for (int i = col_to_delete; i < cols - 1; i++)
@@ -78,7 +78,7 @@ int sum_of_digits(int num)
     return sum;
 }
 
-void find_element(const int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void find_element(int (* const matrix)[MAX_COLUMNS], const int rows,
 const int cols, int *x, int *y)
 {
     int min_sum = INT_MAX;
