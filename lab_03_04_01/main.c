@@ -6,7 +6,7 @@
 #define MAX_ROWS 10
 #define MAX_COLUMNS 10
 
-#define MIN_ROWS 2
+#define MIN_ROWS 1
 #define MIN_COLUMNS 1
 
 #define INPUT_SUCCESSFUL 1
