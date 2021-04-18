@@ -35,7 +35,7 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void matrix_print(const int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
 const int columns)
 {
     for (int i = 0; i < rows; i++)
@@ -103,8 +103,6 @@ int main(void)
 
     if (matrix_input(array, &rows, &columns) == INPUT_NOT_SUCCESSFUL)
         return INPUT_ERROR;
-
-    matrix_print(array, rows, columns);
 
     int to_delete_row, to_delete_col;
     find_element(array, rows, columns, &to_delete_row, &to_delete_col);
