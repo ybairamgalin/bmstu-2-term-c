@@ -11,7 +11,7 @@
 
 #define EXPECTED_ARGS 1
 
-int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
+int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
