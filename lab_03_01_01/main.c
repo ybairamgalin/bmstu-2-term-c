@@ -54,7 +54,6 @@ int row_is_symmetrical(const int *row, const int size)
 
     for (int i = 0, j = size - 1; i < j; i++, j--)
     {
-        printf("\n%d, %d\n", i, j);
         if (*(row + i) != *(row + j))
         {
             symmetry = IS_NOT_SYMMETRICAL;
