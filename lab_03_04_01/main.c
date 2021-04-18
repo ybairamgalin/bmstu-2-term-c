@@ -33,7 +33,7 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(int (* const matrix)[MAX_COLUMNS], const int rows,
+void matrix_print(int (*const matrix)[MAX_COLUMNS], const int rows,
                   const int columns)
 {
     for (int i = 0; i < rows; i++)

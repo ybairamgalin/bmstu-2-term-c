@@ -38,7 +38,7 @@ int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(int (* const matrix)[MAX_COLUMNS], const int rows,
+void matrix_print(int (*const matrix)[MAX_COLUMNS], const int rows,
 const int columns)
 {
     for (int i = 0; i < rows; i++)
@@ -80,7 +80,7 @@ int sum_of_digits(int num)
     return sum;
 }
 
-void find_element(int (* const matrix)[MAX_COLUMNS], const int rows,
+void find_element(int (*const matrix)[MAX_COLUMNS], const int rows,
 const int cols, int *x, int *y)
 {
     int min_sum = INT_MAX;
