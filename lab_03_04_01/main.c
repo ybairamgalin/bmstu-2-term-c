@@ -45,6 +45,22 @@ void matrix_print(int (*const matrix)[MAX_COLUMNS], const int rows,
     }
 }
 
+void swap(int *row_1, int *row_2, const int start, const int stop)
+{
+    for (int i = start; i < stop; i++)
+    {
+        int buf = *(row_1 + i);
+        *(row_1 + i) = *(row_2 + i);
+        *(row_2 + i) = buf;
+    }
+}
+
+void swap_lines(int (*matrix)[MAX_COLUMNS], const int rows, const int cols)
+{
+    for (int i = 0; i < rows / 2; i++)
+        swap(matrix[i], matrix[rows - 1 - i], i, cols - i);
+}
+
 int main(void)
 {
     int array[MAX_ROWS][MAX_COLUMNS];
@@ -53,5 +69,6 @@ int main(void)
     if (matrix_input(array, &rows, &columns) == INPUT_NOT_SUCCESSFUL)
         return INPUT_ERROR;
 
+    swap_lines(array, rows, columns);
     matrix_print(array, rows, columns);
 }
