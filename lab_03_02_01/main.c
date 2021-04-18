@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 
 #define OK 0
 #define INPUT_ERROR 1
@@ -12,6 +11,8 @@
 #define INPUT_NOT_SUCCESSFUL 0
 
 #define EXPECTED_ARGS 1
+
+#define INT_MAX 2147483647
 
 int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
 {
