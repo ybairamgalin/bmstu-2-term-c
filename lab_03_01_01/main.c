@@ -19,13 +19,13 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     if (scanf("%d", rows) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
-    if (*rows < 0 || *rows > MAX_ROWS)
+    if (*rows <= 0 || *rows > MAX_ROWS)
         return INPUT_NOT_SUCCESSFUL;
 
     if (scanf("%d", columns) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
-    if (*columns < 0 || *columns > MAX_COLUMNS)
+    if (*columns <= 0 || *columns > MAX_COLUMNS)
         return INPUT_NOT_SUCCESSFUL;
 
     for (int i = 0; i < *rows; i++)
