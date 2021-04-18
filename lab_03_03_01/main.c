@@ -65,6 +65,16 @@ void array_print(const int *arr, const int size)
     printf("\n");
 }
 
+void swap_rows(int *row_1, int *row_2, const int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        int buf = *(row_1 + i);
+        *(row_1 + i) = *(row_2 + i);
+        *(row_2 + i) = buf;
+    }
+}
+
 void sort_rows(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
 const int cols)
 {
@@ -73,11 +83,14 @@ const int cols)
     for (int i = 0; i < rows; i++)
         max_elements[i] = max_element_in_row(matrix[i], cols);
 
-    for (int i = 0; i < cols - 1; i++)
-        for (int j = i + 1; j < cols - 1; j++)
-            if (max_elements[i] > max_elements[i + 1])
+    for (int i = 0; i < cols; i++)
+        for (int j = 1; j < cols - i; j++)
+            if (max_elements[j] > max_elements[j - 1])
             {
-                int buf = max_elements[i]
+                int buf = max_elements[j];
+                max_elements[j] = max_elements[j - 1];
+                max_elements[j - 1] = buf;
+                swap_rows(matrix[j], matrix[j - 1], cols);
             }
 }
 
