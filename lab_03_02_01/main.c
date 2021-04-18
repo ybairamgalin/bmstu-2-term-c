@@ -6,6 +6,8 @@
 
 #define MAX_ROWS 10
 #define MAX_COLUMNS 10
+#define MIN_ROWS 2
+#define MIN_COLUMNS 2
 
 #define INPUT_SUCCESSFUL 1
 #define INPUT_NOT_SUCCESSFUL 0
@@ -19,13 +21,13 @@ int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
     if (scanf("%d", rows) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
-    if (*rows <= 0 || *rows > MAX_ROWS)
+    if (*rows < MIN_ROWS || *rows > MAX_ROWS)
         return INPUT_NOT_SUCCESSFUL;
 
     if (scanf("%d", columns) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
-    if (*columns <= 0 || *columns > MAX_COLUMNS)
+    if (*columns < MIN_COLUMNS || *columns > MAX_COLUMNS)
         return INPUT_NOT_SUCCESSFUL;
 
     for (int i = 0; i < *rows; i++)
