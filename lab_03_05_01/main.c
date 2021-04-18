@@ -12,7 +12,8 @@
 
 #define EXPECTED_ARGS 1
 
-#define NO_ELEMENTS_DIVISIBLE_BY_10 -1
+#define NO_ELEMENTS_SUM_GT_10 -1
+
 
 #define CYCLE_MARGIN 3
 
@@ -71,7 +72,7 @@ int *array)
 
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
-            if (matrix[i][j] % 10 == 0)
+            if (sum_of_digits(matrix[i][j]) > 10)
             {
                 array[arr_size] = matrix[i][j];
                 arr_size++;
@@ -110,8 +111,9 @@ const int cols, const int *arr)
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
         {
-            matrix[i][j] = matrix[i][j] % 10 == 0 ? arr[count] : matrix[i][j];
-            count += matrix[i][j] % 10 == 0 ? 1 : 0;
+            matrix[i][j] = sum_of_digits(matrix[i][j]) > 10 ?
+        arr[count] : matrix[i][j];
+            count += sum_of_digits(matrix[i][j]) > 10 ? 1 : 0;
         }
 }
 
@@ -127,7 +129,7 @@ int main(void)
     int arr_size = get_array(matrix, rows, columns, array);
 
     if (arr_size == 0)
-        return NO_ELEMENTS_DIVISIBLE_BY_10;
+        return NO_ELEMENTS_SUM_GT_10;
 
     move_3_left(array, arr_size);
     fill_matrix_with_arr(matrix, rows, columns, array);
