@@ -90,11 +90,9 @@ int main(void)
     {
         if (row_is_symmetrical(array[i], rows) == IS_SYMMETRICAL)
             result[i] = IS_SYMMETRICAL;
-
         else
             result[i] = IS_NOT_SYMMETRICAL;
     }
 
-    matrix_print(array, rows, columns);
     array_print(result, rows);
 }
