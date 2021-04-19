@@ -75,6 +75,20 @@ void swap_rows(int *row_1, int *row_2, const int size)
     }
 }
 
+void sort_by_key(int matrix[][MAX_COLUMNS], const int rows, const int cols,
+int *key_array)
+{
+    for (int i = 1; i < rows; i++)
+        for (int j = 0; j < rows - i; j++)
+            if (*(key_array + j) < *(key_array + j + 1))
+            {
+                int buf = *(key_array + j);
+                *(key_array + j) = *(key_array + j + 1);
+                *(key_array + j + 1) = buf;
+                swap_rows(matrix[j], matrix[j + 1], cols);
+            }
+}
+
 void sort_rows(int (*matrix)[MAX_COLUMNS], const int rows,
 const int cols)
 {
@@ -83,15 +97,7 @@ const int cols)
     for (int i = 0; i < rows; i++)
         max_elements[i] = max_element_in_row(matrix[i], cols);
 
-    for (int i = 0; i < cols; i++)
-        for (int j = 1; j < cols - i; j++)
-            if (max_elements[j] > max_elements[j - 1])
-            {
-                int buf = max_elements[j];
-                max_elements[j] = max_elements[j - 1];
-                max_elements[j - 1] = buf;
-                swap_rows(matrix[j], matrix[j - 1], cols);
-            }
+    sort_by_key(matrix, rows, cols, max_elements);
 }
 
 int main(void)
