@@ -32,7 +32,7 @@ int input(int *rows, int *columns)
 }
 
 void matrix_print(int (*const matrix)[MAX_COLUMNS], const int rows,
-                  const int columns)
+const int columns)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -78,7 +78,7 @@ void fill_matrix(int (*matrix)[MAX_COLUMNS], const int rows, const int cols)
 
 int main(void)
 {
-    int array[MAX_ROWS][MAX_COLUMNS] = {0};
+    int array[MAX_ROWS][MAX_COLUMNS] = { 0 };
     int rows, columns;
 
     if (input(&rows, &columns) == INPUT_NOT_SUCCESSFUL)
