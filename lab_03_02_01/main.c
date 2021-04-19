@@ -14,8 +14,6 @@
 
 #define EXPECTED_ARGS 1
 
-#define INT_MAX 2147483647
-
 int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
@@ -83,7 +81,9 @@ int sum_of_digits(int num)
 void find_element(int (*const matrix)[MAX_COLUMNS], const int rows,
 const int cols, int *x, int *y)
 {
-    int min_sum = INT_MAX;
+    int min_sum = sum_of_digits(matrix[0][0]);
+    *x = 0;
+    *y = 0;
 
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
@@ -91,7 +91,7 @@ const int cols, int *x, int *y)
             {
                 *x = i;
                 *y = j;
-                min_sum = matrix[i][j];
+                min_sum = sum_of_digits(matrix[i][j]);
             }
 }
 
