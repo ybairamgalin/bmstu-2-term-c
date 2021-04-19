@@ -12,19 +12,16 @@
 #define INPUT_SUCCESSFUL 1
 #define INPUT_NOT_SUCCESSFUL 0
 
-#define EXPECTED_ARGS 1
+#define EXPECTED_ARGS 2
 
 #define MIN(a, b) a <= b ? a : b
 
 int input(int *rows, int *columns)
 {
-    if (scanf("%d", rows) != EXPECTED_ARGS)
+    if (scanf("%d%d", rows, columns) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
     if (*rows < MIN_ROWS || *rows > MAX_ROWS)
-        return INPUT_NOT_SUCCESSFUL;
-
-    if (scanf("%d", columns) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
 
     if (*columns < MIN_COLUMNS || *columns > MAX_COLUMNS)
