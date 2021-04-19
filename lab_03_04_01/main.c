@@ -28,6 +28,9 @@ int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
     if (*columns < MIN_ROWS || *columns > MAX_COLUMNS)
         return INPUT_NOT_SUCCESSFUL;
 
+    if (*rows != *columns)
+        return INPUT_NOT_SUCCESSFUL;
+
     for (int i = 0; i < *rows; i++)
         for (int j = 0; j < *columns; j++)
             if (scanf("%d", &matrix[i][j]) != EXPECTED_ARGS)
