@@ -77,4 +77,6 @@ int main(void)
 
     swap_lines(array, rows, columns);
     matrix_print(array, rows, columns);
+
+    return OK;
 }

@@ -134,4 +134,6 @@ int main(void)
     fill_matrix_with_arr(matrix, rows, columns, array);
 
     matrix_print(matrix, rows, columns);
+
+    return OK;
 }

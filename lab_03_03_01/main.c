@@ -104,4 +104,6 @@ int main(void)
 
     sort_rows(array, rows, columns);
     matrix_print(array, rows, columns);
+
+    return OK;
 }
