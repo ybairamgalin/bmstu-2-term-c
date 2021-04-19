@@ -85,4 +85,6 @@ int main(void)
 
     fill_matrix(array, rows, columns);
     matrix_print(array, rows, columns);
+
+    return OK;
 }
