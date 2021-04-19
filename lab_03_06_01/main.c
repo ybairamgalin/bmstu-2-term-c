@@ -27,6 +27,10 @@ int input(int *rows, int *columns)
     if (*columns < MIN_COLUMNS || *columns > MAX_COLUMNS)
         return INPUT_NOT_SUCCESSFUL;
 
+    if (*rows != *columns)
+        return INPUT_NOT_SUCCESSFUL;
+
+
     return INPUT_SUCCESSFUL;
 }
 
