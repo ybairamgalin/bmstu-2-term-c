@@ -86,17 +86,13 @@ const int cols, int *x, int *y)
     int min_sum = INT_MAX;
 
     for (int i = 0; i < rows; i++)
-    {
         for (int j = 0; j < cols; j++)
-        {
             if (sum_of_digits(matrix[i][j]) < min_sum)
             {
                 *x = i;
                 *y = j;
                 min_sum = matrix[i][j];
             }
-        }
-    }
 }
 
 int main(void)
