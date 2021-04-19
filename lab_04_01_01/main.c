@@ -9,4 +9,6 @@ int main(void)
     fgets(str2, sizeof(str2), stdin);
 
     printf("%zu", my_strspn(str1, str2));
+
+    return OK;
 }

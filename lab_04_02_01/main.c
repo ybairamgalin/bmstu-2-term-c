@@ -1,5 +1,23 @@
 #include <stdio.h>
+#include <string.h>
+#include "functions.h"
 
-#define MAX_STR_SIZE 256
+int main(void)
+{
+    char str[MAX_STR_SIZE];
+    char words[MAX_WORDS][MAX_WORD_SIZE];
 
-#define END_OF_LINE '\0'
+    fgets(str, sizeof(str), stdin);
+
+    int num_of_words = split(str, words);
+
+    for (int i = 0; i < num_of_words; i++)
+    {
+        for (int j = 0; j < strlen(words[i]); j++)
+            printf("%c", words[i][j]);
+
+        printf("\n");
+    }
+
+    return OK;
+}
