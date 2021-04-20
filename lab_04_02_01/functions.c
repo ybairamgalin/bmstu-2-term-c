@@ -19,7 +19,7 @@ int split(const char *str, char (*words)[MAX_WORD_SIZE])
     for (int i = 0, j = 0; str[j] != CHAR_END_OF_LINE; j++)
         if (str[j] == CHAR_SPACE && j - i != 0)
         {
-            cpy_substr(words[num_of_words], str + i, str + j);
+            cpy_substr(words[num_of_words++], str + i, str + j);
             i = ++j;
             continue;
         }

@@ -12,12 +12,7 @@ int main(void)
     int num_of_words = split(str, words);
 
     for (int i = 0; i < num_of_words; i++)
-    {
-        for (int j = 0; j < strlen(words[i]); j++)
-            printf("%c", words[i][j]);
-
-        printf("\n");
-    }
+        printf("%s\n", words[i]);
 
     return OK;
 }
