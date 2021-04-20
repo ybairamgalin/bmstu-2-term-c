@@ -22,7 +22,7 @@ int my_strcmp(const char *str_1, const char *str_2)
 void swap_words(char *str_1, char *str_2)
 {
     for (int i = 0; str_1[i] != CHAR_END_OF_STR &&
-                str_2[i] != CHAR_END_OF_STR; i++)
+        str_2[i] != CHAR_END_OF_STR; i++)
     {
         char buf = str_1[i];
         str_1[i] = str_2[i];
@@ -47,7 +47,7 @@ void sort_words(char (*words)[MAX_WORD_SIZE], const int num_of_words)
 {
     for (int i = 0; i < num_of_words - 1; i++)
         for (int j = 0; i < num_of_words - j - 1; j++)
-            if (my_strcmp(words[j], words[j + 1])  < 0)
+            if (my_strcmp(words[j], words[j + 1]) < 0)
                 swap_words(words[j], words[j + 1]);
 }
 
@@ -63,14 +63,14 @@ void delete_punctuation(char *str)
 {
     for (int i = 0; str[i] != CHAR_END_OF_STR; i++)
         if (str[i] == COMA || str[i] == SEMICOLON || str[i] == COLON ||
-                str[i] == DASH || str[i] == POINT || str[i] == EXCLAMATION ||
-                str[i] == QUESTION || str[i] == CHAR_END_OF_LINE)
+            str[i] == DASH || str[i] == POINT || str[i] == EXCLAMATION ||
+            str[i] == QUESTION || str[i] == CHAR_END_OF_LINE)
             str[i] = CHAR_SPACE;
 
     strcat(str, STR_SPACE);
 }
 
-int word_is_in_words(char (* const words)[MAX_WORD_SIZE],
+int word_is_in_words(char (*const words)[MAX_WORD_SIZE],
 const int number_of_words, const char *word)
 {
     for (int i = 0; i < number_of_words; i++)
@@ -99,7 +99,7 @@ int split(char (*words)[MAX_WORD_SIZE], char *str)
                 return MAX_WORD_LNG_EXCEEDED;
 
             char word[MAX_WORD_SIZE];
-            cpy_word(word, str + i, j -i);
+            cpy_word(word, str + i, j - i);
 
             if (word_is_in_words(words, number_of_words, word) == WORD_NOT_IN)
                 cpy_word(words[number_of_words++], str + i, j - i);
