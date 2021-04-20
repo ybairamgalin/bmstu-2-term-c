@@ -95,6 +95,9 @@ int split(char (*words)[MAX_WORD_SIZE], char *str)
 
         if (str[j] == CHAR_SPACE)
         {
+            if (j - i > MAX_WORD_SIZE)
+                return MAX_WORD_LNG_EXCEEDED;
+
             char word[MAX_WORD_SIZE];
             cpy_word(word, str + i, j -i);
 
