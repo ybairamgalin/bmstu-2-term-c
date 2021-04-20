@@ -4,36 +4,91 @@
 
 void print_str_arr(char (*const words)[MAX_WORD_SIZE], const int num_of_words)
 {
+    printf("Result: ");
     for (int i = 0; i < num_of_words; i++)
         printf("%s ", words[i]);
 
-    printf("\n");
 }
 
-void cpy_substr(char *dest, const char *start, const char *stop)
+int my_strcmp(char *str_1, char *str_2)
 {
-    long size = stop - start;
+    for (; *str_1 == *str_2; str_1++, str_2++)
+        if (*str_1 == CHAR_END_OF_LINE)
+            return 0;
 
-    for (int i = 0; i < size; i++)
-        dest[i] = start[i];
-
-    dest[size] = CHAR_END_OF_LINE;
+    return *(char *)str_2 - *(char *)str_1;
 }
 
-int split(char *str, char (*words)[MAX_WORD_SIZE])
+void swap_words(char *str_1, char *str_2)
 {
-    // insert space in order to track the last word
-    int num_of_words = 0;
-    str[strlen(str)] = CHAR_SPACE;
-    strcat(str, STR_END_OF_LINE);
+    for (int i = 0; str_1[i] != CHAR_END_OF_LINE &&
+                str_2[i] != CHAR_END_OF_LINE; i++)
+    {
+        char buf = str_1[i];
+        str_1[i] = str_2[i];
+        str_2[i] = buf;
+    }
 
-    for (int i = 0, j = 0; str[j] != CHAR_END_OF_LINE; j++)
-        if (str[j] == CHAR_SPACE && j - i != 0)
+    int lng_1 = strlen(str_1);
+    int lng_2 = strlen(str_2);
+
+    if (strlen(str_1) > strlen(str_2))
+        for (int i = lng_2; i < lng_1; i++)
+            str_2[i] = str_1[i];
+    else
+        for (int i = lng_1; i < lng_2; i++)
+            str_1[i] = str_2[i];
+
+    str_1[lng_2] = CHAR_END_OF_LINE;
+    str_2[lng_1] = CHAR_END_OF_LINE;
+}
+
+void sort_words(char (*words)[MAX_WORD_SIZE], const int num_of_words)
+{
+    for (int i = 0; i < num_of_words - 1; i++)
+        for (int j = 0; i < num_of_words - j - 1; j++)
+            if (my_strcmp(words[j], words[j + 1])  < 0)
+                swap_words(words[j], words[j + 1]);
+}
+
+void cpy_word(char *dest, const char *src, int lng)
+{
+    for (int i = 0; i < lng; i++)
+        dest[i] = src[i];
+
+    dest[lng] = CHAR_END_OF_LINE;
+}
+
+void delete_punctuation(char *str)
+{
+    for (int i = 0; str[i] != CHAR_END_OF_LINE; i++)
+        if (str[i] == COMA || str[i] == SEMICOLON || str[i] == COLON ||
+                str[i] == DASH || str[i] == POINT || str[i] == EXCLAMATION ||
+                str[i] == QUESTION)
+            str[i] = CHAR_SPACE;
+
+    strcat(str, STR_SPACE);
+}
+
+int split(char (*words)[MAX_WORD_SIZE], char *str)
+{
+    int number_of_words = 0;
+    delete_punctuation(str);
+
+    for (int i = 0, j = 0; j < strlen(str); j++)
+    {
+        if (str[i] == CHAR_SPACE)
         {
-            cpy_substr(words[num_of_words++], str + i, str + j);
-            i = ++j;
-            continue;
+            i++;
+            continue;;
         }
 
-    return num_of_words;
+        if (str[j] == CHAR_SPACE)
+        {
+            cpy_word(words[number_of_words++], str + i, j - i);
+            i = j;
+        }
+    }
+
+    return number_of_words;
 }
