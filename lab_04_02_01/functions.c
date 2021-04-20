@@ -10,7 +10,7 @@ void print_str_arr(char (*const words)[MAX_WORD_SIZE], const int num_of_words)
         printf("%s ", words[i]);
 }
 
-int my_strcmp(char *str_1, char *str_2)
+int my_strcmp(const char *str_1, const char *str_2)
 {
     for (; *str_1 == *str_2; str_1++, str_2++)
         if (*str_1 == CHAR_END_OF_STR)
@@ -70,6 +70,16 @@ void delete_punctuation(char *str)
     strcat(str, STR_SPACE);
 }
 
+int word_is_in_words(char (* const words)[MAX_WORD_SIZE],
+const int number_of_words, const char *word)
+{
+    for (int i = 0; i < number_of_words; i++)
+        if (my_strcmp(words[i], word) == 0)
+            return WORD_IN_WORDS;
+
+    return WORD_NOT_IN;
+}
+
 int split(char (*words)[MAX_WORD_SIZE], char *str)
 {
     int number_of_words = 0;
@@ -85,7 +95,12 @@ int split(char (*words)[MAX_WORD_SIZE], char *str)
 
         if (str[j] == CHAR_SPACE)
         {
-            cpy_word(words[number_of_words++], str + i, j - i);
+            char word[MAX_WORD_SIZE];
+            cpy_word(word, str + i, j -i);
+
+            if (word_is_in_words(words, number_of_words, word) == WORD_NOT_IN)
+                cpy_word(words[number_of_words++], str + i, j - i);
+
             i = j;
         }
     }

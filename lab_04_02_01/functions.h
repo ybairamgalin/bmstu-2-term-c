@@ -8,6 +8,9 @@
 #define MAX_STR_SIZE 256
 #define MAX_WORD_SIZE 16
 
+#define WORD_IN_WORDS 1
+#define WORD_NOT_IN 0
+
 #define CHAR_END_OF_STR '\0'
 #define STR_END_OF_STR "\0"
 
