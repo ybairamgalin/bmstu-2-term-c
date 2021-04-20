@@ -8,8 +8,12 @@
 #define MAX_STR_SIZE 256
 #define MAX_WORD_SIZE 16
 
-#define CHAR_END_OF_LINE '\0'
-#define STR_END_OF_LINE "\0"
+#define CHAR_END_OF_STR '\0'
+#define STR_END_OF_STR "\0"
+
+#define CHAR_END_OF_LINE '\n'
+
+#define CHAR_END_OF_
 
 #define CHAR_SPACE ' '
 #define STR_SPACE " "

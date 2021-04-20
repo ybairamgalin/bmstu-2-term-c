@@ -5,15 +5,15 @@
 void print_str_arr(char (*const words)[MAX_WORD_SIZE], const int num_of_words)
 {
     printf("Result: ");
+
     for (int i = 0; i < num_of_words; i++)
         printf("%s ", words[i]);
-
 }
 
 int my_strcmp(char *str_1, char *str_2)
 {
     for (; *str_1 == *str_2; str_1++, str_2++)
-        if (*str_1 == CHAR_END_OF_LINE)
+        if (*str_1 == CHAR_END_OF_STR)
             return 0;
 
     return *(char *)str_2 - *(char *)str_1;
@@ -21,8 +21,8 @@ int my_strcmp(char *str_1, char *str_2)
 
 void swap_words(char *str_1, char *str_2)
 {
-    for (int i = 0; str_1[i] != CHAR_END_OF_LINE &&
-                str_2[i] != CHAR_END_OF_LINE; i++)
+    for (int i = 0; str_1[i] != CHAR_END_OF_STR &&
+                str_2[i] != CHAR_END_OF_STR; i++)
     {
         char buf = str_1[i];
         str_1[i] = str_2[i];
@@ -39,8 +39,8 @@ void swap_words(char *str_1, char *str_2)
         for (int i = lng_1; i < lng_2; i++)
             str_1[i] = str_2[i];
 
-    str_1[lng_2] = CHAR_END_OF_LINE;
-    str_2[lng_1] = CHAR_END_OF_LINE;
+    str_1[lng_2] = CHAR_END_OF_STR;
+    str_2[lng_1] = CHAR_END_OF_STR;
 }
 
 void sort_words(char (*words)[MAX_WORD_SIZE], const int num_of_words)
@@ -56,15 +56,15 @@ void cpy_word(char *dest, const char *src, int lng)
     for (int i = 0; i < lng; i++)
         dest[i] = src[i];
 
-    dest[lng] = CHAR_END_OF_LINE;
+    dest[lng] = CHAR_END_OF_STR;
 }
 
 void delete_punctuation(char *str)
 {
-    for (int i = 0; str[i] != CHAR_END_OF_LINE; i++)
+    for (int i = 0; str[i] != CHAR_END_OF_STR; i++)
         if (str[i] == COMA || str[i] == SEMICOLON || str[i] == COLON ||
                 str[i] == DASH || str[i] == POINT || str[i] == EXCLAMATION ||
-                str[i] == QUESTION)
+                str[i] == QUESTION || str[i] == CHAR_END_OF_LINE)
             str[i] = CHAR_SPACE;
 
     strcat(str, STR_SPACE);
