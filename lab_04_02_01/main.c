@@ -11,8 +11,8 @@ int main(void)
 
     int num_of_words = split(str, words);
 
-    for (int i = 0; i < num_of_words; i++)
-        printf("%s\n", words[i]);
+    printf("num of words: %d\n", num_of_words);
+    print_str_arr(words, num_of_words);
 
     return OK;
 }
