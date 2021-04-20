@@ -7,7 +7,7 @@
 
 #define MAX_WORD_LNG_EXCEEDED -2
 
-#define MAX_STR_SIZE 10 + 1
+#define MAX_STR_SIZE 256 + 1
 #define MAX_WORD_SIZE 16 + 1
 
 #define WORD_IN_WORDS 1
