@@ -13,12 +13,12 @@
 #define WORD_IN_WORDS 1
 #define WORD_NOT_IN 0
 
+#define WORDS_ARE_EQUAL 0
+
 #define CHAR_END_OF_STR '\0'
 #define STR_END_OF_STR "\0"
 
 #define CHAR_END_OF_LINE '\n'
-
-#define CHAR_END_OF_
 
 #define CHAR_SPACE ' '
 #define STR_SPACE " "

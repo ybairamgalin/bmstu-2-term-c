@@ -14,7 +14,7 @@ int my_strcmp(const char *str_1, const char *str_2)
 {
     for (; *str_1 == *str_2; str_1++, str_2++)
         if (*str_1 == CHAR_END_OF_STR)
-            return 0;
+            return WORDS_ARE_EQAUL;
 
     return *(char *)str_2 - *(char *)str_1;
 }
@@ -74,7 +74,7 @@ int word_is_in_words(char (*const words)[MAX_WORD_SIZE],
 const int number_of_words, const char *word)
 {
     for (int i = 0; i < number_of_words; i++)
-        if (my_strcmp(words[i], word) == 0)
+        if (my_strcmp(words[i], word) == WORDS_ARE_EQUAL)
             return WORD_IN_WORDS;
 
     return WORD_NOT_IN;
