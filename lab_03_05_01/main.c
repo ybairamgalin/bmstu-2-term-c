@@ -14,7 +14,6 @@
 
 #define NO_ELEMENTS_SUM_GT_10 -1
 
-
 #define CYCLE_MARGIN 3
 
 int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
