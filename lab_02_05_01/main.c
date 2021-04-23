@@ -81,22 +81,22 @@ int main(void)
     int size;
     int input_array[ARRAY_SIZE], neg_arr[ARRAY_SIZE], pos_arr[ARRAY_SIZE];
 
-    if (scanf("%d", &number_of_elements) != EXPECTED_ARGS)
+    if (scanf("%d", &size) != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
-    if (size <= 0 || number_of_elements > ARRAY_SIZE)
+    if (size <= 0 || size > ARRAY_SIZE)
         return INCORRECT_VALUE;
 
     if (input(input_array, input_array + size) == NO)
         return INCORRECT_TYPE;
 
     int count_neg_elements = get_subarray_of_neg(input_array, size, neg_arr);
-    int count_pos_elements = get_subarray_of_pos(input_array, size, pos_array);
+    int count_pos_elements = get_subarray_of_pos(input_array, size, pos_arr);
 
     int iter_to = (count_neg_elements > count_pos_elements) ?
         count_pos_elements : count_neg_elements;
 
-    if (iterate_to == 0)
+    if (iter_to == 0)
         return VALUE_CANNOT_BE_DEFINED;
 
     int sum = find_expected_sum(neg_arr, neg_arr + iter_to, pos_arr);
