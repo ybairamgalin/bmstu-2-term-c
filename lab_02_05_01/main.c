@@ -4,7 +4,7 @@
 #define INCORRECT_TYPE 2
 #define INCORRECT_VALUE 3
 
-#define VALUE_CANNOT_BE_DEFINED 20
+#define VALUE_CANT_BE_DEFINED 20
 
 #define CORRECT 1
 #define NOT_CORRECT 0
@@ -87,7 +87,7 @@ int main(void)
     if (size <= 0 || size > ARRAY_SIZE)
         return INCORRECT_VALUE;
 
-    if (input(input_array, input_array + size) == NO)
+    if (input(input_array, input_array + size) == NOT_CORRECT)
         return INCORRECT_TYPE;
 
     int count_neg_elements = get_subarray_of_neg(input_array, size, neg_arr);
