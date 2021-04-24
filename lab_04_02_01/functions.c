@@ -14,7 +14,7 @@ int my_strcmp(const char *str_1, const char *str_2)
 {
     for (; *str_1 == *str_2; str_1++, str_2++)
         if (*str_1 == CHAR_END_OF_STR)
-            return WORDS_ARE_EQAUL;
+            return WORDS_ARE_EQUAL;
 
     return *(char *)str_2 - *(char *)str_1;
 }
