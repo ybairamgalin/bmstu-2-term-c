@@ -6,8 +6,8 @@
 #define INCORRECT_TYPE 2
 #define INCORRECT_VALUE 3
 
-#define YES 1
-#define NO 0
+#define CORRECT 1
+#define NOT_CORRECT 0
 
 #define ARRAY_SIZE 10000
 #define MAX_NUMBER_OF_CYCLES 10000
@@ -19,13 +19,13 @@
 int input(int *first, int *last)
 {
     long num_of_elem = last - first;
-    int input_is_correct = YES;
+    int input_is_correct = CORRECT;
 
     for (int i = 0; i < num_of_elem; i++)
     {
         if (scanf("%d", first + i) != EXPECTED_ARGS_INPUT)
         {
-            input_is_correct = NO;
+            input_is_correct = NOT_CORRECT;
             break;
         }
     }

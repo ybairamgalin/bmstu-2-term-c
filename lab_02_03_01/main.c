@@ -12,22 +12,25 @@
 
 #define EXPECTED_ARGS 1
 
+#define CORRECT 1
+#define NOT_CORRECT 0
+
+
 int input(int *array, const int num_of_elem)
 {
-    int input_is_correct = YES;
+    int input_is_correct = CORRECT;
 
     for (int i = 0; i < num_of_elem; i++)
     {
         if (scanf("%d", array + i) != EXPECTED_ARGS)
         {
-            input_is_correct = NO;
+            input_is_correct = NOT_CORRECT;
             break;
         }
     }
 
     return input_is_correct;
 }
-
 
 // the functions returns fib_i,, where i is the number of times
 // the function was previously called

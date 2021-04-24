@@ -6,8 +6,8 @@
 
 #define VALUE_CANNOT_BE_DEFINED 20
 
-#define YES 1
-#define NO 0
+#define CORRECT 1
+#define NOT_CORRECT 0
 
 #define ARRAY_SIZE 10
 
@@ -17,13 +17,13 @@
 int input(int *first, int *last)
 {
     long num_of_elem = last - first;
-    int input_is_correct = YES;
+    int input_is_correct = CORRECT;
 
     for (int i = 0; i < num_of_elem; i++)
     {
         if (scanf("%d", first + i) != EXPECTED_ARGS)
         {
-            input_is_correct = NO;
+            input_is_correct = NOT_CORRECT;
             break;
         }
     }
