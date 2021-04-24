@@ -97,7 +97,7 @@ int main(void)
         count_pos_elements : count_neg_elements;
 
     if (iter_to == 0)
-        return VALUE_CANNOT_BE_DEFINED;
+        return VALUE_CANT_BE_DEFINED;
 
     int sum = find_expected_sum(neg_arr, neg_arr + iter_to, pos_arr);
 
