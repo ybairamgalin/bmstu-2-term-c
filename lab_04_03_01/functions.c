@@ -9,6 +9,8 @@ void print_result(char (*dest_array)[MAX_WORD_SIZE], const int size)
     for (int i = size - 1; i >= 0; i--)
         if (strcmp(dest_array[i], EMPTY_STRING) != WORDS_ARE_EQUAL)
             printf(" %s", dest_array[i]);
+
+    printf("\n");
 }
 
 int modify_word(char *word, const int src, const int dest)
