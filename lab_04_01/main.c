@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "my_strspn.h"
 
 int main(void)
@@ -8,7 +9,8 @@ int main(void)
     fgets(str1, sizeof(str1), stdin);
     fgets(str2, sizeof(str2), stdin);
 
-    printf("%zu", my_strspn(str1, str2));
+    printf("my_strspn:\t%zu\n", my_strspn(str1, str2));
+    printf("strspn:\t\t%zu\n", strspn(str1, str2));
 
     return OK;
 }
