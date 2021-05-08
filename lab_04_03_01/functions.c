@@ -37,9 +37,13 @@ void del_first_appear_letter(char *word)
 
 void set_as_last_empty(char (*array)[MAX_WORD_SIZE], const int size)
 {
-    for (int i = size - 2; i >= 0; i--)
+    for (int i = 0; i < size; i++)
         if (strcmp(array[i], array[size - 1]) == WORDS_ARE_EQUAL)
             strncpy(array[i], EMPTY_STRING, MAX_WORD_SIZE);
+
+//    for (int i = size - 2; i >= 0; i--)
+//        if (strcmp(array[i], array[size - 1]) == WORDS_ARE_EQUAL)
+//            strncpy(array[i], EMPTY_STRING, MAX_WORD_SIZE);
 }
 
 
