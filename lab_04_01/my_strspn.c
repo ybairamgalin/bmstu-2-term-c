@@ -7,11 +7,11 @@ size_t my_strspn(const char *string_1, const char *string_2)
 
     for (int i = 0; string_1[i] != END_OF_LINE; i++, count++)
     {
-        const char *pStr;
+        const char *p_str;
 
-        for (pStr = string_2; *pStr && *pStr != string_1[i]; pStr++);
+        for (p_str = string_2; *p_str && *p_str != string_1[i]; p_str++);
 
-        if (!*pStr)
+        if (!*p_str)
             break;
     }
 
