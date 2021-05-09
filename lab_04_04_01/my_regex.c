@@ -16,7 +16,7 @@ void trim(char *str)
         move_str_left(str);
 
     for (int i = strlen(str) - 1;
-            str[i] == CHAR_SPACE || str[i] == CHAR_TAB; i--)
+        str[i] == CHAR_SPACE || str[i] == CHAR_TAB; i--)
         str[i] = CHAR_END_OF_STR;
 }
 
@@ -66,6 +66,10 @@ int is_exp_num(const char *str)
     strncpy(new_str, str, MAX_STR_SIZE);
     new_str[strlen(new_str) - 1] = CHAR_END_OF_STR;
     trim(new_str);
+
+    if (strlen(new_str) == 0)
+        result = IS_NOT_NUM;
+
     del_sign(new_str);
     int deleted = del_decimal(new_str);
 
