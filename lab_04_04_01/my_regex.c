@@ -12,10 +12,11 @@ void move_str_left(char *str)
 // deletes unnecessary spaces
 void trim(char *str)
 {
-    while (str[0] == CHAR_SPACE)
+    while (str[0] == CHAR_SPACE || str[0] == CHAR_TAB)
         move_str_left(str);
 
-    for (int i = strlen(str) - 1; str[i] == CHAR_SPACE; i--)
+    for (int i = strlen(str) - 1;
+            str[i] == CHAR_SPACE || str[i] == CHAR_TAB; i--)
         str[i] = CHAR_END_OF_STR;
 }
 

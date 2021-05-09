@@ -12,6 +12,7 @@
 #define CHAR_POINT '.'
 #define CHAR_LOWER_E 'e'
 #define CHAR_UPPER_E 'E'
+#define CHAR_TAB '\t'
 
 #define MAX_STR_SIZE 256 + 1
 
