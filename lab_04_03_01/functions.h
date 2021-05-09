@@ -25,5 +25,4 @@
 
 int split_and_solve(char *string, char (*dest_array)[MAX_WORD_SIZE]);
 void print_result(char (*dest_array)[MAX_WORD_SIZE], const int size);
-void set_as_last_empty(char (*array)[MAX_WORD_SIZE], const int size);
 void del_first_appear_letter(char *word);

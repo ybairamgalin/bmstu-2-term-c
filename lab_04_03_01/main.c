@@ -17,7 +17,6 @@ int main(void)
 
     char result_arr[MAX_WORDS][MAX_WORD_SIZE];
     int arr_size = split_and_solve(str, result_arr);
-    set_as_last_empty(result_arr, arr_size);
 
     for (int i = 0; i < arr_size; i++)
         del_first_appear_letter(result_arr[i]);

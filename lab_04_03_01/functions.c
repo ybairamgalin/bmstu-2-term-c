@@ -7,7 +7,7 @@ void print_result(char (*dest_array)[MAX_WORD_SIZE], const int size)
     printf("Result:");
 
     for (int i = size - 1; i >= 0; i--)
-        if (strcmp(dest_array[i], EMPTY_STRING) != WORDS_ARE_EQUAL)
+        if (strcmp(dest_array[i], dest_array[size - 1]) != WORDS_ARE_EQUAL)
             printf(" %s", dest_array[i]);
 
     printf("\n");
@@ -20,7 +20,6 @@ int modify_word(char *word, const int src, const int dest)
     if (word[src] == word[dest])
     {
         was_modified = YES;
-        strcat(word, "\0");
 
         for (int i = dest; word[i] != CHAR_END_OF_STR; i++)
             word[i] = word[i + 1];
@@ -36,14 +35,6 @@ void del_first_appear_letter(char *word)
             if (modify_word(word, i, j) == YES)
                 j--;
 }
-
-void set_as_last_empty(char (*array)[MAX_WORD_SIZE], const int size)
-{
-    for (int i = 0; i < size; i++)
-        if (strcmp(array[i], array[size - 1]) == WORDS_ARE_EQUAL)
-            strncpy(array[i], EMPTY_STRING, MAX_WORD_SIZE);
-}
-
 
 int split_and_solve(char *string, char (*dest_array)[MAX_WORD_SIZE])
 {
