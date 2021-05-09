@@ -20,8 +20,9 @@ int modify_word(char *word, const int src, const int dest)
     if (word[src] == word[dest])
     {
         was_modified = YES;
+        strcat(word, "\0");
 
-        for (int i = dest; word[i + 1] != CHAR_END_OF_STR; i++)
+        for (int i = dest; word[i] != CHAR_END_OF_STR; i++)
             word[i] = word[i + 1];
     }
 
