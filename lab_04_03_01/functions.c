@@ -20,7 +20,8 @@ int modify_word(char *word, const int src, const int dest)
     if (word[src] == word[dest])
     {
         was_modified = YES;
-        for (int i = dest; word[i] != CHAR_END_OF_STR; i++)
+
+        for (int i = dest; word[i + 1] != CHAR_END_OF_STR; i++)
             word[i] = word[i + 1];
     }
 
@@ -40,10 +41,6 @@ void set_as_last_empty(char (*array)[MAX_WORD_SIZE], const int size)
     for (int i = 0; i < size; i++)
         if (strcmp(array[i], array[size - 1]) == WORDS_ARE_EQUAL)
             strncpy(array[i], EMPTY_STRING, MAX_WORD_SIZE);
-
-//    for (int i = size - 2; i >= 0; i--)
-//        if (strcmp(array[i], array[size - 1]) == WORDS_ARE_EQUAL)
-//            strncpy(array[i], EMPTY_STRING, MAX_WORD_SIZE);
 }
 
 
