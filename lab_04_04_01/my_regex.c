@@ -39,10 +39,17 @@ int del_decimal(char *str)
     return deleted;
 }
 
-void del_point(char *str)
+int del_point(char *str)
 {
+    int deleted = 0;
+
     if (str[0] == CHAR_POINT)
+    {
         move_str_left(str);
+        deleted = 1;
+    }
+
+    return deleted;
 }
 
 int del_exp(char *str)
@@ -74,10 +81,23 @@ int is_exp_num(const char *str)
     int deleted = del_decimal(new_str);
 
     if (deleted == 0)
-        result = IS_NOT_NUM;
+    {
+        deleted = del_point(new_str);
 
-    del_point(new_str);
-    del_decimal(new_str);
+        if (deleted == 0)
+            result = IS_NOT_NUM;
+
+        deleted = del_decimal(new_str);
+
+        if (deleted == 0)
+            result = IS_NOT_NUM;
+    }
+    else
+    {
+        del_point(new_str);
+        del_decimal(new_str);
+    }
+
     deleted = del_exp(new_str);
 
     if (deleted)

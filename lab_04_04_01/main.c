@@ -2,8 +2,6 @@
 #include <string.h>
 #include "my_regex.h"
 
-//[+-]?([[:digit:]]+([.][[:digit:]]*)?([eE][+-]?[[:digit:]]+)?|[.][[:digit:]]+([eE][+-]?[[:digit:]]+)?)
-
 int main(void)
 {
     setbuf(stdout, NULL);
