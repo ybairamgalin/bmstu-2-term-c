@@ -112,7 +112,7 @@ const int cols, const int *arr)
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
         {
-            matrix[i][j] = sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM ?
+            matrix[i][j] = (sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM) ?
                 arr[count] : matrix[i][j];
             if (sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM)
                 count++;

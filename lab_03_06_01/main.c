@@ -17,7 +17,7 @@
 
 #define EXPECTED_ARGS 2
 
-#define MIN(a, b) a <= b ? a : b
+#define MIN(a, b) (a <= b) ? a : b
 
 int input_dims(int *rows, int *columns)
 {
@@ -49,7 +49,7 @@ const int columns)
     }
 }
 
-void fill_matrix(int (*matrix)[MAX_COLUMNS], const int rows, const int cols)
+void fill_matrix_spiral(int (*matrix)[MAX_COLUMNS], const int rows, const int cols)
 {
     int current = 1;
     int m_rows = 0, m_cols = 0;
@@ -91,7 +91,7 @@ int main(void)
     if ((err = input_dims(&rows, &columns)) != INPUT_SUCCESSFUL)
         return err;
 
-    fill_matrix(array, rows, columns);
+    fill_matrix_spiral(array, rows, columns);
     matrix_print(array, rows, columns);
 
     return OK;
