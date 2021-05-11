@@ -6,9 +6,13 @@
 
 #define MAX_ROWS 10
 #define MAX_COLUMNS 10
+#define MIN_ROWS 1
+#define MIN_COLUMNS 1
 
-#define INPUT_SUCCESSFUL 1
-#define INPUT_NOT_SUCCESSFUL 0
+#define INPUT_SUCCESSFUL 0
+#define NUMBER_OF_ARGS_ERR -1
+#define NUMBER_OF_ROWS_ERR -2
+#define NUMBER_OF_COLS_ERR -3
 
 #define EXPECTED_ARGS 1
 
@@ -21,21 +25,21 @@
 int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_ARGS_ERR;
 
     if (*rows <= 0 || *rows > MAX_ROWS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_ROWS_ERR;
 
     if (scanf("%d", columns) != EXPECTED_ARGS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_ARGS_ERR;
 
     if (*columns <= 0 || *columns > MAX_COLUMNS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_COLS_ERR;
 
     for (int i = 0; i < *rows; i++)
         for (int j = 0; j < *columns; j++)
             if (scanf("%d", &matrix[i][j]) != EXPECTED_ARGS)
-                return INPUT_NOT_SUCCESSFUL;
+                return NUMBER_OF_ARGS_ERR;
 
     return INPUT_SUCCESSFUL;
 }
@@ -119,9 +123,10 @@ int main(void)
 {
     int matrix[MAX_ROWS][MAX_COLUMNS];
     int rows, columns;
+    int err;
 
-    if (matrix_input(matrix, &rows, &columns) == INPUT_NOT_SUCCESSFUL)
-        return INPUT_ERROR;
+    if ((err = matrix_input(matrix, &rows, &columns)) != INPUT_SUCCESSFUL)
+        return err;
 
     int array[MAX_ROWS * MAX_COLUMNS];
     int arr_size = get_array(matrix, rows, columns, array);
