@@ -21,7 +21,6 @@
 
 int input_dims(int *rows, int *columns)
 {
-
     if (scanf("%d%d", rows, columns) != EXPECTED_ARGS)
         return NUMBER_OF_ARGS_ERR;
 
