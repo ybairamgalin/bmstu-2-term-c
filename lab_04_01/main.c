@@ -4,8 +4,6 @@
 
 int main(void)
 {
-    char str1[MAX_STR_SIZE], str2[MAX_STR_SIZE];
-
     printf("my_strspn:\t%zu\n", my_strspn("this is a test", "ihst"));
     printf("strspn:\t\t%zu\n", strspn("this is a test", "ihst"));
 
