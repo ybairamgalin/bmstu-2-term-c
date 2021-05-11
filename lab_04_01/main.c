@@ -6,11 +6,17 @@ int main(void)
 {
     char str1[MAX_STR_SIZE], str2[MAX_STR_SIZE];
 
-    fgets(str1, sizeof(str1), stdin);
-    fgets(str2, sizeof(str2), stdin);
+    printf("my_strspn:\t%zu\n", my_strspn("this is a test", "ihst"));
+    printf("strspn:\t\t%zu\n", strspn("this is a test", "ihst"));
 
-    printf("my_strspn:\t%zu\n", my_strspn(str1, str2));
-    printf("strspn:\t\t%zu\n", strspn(str1, str2));
+    printf("my_strspn:\t%zu\n", my_strspn("this is test", "this is test"));
+    printf("strspn:\t\t%zu\n", strspn("this is test", "this is test"));
+
+    printf("my_strchr:\t%p\n", my_strchr("str1", '1'));
+    printf("strchr:\t\t%p\n", strchr("str1", '1'));
+
+    printf("my_strchr:\t%p\n", my_strchr("str2", '5'));
+    printf("strchr:\t\t%p\n", strchr("str2", '5'));
 
     return OK;
 }
