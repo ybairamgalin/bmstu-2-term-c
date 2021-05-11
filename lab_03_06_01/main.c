@@ -9,8 +9,11 @@
 #define MIN_ROWS 1
 #define MIN_COLUMNS 1
 
-#define INPUT_SUCCESSFUL 1
-#define INPUT_NOT_SUCCESSFUL 0
+#define INPUT_SUCCESSFUL 0
+#define NUMBER_OF_ARGS_ERR -1
+#define NUMBER_OF_ROWS_ERR -2
+#define NUMBER_OF_COLS_ERR -3
+#define NOT_SQ_MATRIX_ERR -4
 
 #define EXPECTED_ARGS 2
 
@@ -18,17 +21,18 @@
 
 int input_dims(int *rows, int *columns)
 {
+
     if (scanf("%d%d", rows, columns) != EXPECTED_ARGS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_ARGS_ERR;
 
     if (*rows < MIN_ROWS || *rows > MAX_ROWS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_ROWS_ERR;
 
     if (*columns < MIN_COLUMNS || *columns > MAX_COLUMNS)
-        return INPUT_NOT_SUCCESSFUL;
+        return NUMBER_OF_COLS_ERR;
 
     if (*rows != *columns)
-        return INPUT_NOT_SUCCESSFUL;
+        return NOT_SQ_MATRIX_ERR;
 
 
     return INPUT_SUCCESSFUL;
@@ -83,9 +87,10 @@ int main(void)
 {
     int array[MAX_ROWS][MAX_COLUMNS] = { 0 };
     int rows, columns;
+    int err;
 
-    if (input_dims(&rows, &columns) == INPUT_NOT_SUCCESSFUL)
-        return INPUT_ERROR;
+    if ((err = input_dims(&rows, &columns)) != INPUT_SUCCESSFUL)
+        return err;
 
     fill_matrix(array, rows, columns);
     matrix_print(array, rows, columns);
