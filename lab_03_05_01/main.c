@@ -12,9 +12,11 @@
 
 #define EXPECTED_ARGS 1
 
-#define NO_ELEMENTS_SUM_GT_10 -1
+#define NO_ELEMENTS_SUM_GT_TEN -1
 
+#define MAX_POSSIBLE_SUM 10
 #define CYCLE_MARGIN 3
+
 
 int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
 {
@@ -71,18 +73,15 @@ int *array)
 
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
-            if (sum_of_digits(matrix[i][j]) > 10)
-            {
-                array[arr_size] = matrix[i][j];
-                arr_size++;
-            }
+            if (sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM)
+                array[arr_size++] = matrix[i][j];
 
     return arr_size;
 }
 
-void move_3_left(int *array, const int size)
+void move_left(int *array, const int size, const int times)
 {
-    for (int i = 0; i < CYCLE_MARGIN; i++)
+    for (int i = 0; i < times; i++)
     {
         int buf = *array;
 
@@ -109,9 +108,10 @@ const int cols, const int *arr)
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
         {
-            matrix[i][j] = sum_of_digits(matrix[i][j]) > 10 ?
+            matrix[i][j] = sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM ?
                 arr[count] : matrix[i][j];
-            count += sum_of_digits(matrix[i][j]) > 10 ? 1 : 0;
+            if (sum_of_digits(matrix[i][j]) > MAX_POSSIBLE_SUM)
+                count++;
         }
 }
 
@@ -127,9 +127,9 @@ int main(void)
     int arr_size = get_array(matrix, rows, columns, array);
 
     if (arr_size == 0)
-        return NO_ELEMENTS_SUM_GT_10;
+        return NO_ELEMENTS_SUM_GT_TEN;
 
-    move_3_left(array, arr_size);
+    move_left(array, arr_size, CYCLE_MARGIN);
     fill_matrix_with_arr(matrix, rows, columns, array);
 
     matrix_print(matrix, rows, columns);

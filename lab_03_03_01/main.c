@@ -11,8 +11,6 @@
 
 #define EXPECTED_ARGS 1
 
-#define INT_MIN -2147483647
-
 int matrix_input(int (*matrix)[MAX_COLUMNS], int *rows, int *columns)
 {
     if (scanf("%d", rows) != EXPECTED_ARGS)
@@ -47,11 +45,11 @@ const int columns)
     }
 }
 
-int max_element_in_row(const int *row, int cols)
+int max_element_in_row(const int *row, const int cols)
 {
-    int max_elem = INT_MIN;
+    int max_elem = *row;
 
-    for (int i = 0; i < cols; i++)
+    for (int i = 1; i < cols; i++)
         max_elem = (max_elem < *(row + i)) ? *(row + i) : max_elem;
 
     return max_elem;
@@ -75,6 +73,13 @@ void swap_rows(int *row_1, int *row_2, const int size)
     }
 }
 
+void swap_elem_in_arr(int *first, int *second)
+{
+    int buf = *first;
+    *first = *second;
+    *second = buf;
+}
+
 void sort_by_key(int matrix[][MAX_COLUMNS], const int rows, const int cols,
 int *key_array)
 {
@@ -82,9 +87,7 @@ int *key_array)
         for (int j = 0; j < rows - i; j++)
             if (*(key_array + j) < *(key_array + j + 1))
             {
-                int buf = *(key_array + j);
-                *(key_array + j) = *(key_array + j + 1);
-                *(key_array + j + 1) = buf;
+                swap_elem_in_arr(key_array + j, key_array + j + 1);
                 swap_rows(matrix[j], matrix[j + 1], cols);
             }
 }

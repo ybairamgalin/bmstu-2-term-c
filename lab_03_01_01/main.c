@@ -36,7 +36,7 @@ int matrix_input(int matrix[MAX_ROWS][MAX_COLUMNS], int *rows, int *columns)
     return INPUT_SUCCESSFUL;
 }
 
-void matrix_print(int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
+void matrix_print(const int matrix[MAX_ROWS][MAX_COLUMNS], const int rows,
 const int columns)
 {
     for (int i = 0; i < rows; i++)
@@ -70,6 +70,18 @@ void array_print(const int *arr, const int size)
     printf("\n");
 }
 
+void solve_problem(int (*const array)[MAX_COLUMNS], const int rows, const int cols,
+int *res_arr)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        if (row_is_symmetrical(array[i], cols) == IS_SYMMETRICAL)
+            *(res_arr + i) = IS_SYMMETRICAL;
+        else
+            *(res_arr + i) = IS_NOT_SYMMETRICAL;
+    }
+}
+
 int main(void)
 {
     int array[MAX_ROWS][MAX_COLUMNS];
@@ -79,6 +91,8 @@ int main(void)
         return INPUT_ERROR;
 
     int result[MAX_ROWS];
+
+    solve_problem(array, rows, columns, result);
 
     for (int i = 0; i < rows; i++)
     {

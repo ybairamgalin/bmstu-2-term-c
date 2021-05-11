@@ -16,7 +16,7 @@
 
 #define MIN(a, b) a <= b ? a : b
 
-int input(int *rows, int *columns)
+int input_dims(int *rows, int *columns)
 {
     if (scanf("%d%d", rows, columns) != EXPECTED_ARGS)
         return INPUT_NOT_SUCCESSFUL;
@@ -84,7 +84,7 @@ int main(void)
     int array[MAX_ROWS][MAX_COLUMNS] = { 0 };
     int rows, columns;
 
-    if (input(&rows, &columns) == INPUT_NOT_SUCCESSFUL)
+    if (input_dims(&rows, &columns) == INPUT_NOT_SUCCESSFUL)
         return INPUT_ERROR;
 
     fill_matrix(array, rows, columns);

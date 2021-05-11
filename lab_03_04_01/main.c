@@ -51,7 +51,7 @@ const int columns)
     }
 }
 
-void swap(int *row_1, int *row_2, const int start, const int stop)
+void swap_rows(int *row_1, int *row_2, const int start, const int stop)
 {
     for (int i = start; i < stop; i++)
     {
@@ -64,7 +64,7 @@ void swap(int *row_1, int *row_2, const int start, const int stop)
 void swap_lines(int (*matrix)[MAX_COLUMNS], const int rows, const int cols)
 {
     for (int i = 0; i < rows / 2; i++)
-        swap(matrix[i], matrix[rows - 1 - i], i, cols - i);
+        swap_rows(matrix[i], matrix[rows - 1 - i], i, cols - i);
 }
 
 int main(void)
