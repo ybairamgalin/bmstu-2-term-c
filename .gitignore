@@ -3,11 +3,10 @@
 *.o
 *.pch
 *.gch
-*.gcda
 *.gcno
-*.DS_STORE
-.idea/
+*.gcda
+*.gcov
+.idea/*
+**/.DS_Store
 createtests
 runtests
-report.md
-*.gcov
