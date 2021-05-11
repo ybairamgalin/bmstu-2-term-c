@@ -18,11 +18,16 @@ size_t my_strspn(const char *string_1, const char *string_2)
     return count;
 }
 
-char *my_strchr(char *str, int ch)
+char *my_strchr(const char *str, int ch)
 {
-    for (int i = 0; str[i] != '\0'; i++)
-        if(str[i] == ch)
-            return str + i;
+    char character = ch;
 
-    return NULL;
+    for (; ; str++)
+    {
+        if (*str == character)
+            return (char *)str;
+
+        if (*str == '\0')
+            return NULL;
+    }
 }
