@@ -5,3 +5,10 @@
 *.gch
 *.i
 *.s
+*.gcno
+*.gcda
+*.gcov
+.idea/*
+**/.DS_Store
+createtests
+runtests
