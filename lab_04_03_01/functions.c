@@ -2,7 +2,7 @@
 #include <string.h>
 #include "functions.h"
 
-void print_result(char (*dest_array)[MAX_WORD_SIZE], const int size)
+void print_result(char (*dest_array)[MAX_STR_SIZE], const int size)
 {
     printf("Result:");
 
@@ -36,7 +36,7 @@ void del_first_appear_letter(char *word)
                 j--;
 }
 
-int split_and_solve(char *string, char (*dest_array)[MAX_WORD_SIZE])
+int split_and_solve(char *string, char (*dest_array)[MAX_STR_SIZE])
 {
     char *word = strtok(string, SEPARATORS);
     int size = 0;

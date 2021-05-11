@@ -15,7 +15,7 @@ int main(void)
     if (str[strlen(str) - 1] != CHAR_END_OF_LINE)
         return INPUT_ERROR;
 
-    char result_arr[MAX_WORDS][MAX_WORD_SIZE];
+    char result_arr[MAX_WORDS][MAX_STR_SIZE];
     int arr_size = split_and_solve(str, result_arr);
 
     for (int i = 0; i < arr_size; i++)

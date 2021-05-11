@@ -23,6 +23,6 @@
 #define NOT_MODIFIED 0
 
 
-int split_and_solve(char *string, char (*dest_array)[MAX_WORD_SIZE]);
-void print_result(char (*dest_array)[MAX_WORD_SIZE], const int size);
+int split_and_solve(char *string, char (*dest_array)[MAX_STR_SIZE]);
+void print_result(char (*dest_array)[MAX_STR_SIZE], const int size);
 void del_first_appear_letter(char *word);
