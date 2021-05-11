@@ -19,8 +19,8 @@
 
 #define EMPTY_STRING ""
 
-#define YES 1
-#define NO 0
+#define MODIFIED 1
+#define NOT_MODIFIED 0
 
 
 int split_and_solve(char *string, char (*dest_array)[MAX_WORD_SIZE]);
