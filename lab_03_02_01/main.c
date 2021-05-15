@@ -84,7 +84,7 @@ int sum_of_digits(int num)
     return sum;
 }
 
-void find_element(int (*const matrix)[MAX_COLUMNS], const int rows,
+void find_elem_min_dig_sum(int (*const matrix)[MAX_COLUMNS], const int rows,
 const int cols, int *row_elem, int *col_elem)
 {
     int min_sum = sum_of_digits(matrix[0][0]);
@@ -111,10 +111,9 @@ int main(void)
         return err;
 
     int to_delete_row, to_delete_col;
-    find_element(array, rows, columns, &to_delete_row, &to_delete_col);
+    find_elem_min_dig_sum(array, rows, columns, &to_delete_row, &to_delete_col);
 
     delete_row(array, &rows, columns, to_delete_row);
-
     delete_column(array, rows, &columns, to_delete_col);
 
     matrix_print(array, rows, columns);

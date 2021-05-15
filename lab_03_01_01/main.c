@@ -87,6 +87,18 @@ int *res_arr)
     }
 }
 
+void fill_result_array(int (*const source)[MAX_COLUMNS], int *result,
+const int rows, const int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        if (row_is_symmetrical(source[i], cols) == IS_SYMMETRICAL)
+            result[i] = IS_SYMMETRICAL;
+        else
+            result[i] = IS_NOT_SYMMETRICAL;
+    }
+}
+
 int main(void)
 {
     int array[MAX_ROWS][MAX_COLUMNS];
@@ -99,14 +111,7 @@ int main(void)
     int result[MAX_ROWS];
 
     solve_problem(array, rows, columns, result);
-
-    for (int i = 0; i < rows; i++)
-    {
-        if (row_is_symmetrical(array[i], columns) == IS_SYMMETRICAL)
-            result[i] = IS_SYMMETRICAL;
-        else
-            result[i] = IS_NOT_SYMMETRICAL;
-    }
+    fill_result_array(array, result, rows, columns);
 
     array_print(result, rows);
 
