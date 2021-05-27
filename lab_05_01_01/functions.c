@@ -1,33 +1,52 @@
 #include <stdio.h>
 #include "functions.h"
 
-int process(FILE *f)
+#define EXPECTED_ARGS 1
+
+#define YES 1
+#define NO 0
+
+int is_maximum(int a, int b, int c)
 {
-    int number, prev, pre_prev;
-    int num_extremums = 0;
+    if (b > a && b > c)
+        return YES;
 
-    if (fscanf(f, "%d", &pre_prev) == EOF)
+    return NO;
+}
+
+int process(FILE *f, int *a, int *b)
+{
+    int first, second, third;
+    int count_maximums = 0;
+
+    if (fscanf(f, "%d", &first) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
-    if (fscanf(f, "%d", &prev) == EOF)
+    if (fscanf(f, "%d", &second) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
-    int read_args;
+    int check = fscanf(f, "%d", &third);
 
-    while ((read_args = fscanf(f, "%d", &number)) != EOF && read_args == 1)
+    while (check == EXPECTED_ARGS)
     {
-        if (pre_prev < prev && prev > number)
+        if (is_maximum(first, second, third))
         {
-            // printf("%d\n", prev);
-            num_extremums++;
+            if (count_maximums++ == 0)
+                *a = second;
+            else
+            {
+                *b = second;
+                break;
+            }
         }
 
-        pre_prev = prev;
-        prev = number;
+        first = second;
+        second = third;
+        check = fscanf(f, "%d", &third);
     }
 
-    if (num_extremums >= EXPECTED_EXTREMUMS)
-        return OK;
-    else
+    if (count_maximums != EXPECTED_EXTREMUMS)
         return NOT_ENOUGH_EXTREMUMS;
+    else
+        return OK;
 }
