@@ -12,17 +12,18 @@ int process(FILE *f)
     if (fscanf(f, "%d", &prev) == EOF)
         return NOT_ENOUGH_ARGS;
 
-    while (fscanf(f, "%d", &number) != EOF)
+    int read_args;
+
+    while ((read_args = fscanf(f, "%d", &number)) != EOF && read_args == 1)
     {
-        if ((number > prev && prev > pre_prev) ||
-            (number < prev && prev < pre_prev))
-        {
+        if (pre_prev < prev && prev > number)
             num_extremums++;
-            continue;
-        }
+
+        pre_prev = prev;
+        prev = number;
     }
 
-    if (num_extremums == EXPECTED_EXTREMUMS)
+    if (num_extremums >= EXPECTED_EXTREMUMS)
         return OK;
     else
         return NOT_ENOUGH_EXTREMUMS;
