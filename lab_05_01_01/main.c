@@ -5,7 +5,7 @@ int main(void)
 {
     int error = process(stdin);
 
-    printf("Error code: %d", error);
+    // printf("Error code: %d", error);
 
     return error;
 }

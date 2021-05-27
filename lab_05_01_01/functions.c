@@ -17,7 +17,10 @@ int process(FILE *f)
     while ((read_args = fscanf(f, "%d", &number)) != EOF && read_args == 1)
     {
         if (pre_prev < prev && prev > number)
+        {
+            // printf("%d\n", prev);
             num_extremums++;
+        }
 
         pre_prev = prev;
         prev = number;
