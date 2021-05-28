@@ -3,6 +3,7 @@
 #define OK 0
 #define NOT_ENOUGH_MAIN_ARGS -1
 #define NO_INTEGERS_IN_FILE -2
+#define FILE_CANNOT_BE_OPENED -3
 
 #define MAX_INT 2147483647
 #define YES 1
@@ -50,6 +51,9 @@ int main(const int argc, char **argv)
     char *file_name = argv[1];
 
     FILE *file = fopen(file_name, "r");
+
+    if (file == NULL)
+        return FILE_CANNOT_BE_OPENED;
 
     int max, min;
 
