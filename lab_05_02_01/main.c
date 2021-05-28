@@ -50,9 +50,9 @@ int main(const int argc, char **argv)
 
     char *file_name = argv[1];
 
-    FILE *file = fopen(file_name, "r");
+    FILE *file;
 
-    if (file == NULL)
+    if ((file = fopen(file_name, "r")) == NULL)
         return FILE_CANNOT_BE_OPENED;
 
     int max, min;
