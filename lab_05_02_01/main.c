@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+#define OK 0
 #define NOT_ENOUGH_MAIN_ARGS -1
 #define NO_INTEGERS_IN_FILE -2
 
@@ -62,4 +63,6 @@ int main(const int argc, char **argv)
     printf("%d", result);
 
     fclose(file);
+
+    return OK;
 }
