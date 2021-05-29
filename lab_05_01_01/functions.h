@@ -4,6 +4,7 @@
 
 #define OK 0
 #define NOT_ENOUGH_ARGS -1
+#define FILE_DOES_NOT_EXIST -2
 #define NOT_ENOUGH_MAXIMUMS -3
 
 #define EXPECTED_MAXIMUMS 2
