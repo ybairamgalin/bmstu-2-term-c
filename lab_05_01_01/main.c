@@ -1,4 +1,4 @@
-#include <stdio.h>
+include <stdio.h>
 #include "functions.h"
 
 int main(void)
@@ -8,8 +8,8 @@ int main(void)
 
     printf("Error code: %d\n", error);
 
-    if (error == OK)
-        printf("%d %d", first, second);
-
+//    if (error == OK)
+//        printf("%d %d", first, second);
+q
     return error;
 }
