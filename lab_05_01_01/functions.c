@@ -15,39 +15,39 @@ int is_maximum(int a, int b, int c)
     return NO;
 }
 
-int process(FILE *f, int *a, int *b)
+int process(FILE *f, int *first_max, int *second_max)
 {
-//    int first, second, third;
-//    int count_maximums = 0;
-//
-//    if (fscanf(f, "%d", &first) != EXPECTED_ARGS)
-//        return NOT_ENOUGH_ARGS;
-//
-//    if (fscanf(f, "%d", &second) != EXPECTED_ARGS)
-//        return NOT_ENOUGH_ARGS;
-//
-//    int check = fscanf(f, "%d", &third);
-//
-//    while (check == EXPECTED_ARGS)
-//    {
-//        if (is_maximum(first, second, third))
-//        {
-//            if (count_maximums++ == 0)
-//                *a = second;
-//            else
-//            {
-//                *b = second;
-//                break;
-//            }
-//        }
-//
-//        first = second;
-//        second = third;
-//        check = fscanf(f, "%d", &third);
-//    }
-//
-//    if (count_maximums != EXPECTED_EXTREMUMS)
-//        return NOT_ENOUGH_EXTREMUMS;
-//    else
-        return OK;
+    int pre_prev_number, prev_number, number;
+
+    if (fscanf(f, "%d", &pre_prev_number) != 1)
+        return NOT_ENOUGH_ARGS;
+
+    if (fscanf(f, "%d", &prev_number) != 1)
+        return NOT_ENOUGH_ARGS;
+
+    int number_os_maximums = 0;
+
+    while (fscanf(f, "%d", &number) == 1)
+    {
+        if (prev_number > pre_prev_number && prev_number > number)
+        {
+
+            if (number_os_maximums++ == 0)
+                *first_max = prev_number;
+            else
+            {
+                number_os_maximums++;
+                *second_max = prev_number;
+                break;
+            }
+        }
+
+        pre_prev_number = prev_number;
+        prev_number = number;
+    }
+
+    if (number_os_maximums < EXPECTED_MAXIMUMS)
+        return NOT_ENOUGH_MAXIMUMS;
+
+    return OK;
 }

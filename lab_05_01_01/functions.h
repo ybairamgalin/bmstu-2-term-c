@@ -5,7 +5,7 @@
 #define OK 0
 #define NOT_ENOUGH_ARGS -1
 
-#define EXPECTED_EXTREMUMS 2
-#define NOT_ENOUGH_EXTREMUMS -3
+#define EXPECTED_MAXIMUMS 2
+#define NOT_ENOUGH_MAXIMUMS -3
 
 int process(FILE *f, int *a, int *b);
