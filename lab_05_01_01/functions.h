@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdio.h>
+
 #define OK 0
 #define NOT_ENOUGH_ARGS -1
 

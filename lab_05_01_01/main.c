@@ -2,12 +2,13 @@
 
 int main(void)
 {
-    int first, second;
+    int first = 10;
+    int second = 10;
     int error = process(stdin, &first, &second);
 
     printf("Error code: %d\n", error);
 
-//    if (error == OK)
-//        printf("%d %d", first, second);
+    if (error == OK)
+        printf("%d %d", first, second);
     return error;
 }
