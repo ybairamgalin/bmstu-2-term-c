@@ -4,8 +4,8 @@
 
 #define OK 0
 #define NOT_ENOUGH_ARGS -1
-
-#define EXPECTED_MAXIMUMS 2
 #define NOT_ENOUGH_MAXIMUMS -3
 
-int process(FILE *f, int *a, int *b);
+#define EXPECTED_MAXIMUMS 2
+
+int process(FILE *f, int *first_max, int *second_max);

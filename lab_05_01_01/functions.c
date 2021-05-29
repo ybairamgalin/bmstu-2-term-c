@@ -7,14 +7,6 @@
 #define YES 1
 #define NO 0
 
-int is_maximum(int a, int b, int c)
-{
-    if (b > a && b > c)
-        return YES;
-
-    return NO;
-}
-
 int process(FILE *f, int *first_max, int *second_max)
 {
     int pre_prev_number, prev_number, number;
