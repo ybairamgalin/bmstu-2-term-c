@@ -7,41 +7,44 @@
 #define YES 1
 #define NO 0
 
+void swap_values(int *first, int *second)
+{
+    int buf = *first;
+    *first = *second;
+    *second = buf;
+}
+
 int process(FILE *f, int *first_max, int *second_max)
 {
     if (f == NULL)
         return FILE_DOES_NOT_EXIST;
 
-    int pre_prev_number, prev_number, number;
+    int number;
 
-    if (fscanf(f, "%d", &pre_prev_number) != 1)
+    if (fscanf(f, "%d", first_max) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
-    if (fscanf(f, "%d", &prev_number) != 1)
+    if (fscanf(f, "%d", second_max) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
-    int number_os_maximums = 0;
+    if (*first_max < *second_max)
+        swap_values(first_max, second_max);
 
-    while (fscanf(f, "%d", &number) == 1)
+    while (fscanf(f, "%d", &number) == EXPECTED_ARGS)
     {
-        if (prev_number > pre_prev_number && prev_number > number)
+        if (number > *first_max)
         {
-            if (number_os_maximums++ == 0)
-                *first_max = prev_number;
-            else
-            {
-                number_os_maximums++;
-                *second_max = prev_number;
-                break;
-            }
+            if (*first_max > *second_max)
+                *second_max = *first_max;
+
+            *first_max = number;
         }
-
-        pre_prev_number = prev_number;
-        prev_number = number;
+        else
+        {
+            if (number > *second_max)
+                *first_max = number;
+        }
     }
-
-    if (number_os_maximums < EXPECTED_MAXIMUMS)
-        return NOT_ENOUGH_MAXIMUMS;
 
     return OK;
 }
