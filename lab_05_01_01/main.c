@@ -10,6 +10,5 @@ int main(void)
 
 //    if (error == OK)
 //        printf("%d %d", first, second);
-q
     return error;
 }
