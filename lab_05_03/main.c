@@ -57,41 +57,20 @@ int print_int_from_binary(const char *file_name)
         return FILE_DOES_NOT_EXIST;
     }
 
-    fseek(file, 0, SEEK_END);
-    size_t size = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    int number;
 
-    if (size % sizeof(int) != 0)
+    if (fread(&number, sizeof(int), 1, file) == 1)
+        printf("%d", cur);
+    else
     {
-        printf("Error: file format");
-
-        return INCORRECT_FILE_FORMAT;
-    }
-
-    int number_of_elements;
-
-    for (size_t i = 0; i < size / sizeof(int); i++)
-    {
-        int number;
-        size_t read = fread(&number, sizeof(int), 1, file);
-
-        if (read == 1)
-        {
-            number_of_elements++;
-            printf("%d ", number);
-        }
-        else
-            break;
-    }
-
-    fclose(file);
-
-    if (number_of_elements == 0)
-    {
-        printf("Error: file is empty");
-
+        fclose(file);
         return EMPTY_FILE;
     }
+
+    while (fread(&number, sizeof(int), 1, file) == 1)
+        printf("%d ", number);
+
+    fclose(file);
 
     return OK;
 }
