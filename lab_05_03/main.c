@@ -131,7 +131,7 @@ void bubble_sort_binary_file(FILE *file, size_t size)
 int sort_numbers_in_file(const char *filename)
 {
     FILE *file;
-    file = fopen(filename, "rb+");
+    file = fopen(filename, "rb");
 
     if (file == NULL)
         return FILE_DOES_NOT_EXIST;
@@ -142,6 +142,9 @@ int sort_numbers_in_file(const char *filename)
 
     if (size % sizeof(int) != 0)
         return INCORRECT_FILE_FORMAT;
+
+    fclose(file);
+    file = fopen(filename, "rb+");
 
     bubble_sort_binary_file(file, size);
 
