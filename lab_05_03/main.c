@@ -10,10 +10,14 @@
 #define FILE_DOES_NOT_EXIST -3
 #define POS_ERROR -4
 #define UNKNOWN_COMMAND -5
+#define EMPTY_FILE -6
 
 #define EQUAL_STR 0
 
 #define NUMBER_OF_RANDOM_INT_NUMS 20
+
+#define YES 1
+#define NO 0
 
 
 int create_file(const char *file_name)
@@ -62,6 +66,8 @@ int print_int_from_binary(const char *file_name)
         else
             break;
     }
+
+    fclose(file);
 
     return OK;
 }
@@ -114,6 +120,17 @@ void bubble_sort_binary_file(FILE *file)
             compare_and_swap(file, i, j);
 }
 
+int file_contains_integers(FILE* file)
+{
+    int number;
+
+    if (fread(&number, sizeof(int), 1, file) == 1)
+        return YES;
+
+    return NO;
+
+}
+
 int sort_numbers_in_file(const char *filename)
 {
     FILE *file;
@@ -122,7 +139,12 @@ int sort_numbers_in_file(const char *filename)
     if (file == NULL)
         return FILE_DOES_NOT_EXIST;
 
+    if (!file_contains_integers(file))
+        return EMPTY_FILE;
+
     bubble_sort_binary_file(file);
+
+    fclose(file);
 
     return OK;
 }
