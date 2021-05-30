@@ -9,5 +9,7 @@ int main(void)
     if ((error = process(stdin, &first, &second)) != OK)
         return error;
 
+    printf("%d %d", first, second);
+
     return OK;
 }
