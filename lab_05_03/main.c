@@ -57,17 +57,18 @@ int print_int_from_binary(const char *file_name)
         return FILE_DOES_NOT_EXIST;
     }
 
-    struct stat st;
-    stat(file_name, &st);
+    fseek(file, 0, SEEK_END);
+    size_t size = ftell(file);
+    fseek(file, 0, SEEK_SET);
 
-    if (st.st_size % sizeof(int) != 0)
+    if (size % sizeof(int) != 0)
     {
         printf("Error: file format");
 
         return INCORRECT_FILE_FORMAT;
     }
 
-    for (size_t i = 0; i < st.st_size / sizeof(int); i++)
+    for (size_t i = 0; i < size / sizeof(int); i++)
     {
         int number;
         size_t read = fread(&number, sizeof(int), 1, file);
@@ -120,12 +121,8 @@ void compare_and_swap(FILE *file, const int first, const int second)
     }
 }
 
-void bubble_sort_binary_file(FILE *file)
+void bubble_sort_binary_file(FILE *file, size_t size)
 {
-    fseek(file, 0, SEEK_END);
-    size_t size = ftell(file);
-    fseek(file, 0, SEEK_SET);
-
     for (int i = 0; i < size / sizeof(int); i++)
         for (int j = i + 1; j < size / sizeof(int); j++)
             compare_and_swap(file, i, j);
@@ -139,7 +136,14 @@ int sort_numbers_in_file(const char *filename)
     if (file == NULL)
         return FILE_DOES_NOT_EXIST;
 
-    bubble_sort_binary_file(file);
+    fseek(file, 0, SEEK_END);
+    size_t size = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    if (size % sizeof(int) != 0)
+        return INCORRECT_FILE_FORMAT;
+
+    bubble_sort_binary_file(file, size);
 
     fclose(file);
 
