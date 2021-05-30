@@ -7,7 +7,7 @@ int main(void)
     int error = process(stdin, &first, &second);
 
     if (error == OK)
-        printf("%d %d", first, second);
+        printf("%d %d\n", first, second);
 
     printf("Error code: %d\n", error);
 
