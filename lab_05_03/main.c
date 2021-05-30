@@ -68,16 +68,24 @@ int print_int_from_binary(const char *file_name)
         return INCORRECT_FILE_FORMAT;
     }
 
+    int number_of_elements;
+
     for (size_t i = 0; i < size / sizeof(int); i++)
     {
         int number;
         size_t read = fread(&number, sizeof(int), 1, file);
 
         if (read == 1)
+        {
+            number_of_elements++;
             printf("%d ", number);
+        }
         else
             break;
     }
+
+    if (number_of_elements == 0)
+        return EMPTY_FILE;
 
     fclose(file);
 
