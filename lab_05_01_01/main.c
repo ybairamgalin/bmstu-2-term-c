@@ -6,10 +6,10 @@ int main(void)
     int first, second;
     int error = process(stdin, &first, &second);
 
-    printf("Error code: %d\n", error);
-
     if (error == OK)
         printf("%d %d", first, second);
+
+    printf("Error code: %d\n", error);
 
     return error;
 }

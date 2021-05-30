@@ -34,16 +34,11 @@ int process(FILE *f, int *first_max, int *second_max)
     {
         if (number > *first_max)
         {
-            if (*first_max > *second_max)
-                *second_max = *first_max;
-
+            *second_max = *first_max;
             *first_max = number;
         }
-        else
-        {
-            if (number > *second_max)
-                *first_max = number;
-        }
+        else if (number > *second_max)
+            *second_max = number;
     }
 
     return OK;
