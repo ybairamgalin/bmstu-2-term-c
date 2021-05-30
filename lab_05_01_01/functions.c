@@ -19,26 +19,31 @@ int process(FILE *f, int *first_max, int *second_max)
     if (f == NULL)
         return FILE_DOES_NOT_EXIST;
 
+    int number;
+
     if (fscanf(f, "%d", first_max) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
     if (fscanf(f, "%d", second_max) != EXPECTED_ARGS)
         return NOT_ENOUGH_ARGS;
 
-    if (*second_max > *first_max)
+    if (*first_max < *second_max)
         swap_values(first_max, second_max);
-
-    int number;
 
     while (fscanf(f, "%d", &number) == EXPECTED_ARGS)
     {
         if (number > *first_max)
         {
-            *second_max = *first_max;
+            if (*first_max > *second_max)
+                *second_max = *first_max;
+
             *first_max = number;
         }
-        else if (number > *second_max)
-            *second_max = number;
+        else
+        {
+            if (number > *second_max)
+                *first_max = number;
+        }
     }
 
     return OK;
