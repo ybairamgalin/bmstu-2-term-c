@@ -19,6 +19,18 @@
 #define YES 1
 #define NO 0
 
+int file_contains_integers(FILE* file)
+{
+    int number;
+
+    if (fread(&number, sizeof(int), 1, file) == 1)
+        return YES;
+
+    fseek(file, 0, SEEK_SET);
+
+    return NO;
+
+}
 
 int create_file(const char *file_name)
 {
@@ -51,7 +63,18 @@ int print_int_from_binary(const char *file_name)
     file = fopen(file_name, "rb");
 
     if (file == NULL)
+    {
+        printf("Error: no such file");
+
         return FILE_DOES_NOT_EXIST;
+    }
+
+    if (!file_contains_integers(file))
+    {
+        printf("Error: file is empty");
+
+        return EMPTY_FILE;
+    }
 
     struct stat st;
     stat(file_name, &st);
@@ -118,17 +141,6 @@ void bubble_sort_binary_file(FILE *file)
     for (int i = 0; i < size / sizeof(int); i++)
         for (int j = i + 1; j < size / sizeof(int); j++)
             compare_and_swap(file, i, j);
-}
-
-int file_contains_integers(FILE* file)
-{
-    int number;
-
-    if (fread(&number, sizeof(int), 1, file) == 1)
-        return YES;
-
-    return NO;
-
 }
 
 int sort_numbers_in_file(const char *filename)
