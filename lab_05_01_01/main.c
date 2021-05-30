@@ -11,5 +11,5 @@ int main(void)
 
     printf("Error code: %d\n", error);
 
-    return error;
+    return OK;
 }

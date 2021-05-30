@@ -39,9 +39,10 @@ int process(FILE *f, int *first_max, int *second_max)
 
             *first_max = number;
         }
-        else if (number > *second_max)
+        else
         {
-            *first_max = number;
+            if (number > *second_max)
+                *first_max = number;
         }
     }
 
