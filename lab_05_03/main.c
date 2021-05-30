@@ -84,10 +84,14 @@ int print_int_from_binary(const char *file_name)
             break;
     }
 
-    if (number_of_elements == 0)
-        return EMPTY_FILE;
-
     fclose(file);
+
+    if (number_of_elements == 0)
+    {
+        printf("Error: file is empty");
+
+        return EMPTY_FILE;
+    }
 
     return OK;
 }
@@ -142,14 +146,30 @@ int sort_numbers_in_file(const char *filename)
     file = fopen(filename, "rb");
 
     if (file == NULL)
+    {
+        printf("Error: no such file");
+
         return FILE_DOES_NOT_EXIST;
+    }
 
     fseek(file, 0, SEEK_END);
     size_t size = ftell(file);
     fseek(file, 0, SEEK_SET);
 
     if (size % sizeof(int) != 0)
+    {
+        printf("Error: file format");
+
         return INCORRECT_FILE_FORMAT;
+    }
+
+    if (size == 0)
+    {
+        printf("Error: file is empty");
+
+        return EMPTY_FILE;
+    }
+
 
     fclose(file);
     file = fopen(filename, "rb+");
