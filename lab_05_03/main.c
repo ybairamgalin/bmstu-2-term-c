@@ -10,7 +10,6 @@
 #define FILE_DOES_NOT_EXIST -3
 #define POS_ERROR -4
 #define UNKNOWN_COMMAND -5
-#define FILE_IS_EMPTY -6
 
 #define EQUAL_STR 0
 
@@ -52,7 +51,6 @@ int print_int_from_binary(const char *file_name)
 
     struct stat st;
     stat(file_name, &st);
-    int numbers_printed;
 
     for (size_t i = 0; i < st.st_size / sizeof(int); i++)
     {
@@ -60,16 +58,10 @@ int print_int_from_binary(const char *file_name)
         size_t read = fread(&number, sizeof(int), 1, file);
 
         if (read == 1)
-        {
-            numbers_printed++;
             printf("%d ", number);
-        }
         else
             break;
     }
-
-    if (numbers_printed == 0)
-        return FILE_IS_EMPTY;
 
     return OK;
 }
@@ -78,7 +70,6 @@ int get_number_by_pos(FILE *file, const int pos, int *num)
 {
     fseek(file, pos * sizeof(int), SEEK_SET);
     size_t read = fread(num, sizeof(int), 1, file);
-    fseek(file, 0, SEEK_SET);
 
     if (read == 1)
         return OK;
@@ -90,7 +81,6 @@ int put_number_by_pos(FILE *file, const int pos, const int num)
 {
     fseek(file, pos * sizeof(int), SEEK_SET);
     size_t put = fwrite(&num, sizeof(int), 1, file);
-    fseek(file, 0, SEEK_SET);
 
     if (put == 1)
         return OK;
@@ -132,10 +122,6 @@ int sort_numbers_in_file(const char *filename)
     if (file == NULL)
         return FILE_DOES_NOT_EXIST;
 
-    int check_number;
-    if (get_number_by_pos(file, 0, &check_number) != OK)
-        return POS_ERROR;
-
     bubble_sort_binary_file(file);
 
     return OK;
@@ -159,7 +145,7 @@ int main(const int argc, char **argv)
     else if (strcmp(argv[1], "s") == EQUAL_STR)
     {
         if (sort_numbers_in_file(argv[2]) != OK)
-            return FILE_IS_EMPTY;
+            return FILE_DOES_NOT_EXIST;
     }
     else
         return UNKNOWN_COMMAND;
