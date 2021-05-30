@@ -11,6 +11,7 @@
 #define POS_ERROR -4
 #define UNKNOWN_COMMAND -5
 #define EMPTY_FILE -6
+#define INCORRECT_FILE_FORMAT -7
 
 #define EQUAL_STR 0
 
@@ -58,6 +59,13 @@ int print_int_from_binary(const char *file_name)
 
     struct stat st;
     stat(file_name, &st);
+
+    if (st.st_size % sizeof(int) != 0)
+    {
+        printf("Error: file format");
+
+        return INCORRECT_FILE_FORMAT;
+    }
 
     for (size_t i = 0; i < st.st_size / sizeof(int); i++)
     {
