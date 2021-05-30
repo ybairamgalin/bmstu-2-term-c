@@ -60,7 +60,8 @@ int print_int_from_binary(const char *file_name)
     int number;
 
     if (fread(&number, sizeof(int), 1, file) == 1)
-        printf("%d", cur);
+        printf("%d", &number);
+        printf("%d", &number);
     else
     {
         fclose(file);
