@@ -19,6 +19,7 @@ void find_average_student_mark(FILE *file, size_t size, float *average)
 
     for (size_t i = 0; i < num_of_students; i++)
     {
+        fseek(file, sizeof(struct student) * i, SEEK_SET);
         fread(&student, sizeof(struct student), 1, file);
         float sum = 0;
 
@@ -27,16 +28,6 @@ void find_average_student_mark(FILE *file, size_t size, float *average)
 
         average[i] = sum / (float)NUM_OF_SUBJECTS;
     }
-}
-
-float find_average(float *arr, size_t sz)
-{
-    float sum = 0;
-
-    for (size_t i = 0; i < sz; i++)
-        sum += arr[i];
-
-    return sum / (float)sz;
 }
 
 void print_student(struct student student)
@@ -79,12 +70,15 @@ void delete_nth_student(FILE *file, size_t *sz, const int to_del)
     ftruncate(fileno(file), *sz);
 }
 
-void delete_with_low_average(FILE *file, size_t *sz, const float *avg_arr,
+void delete_with_low_average(FILE *file, size_t *sz, float *avg_arr,
 const float common_average)
 {
     for (size_t i = 0; i < *sz / sizeof(struct student); i++)
         if (avg_arr[i] < common_average)
+        {
+            del_arr_elem(avg_arr, *sz / sizeof(struct student), i);
             delete_nth_student(file, sz, i--);
+        }
 
 }
 
@@ -180,7 +174,6 @@ int delete_worst_students(const char *filename)
     find_average_student_mark(file, file_sz, average);
     float common_average = find_average(average,
         file_sz / sizeof(struct student));
-
     delete_with_low_average(file, &file_sz, average, common_average);
 
     return OK;

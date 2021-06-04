@@ -17,3 +17,19 @@ int file_size(FILE *f, size_t *size)
 
     return fseek(f, 0L, SEEK_SET);
 }
+
+float find_average(float *arr, size_t sz)
+{
+    float sum = 0;
+
+    for (size_t i = 0; i < sz; i++)
+        sum += arr[i];
+
+    return sum / (float)sz;
+}
+
+void del_arr_elem(float *arr, const int size, const int elem)
+{
+    for (int i = elem; i < size - 1; i++)
+        arr[i] = arr[i + 1];
+}
