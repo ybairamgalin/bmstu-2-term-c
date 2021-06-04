@@ -6,6 +6,7 @@
 
 #define FILE_DOES_NOT_EXIST -1
 #define FILE_SIZE_ERROR -2
+#define NO_STUDENTS_FOUND -3
 
 #define MAX_STUDENTS 100
 
@@ -50,50 +51,6 @@ void print_file(FILE *file, size_t size)
         print_student(student);
     }
 }
-
-//void delete_nth_student(FILE *file, size_t *sz, const int to_del)
-//{
-//    const int number_of_students = *sz / sizeof(struct student);
-//    printf("%d %d\n", number_of_students, to_del);
-//
-//    for (size_t i = to_del + 1; i < number_of_students; i++)
-//    {
-//        struct student student;
-//
-//        fseek(file, sizeof(struct student) * i, SEEK_SET);
-//        fread(&student, sizeof(struct student), 1, file);
-//
-//        fseek(file, sizeof(struct student) * (i - 1), SEEK_SET);
-//        fwrite(&student, sizeof(struct student), 1, file);
-//    }
-//
-//    *sz -= sizeof(struct student);
-//    if (ftruncate(fileno(file), sizeof(struct student) * (number_of_students - 1)) != 0)
-//        printf("FUCK!");
-//}
-
-//void print_array(float *arr, const int sz)
-//{
-//    for (int i = 0; i < sz; i++)
-//        printf("%f ", arr[i]);
-//
-//    printf("\n");
-//}
-
-//void delete_with_low_average(FILE *file, size_t *sz, float *avg_arr,
-//const float common_average)
-//{
-//    int number_of_students = *sz / sizeof(struct student);
-//
-//    for (size_t i = 0; i < number_of_students; i++)
-//        if (avg_arr[i] < common_average)
-//        {
-//            del_arr_elem(avg_arr, number_of_students--, i);
-//            delete_nth_student(file, sz, i--);
-//        }
-//
-//    printf("num: %d\n", number_of_students);
-//}
 
 void del_nth_student(FILE *file, const int number_of_students, const int pos)
 {
@@ -229,7 +186,64 @@ int delete_worst_students(const char *filename)
     return OK;
 }
 
-int print_students_by_surname(const char *filename)
+int str_begins_with(const char *src, const char *cmp)
 {
+    size_t len_src = strlen(src);
+    size_t len_cmp = strlen(cmp);
+
+    if (len_src < len_cmp)
+        return 0;
+
+    for (size_t i = 0; i < len_cmp; i++)
+        if (cmp[i] != src[i])
+            return 0;
+
+    return 1;
+}
+
+int cpy_students_to_file_by_surname(FILE *src, const size_t src_sz, FILE *dest,
+const char *substr)
+{
+    const int number_of_students = src_sz / sizeof(struct student);
+    struct student student;
+    int written = 0;
+
+    fseek(src, 0, SEEK_SET);
+    fseek(dest, 0, SEEK_SET);
+
+    for (int i = 0; i < number_of_students; i++)
+    {
+        fread(&student, sizeof(struct student), 1, src);
+
+        if (str_begins_with(student.surname, substr))
+        {
+            fwrite(&student, sizeof(struct student), 1, dest);
+            written++;
+        }
+    }
+
+    return written;
+}
+
+int print_students_by_surname(const char *src_file, const char *dest_file,
+const char *substr)
+{
+    FILE *src, *dest;
+    src = fopen(src_file, "rb");
+    dest = fopen(dest_file, "wb");
+
+    if (src == NULL)
+        return FILE_DOES_NOT_EXIST;
+
+    size_t file_sz;
+
+    int rc = file_size(src, &file_sz);
+
+    if (rc != 0 || file_sz % sizeof(struct student) || file_sz == 0)
+        return FILE_SIZE_ERROR;
+
+    if (cpy_students_to_file_by_surname(src, file_sz, dest, substr) == 0)
+        return NO_STUDENTS_FOUND;
+
     return OK;
 }

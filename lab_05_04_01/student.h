@@ -13,6 +13,7 @@ struct student
     int marks[NUM_OF_SUBJECTS];
 };
 
-int print_students_by_surname(const char *filename);
+int print_students_by_surname(const char *src_file, const char *dest_file,
+    const char *substr);
 int delete_worst_students(const char *filename);
 int sort_by_surname(const char *filename);
