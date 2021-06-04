@@ -6,7 +6,7 @@
 #define MAX_NAME_SIZE 10
 #define NUM_OF_SUBJECTS 4
 
-struct Student
+struct student
 {
     char surname[MAX_SURNAME_SIZE + 1];
     char name[MAX_NAME_SIZE + 1];

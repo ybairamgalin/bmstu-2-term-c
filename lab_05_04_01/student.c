@@ -8,28 +8,28 @@
 
 #define EQUAL_STRINGS 0
 
-void print_student(struct Student student)
+void print_student(struct student student)
 {
     printf("%s\n", student.surname);
     printf("%s\n", student.name);
     printf("%d %d %d %d\n", student.marks[0], student.marks[1],
-           student.marks[2], student.marks[3]);
+    student.marks[2], student.marks[3]);
 }
 
 void print_file(FILE *file, size_t size)
 {
-    size_t num_of_students = size / sizeof(struct Student);
-    struct Student student;
+    size_t num_of_students = size / sizeof(struct student);
+    struct student student;
     fseek(file, 0, SEEK_SET);
 
     for (size_t i = 0; i < num_of_students; i++)
     {
-        fread(&student, sizeof(struct Student), 1, file);
+        fread(&student, sizeof(struct student), 1, file);
         print_student(student);
     }
 }
 
-int students_cmp(struct Student first, struct Student second)
+int students_cmp(struct student first, struct student second)
 {
     int cmp = strcmp(first.surname, second.surname);
 
@@ -55,11 +55,11 @@ int students_cmp(struct Student first, struct Student second)
 
 void bubble_sort_students(FILE *file, size_t size)
 {
-    size_t size_of_student = sizeof(struct Student);
+    size_t size_of_student = sizeof(struct student);
     size_t num_of_students = size / size_of_student;
 
-    struct Student first;
-    struct Student second;
+    struct student first;
+    struct student second;
 
     for (size_t i = 0; i < num_of_students; i++)
         for (size_t j = i + 1; j < num_of_students; j++)
@@ -93,10 +93,10 @@ int sort_by_surname(const char *filename)
 
     int rc = file_size(file, &file_sz);
 
-    if (rc != 0 || file_sz % sizeof(struct Student) || file_sz == 0)
+    if (rc != 0 || file_sz % sizeof(struct student) || file_sz == 0)
         return FILE_SIZE_ERROR;
 
-//    if ((file_sz / sizeof(struct Student)) != 0)
+//    if ((file_sz / sizeof(struct student)) != 0)
 //        return FILE_SIZE_ERROR;
 
     bubble_sort_students(file, file_sz);
