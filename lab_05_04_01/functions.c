@@ -28,7 +28,7 @@ float find_average(float *arr, size_t sz)
     return sum / (float)sz;
 }
 
-void del_arr_elem(float *arr, const int size, const int elem)
+void del_arr_elem(float *arr, int size, const int elem)
 {
     for (int i = elem; i < size - 1; i++)
         arr[i] = arr[i + 1];
