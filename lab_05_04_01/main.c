@@ -24,7 +24,7 @@ int main(const int argc, const char **argv)
     else if (argc == 5 && strcmp(argv[1], "fb") == EQUAL_STR)
     {
         if ((error = print_students_by_surname(argv[2],
-    argv[3], argv[4])) != OK)
+        argv[3], argv[4])) != OK)
             return error;
     }
     else
