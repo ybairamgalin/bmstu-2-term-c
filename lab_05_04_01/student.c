@@ -1,12 +1,43 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "student.h"
 #include "functions.h"
 
 #define FILE_DOES_NOT_EXIST -1
 #define FILE_SIZE_ERROR -2
 
+#define MAX_STUDENTS 100
+
 #define EQUAL_STRINGS 0
+
+void find_average_student_mark(FILE *file, size_t size, float *average)
+{
+    size_t num_of_students = size / sizeof(struct student);
+    struct student student;
+    fseek(file, 0, SEEK_SET);
+
+    for (size_t i = 0; i < num_of_students; i++)
+    {
+        fread(&student, sizeof(struct student), 1, file);
+        float sum = 0;
+
+        for (size_t j = 0; j < NUM_OF_SUBJECTS; j++)
+            sum += student.marks[j];
+
+        average[i] = sum / (float)NUM_OF_SUBJECTS;
+    }
+}
+
+float find_average(float *arr, size_t sz)
+{
+    float sum = 0;
+
+    for (size_t i = 0; i < sz; i++)
+        sum += arr[i];
+
+    return sum / (float)sz;
+}
 
 void print_student(struct student student)
 {
@@ -27,6 +58,34 @@ void print_file(FILE *file, size_t size)
         fread(&student, sizeof(struct student), 1, file);
         print_student(student);
     }
+}
+
+void delete_nth_student(FILE *file, size_t *sz, const int to_del)
+{
+    const int number_of_students = *sz / sizeof(struct student);
+
+    for (size_t i = to_del + 1; i < number_of_students; i++)
+    {
+        struct student student;
+
+        fseek(file, sizeof(struct student) * i, SEEK_SET);
+        fread(&student, sizeof(struct student), 1, file);
+
+        fseek(file, sizeof(struct student) * (i - 1), SEEK_SET);
+        fwrite(&student, sizeof(struct student), 1, file);
+    }
+
+    *sz -= sizeof(struct student);
+    ftruncate(fileno(file), *sz);
+}
+
+void delete_with_low_average(FILE *file, size_t *sz, const float *avg_arr,
+const float common_average)
+{
+    for (size_t i = 0; i < *sz / sizeof(struct student); i++)
+        if (avg_arr[i] < common_average)
+            delete_nth_student(file, sz, i--);
+
 }
 
 int students_cmp(struct student first, struct student second)
@@ -96,9 +155,6 @@ int sort_by_surname(const char *filename)
     if (rc != 0 || file_sz % sizeof(struct student) || file_sz == 0)
         return FILE_SIZE_ERROR;
 
-//    if ((file_sz / sizeof(struct student)) != 0)
-//        return FILE_SIZE_ERROR;
-
     bubble_sort_students(file, file_sz);
     print_file(file, file_sz);
 
@@ -107,6 +163,26 @@ int sort_by_surname(const char *filename)
 
 int delete_worst_students(const char *filename)
 {
+    FILE *file;
+    file = fopen(filename, "rb+");
+
+    if (file == NULL)
+        return FILE_DOES_NOT_EXIST;
+
+    size_t file_sz;
+
+    int rc = file_size(file, &file_sz);
+
+    if (rc != 0 || file_sz % sizeof(struct student) || file_sz == 0)
+        return FILE_SIZE_ERROR;
+
+    float average[MAX_STUDENTS];
+    find_average_student_mark(file, file_sz, average);
+    float common_average = find_average(average,
+        file_sz / sizeof(struct student));
+
+    delete_with_low_average(file, &file_sz, average, common_average);
+
     return OK;
 }
 
