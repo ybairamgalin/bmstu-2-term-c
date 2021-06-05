@@ -14,6 +14,8 @@ int main(void)
     if (text.N == -1)
         return WORD_LNG_ERR;
 
-
     print_text(text);
+    reverse_text(&text);
+    print_text(text);
+    put_in_file(text);
 }
