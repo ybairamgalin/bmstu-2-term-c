@@ -15,4 +15,7 @@ rk_02:
   - rk_02
     script:
   - cd rk_02_XXX
-    - gcc …
+    - gcc main.c -Wall -Werror -c
+    - gcc functions.c -Wall -Werror -c
+    - gcc main.o functions.o -o main.exe
+
