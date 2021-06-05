@@ -17,7 +17,7 @@ struct text file_to_text(FILE *file)
     {
         if (strlen(word) > MAX_WORD_LNG)
         {
-            text_from_file.N = -1;
+            text_from_file.N = WORD_LNG_ERR;
             return text_from_file;
         }
 

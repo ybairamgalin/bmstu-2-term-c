@@ -11,7 +11,7 @@ int main(void)
 
     struct text text = file_to_text(file);
 
-    if (text.N == -1)
+    if (text.N == WORD_LNG_ERR)
         return WORD_LNG_ERR;
 
     reverse_text(&text);
