@@ -89,7 +89,7 @@ int students_cmp(struct student first, struct student second)
     if (cmp < 0)
         return -1;
 
-    if (cmp == EQUAL_STRINGS)
+    if (cmp == EQUAL_STR)
     {
         cmp = strcmp(first.name, second.name);
 
@@ -100,7 +100,7 @@ int students_cmp(struct student first, struct student second)
             return -1;
     }
 
-    return EQUAL_STRINGS;
+    return EQUAL_STR;
 }
 
 void bubble_sort_students(FILE *file, size_t size)
