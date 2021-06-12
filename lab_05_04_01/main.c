@@ -2,11 +2,6 @@
 #include <string.h>
 #include "student.h"
 
-#define OK 0
-#define WRONG_COMMAND_LINE_ARG 53
-
-#define EQUAL_STR 0
-
 int main(const int argc, const char **argv)
 {
     int error;

@@ -1,7 +1,14 @@
 #pragma once
 
 #define OK 0
+#define FILE_DOES_NOT_EXIST -1
+#define FILE_SIZE_ERROR -2
+#define NO_STUDENTS_FOUND -3
+#define WRONG_COMMAND_LINE_ARG 53
 
+#define EQUAL_STR 0
+
+#define MAX_STUDENTS 100
 #define MAX_SURNAME_SIZE 25
 #define MAX_NAME_SIZE 10
 #define NUM_OF_SUBJECTS 4

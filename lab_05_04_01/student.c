@@ -4,14 +4,6 @@
 #include "student.h"
 #include "functions.h"
 
-#define FILE_DOES_NOT_EXIST -1
-#define FILE_SIZE_ERROR -2
-#define NO_STUDENTS_FOUND -3
-
-#define MAX_STUDENTS 100
-
-#define EQUAL_STRINGS 0
-
 void find_average_student_mark(FILE *file, size_t size, float *average)
 {
     size_t num_of_students = size / sizeof(struct student);
