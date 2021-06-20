@@ -23,7 +23,7 @@
 // the precise value, double measured - measured or
 // approximated value
 // function returns abs error of the given data
-double abs_error(double const expected, double const measured)
+double abs_error(double expected, double measured)
 {
     return fabs(expected - measured);
 }
@@ -33,10 +33,8 @@ int main(void)
     double x;
     double eps;
     int corr_input = scanf("%lf%lf", &x, &eps);
-
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_TYPE;
-
     // due to the task
     if (eps <= 0 || eps > 1)
         return INCORRECT_VALUE;
@@ -61,7 +59,6 @@ int main(void)
 
     if (fabs(precise_value) < EPS)
         return DIVISION_BY_ZERO;
-
     double relative_error = absolute_error / precise_value;
 
     printf("%lf %lf %lf %lf", approx_value, precise_value, absolute_error, relative_error);

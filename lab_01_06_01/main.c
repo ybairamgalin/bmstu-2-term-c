@@ -18,21 +18,17 @@
 
 
 // function receives elements of 2x2 matrix and returns its determinant
-float det_2x2(const float m11, const float m12, const float m21, const float m22)
+float det_2x2(float m11, float m12, float m21, float m22)
 {
     return m11 * m22 - m21 * m12;
 }
 
 int main(void)
 {
-    float x_a, y_a;
-    float x_b, y_b;
-    float x_c, y_c;
-
+    float x_a, y_a, x_b, y_b, x_c, y_c;
     float det, square;
     
     int corr_input = scanf("%f%f%f%f%f%f", &x_a, &y_a, &x_b, &y_b, &x_c, &y_c);
-
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_INPUT;
     

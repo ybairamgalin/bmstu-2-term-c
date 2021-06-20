@@ -16,7 +16,7 @@
 
 // function puts in quo and num the whole part and the rest of
 // division of num by denom
-void integer_division(int *quo, int *num, const int denom)
+void integer_division(int *quo, int *num, int denom)
 {
     // num finally equals rest
     while (*num >= denom)
@@ -30,7 +30,6 @@ int main(void)
 {
     int num, denom;
     int corr_input = scanf("%d%d", &num, &denom);
-
     if (corr_input != EXPECTED_ARGS)
         return INCORRECT_TYPE;
 
