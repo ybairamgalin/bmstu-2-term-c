@@ -4,14 +4,6 @@
 #include "student.h"
 #include "functions.h"
 
-#define FILE_DOES_NOT_EXIST -1
-#define FILE_SIZE_ERROR -2
-#define NO_STUDENTS_FOUND -3
-
-#define MAX_STUDENTS 100
-
-#define EQUAL_STRINGS 0
-
 void find_average_student_mark(FILE *file, size_t size, float *average)
 {
     size_t num_of_students = size / sizeof(struct student);
@@ -97,7 +89,7 @@ int students_cmp(struct student first, struct student second)
     if (cmp < 0)
         return -1;
 
-    if (cmp == EQUAL_STRINGS)
+    if (cmp == EQUAL_STR)
     {
         cmp = strcmp(first.name, second.name);
 
@@ -108,7 +100,7 @@ int students_cmp(struct student first, struct student second)
             return -1;
     }
 
-    return EQUAL_STRINGS;
+    return EQUAL_STR;
 }
 
 void bubble_sort_students(FILE *file, size_t size)
