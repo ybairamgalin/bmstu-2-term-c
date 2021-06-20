@@ -1,0 +1,3 @@
+67	microseconds (sec * (1e-6))
+78	microseconds (sec * (1e-6))
+54	microseconds (sec * (1e-6))
