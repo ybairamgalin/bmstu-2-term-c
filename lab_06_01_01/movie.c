@@ -45,6 +45,9 @@ int read_movie_from_file(FILE *file, movie *film)
 
     film->title[strlen(film->title) - 1] = '\0';
 
+    if (strlen(film->title) == 0)
+        return ERR_STRING_LNG;
+
     if (fgets(film->name, sizeof(film->name), file) == NULL)
         return ERR_FILE_STRUCT;
 
@@ -52,6 +55,9 @@ int read_movie_from_file(FILE *file, movie *film)
         return ERR_STRING_LNG;
 
     film->name[strlen(film->name) - 1] = '\0';
+
+    if (strlen(film->name) == 0)
+        return ERR_STRING_LNG;
 
     char tmp_year[MAX_YEAR_LNG + 1];
 
@@ -156,15 +162,15 @@ int read_movies_from_file(const char *filename, movie *films,
 }
 
 int cmp_film_with_key(const movie film,
-const sort_by field, const char *key)
+const sort_by field, const char *key, int *result)
 {
     if (field == title)
     {
-        return strcmp(key, film.title);
+        *result = strcmp(key, film.title);
     }
     else if (field == name)
     {
-        return strcmp(key, film.title);
+        *result = strcmp(key, film.title);
     }
     else if (field == year)
     {
@@ -173,14 +179,14 @@ const sort_by field, const char *key)
         if ((date = atoi(key)) == 0)
             return ERR_COMMAND_LINE_ARGS_CONTENT;
 
-        return date - film.year;
+        *result =  date - film.year;
     }
 
     return ERR_UNKNOWN;
 }
 
 int get_index_by_field_and_key(const movie *films, const int num_of_films,
-const sort_by field, const char *key)
+const sort_by field, const char *key, int *result)
 {
     int left = 0, right = num_of_films - 1, center;
 
@@ -188,16 +194,26 @@ const sort_by field, const char *key)
     {
         center = (left + right) / 2;
 
-        if (cmp_film_with_key(films[center], field, key) < 0)
+        int cmp;
+        int error;
+
+        if ((error = cmp_film_with_key(films[center], field, key, &cmp)) != OK)
+            return error;
+
+        if (cmp < 0)
         {
             right = center - 1;
         }
-        else if (cmp_film_with_key(films[center], field, key) > 0)
+        else if (cmp > 0)
         {
             left = center + 1;
         }
         else
-            return center;
+        {
+            *result = center;
+
+            return OK;
+        }
     }
 
     return ERR_MOVIE_NOT_FOUND;
@@ -207,10 +223,11 @@ int find_movie_by_key(const movie *films, movie *found, const int num_of_films,
 const sort_by field, const char *key)
 {
     int index;
+    int error;
 
-    if ((index = get_index_by_field_and_key(films, num_of_films,
-            field, key)) == ERR_MOVIE_NOT_FOUND)
-        return ERR_MOVIE_NOT_FOUND;
+    if ((error  = get_index_by_field_and_key(films, num_of_films, field,
+                                            key, &index)) != OK)
+        return error;
 
     *found = films[index];
 
