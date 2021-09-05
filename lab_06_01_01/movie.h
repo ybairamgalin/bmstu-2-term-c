@@ -7,6 +7,9 @@
 #define ERR_NOTHING_TO_READ 4
 #define ERR_FILE_IS_EMPTY 5
 #define ERR_COMMAND_LINE_ARGS_CONTENT 6
+#define ERR_UNKNOWN 7
+#define ERR_STRING_LNG 8
+#define ERR_MOVIE_NOT_FOUND -1
 
 #define MIN_COMMAND_LINE_ARGS 3
 #define MAX_COMMAND_LINE_ARGS 4
@@ -35,3 +38,5 @@ sort_by set_field_from_str(const char *str);
 int read_movies_from_file(const char *filename, movie *films,
                           int *num_of_films, const sort_by field);
 void print_movies(const movie *films, const int sz);
+int find_movie_by_key(const movie *films, movie *found, const int num_of_films,
+                      const sort_by field, const char *key);
