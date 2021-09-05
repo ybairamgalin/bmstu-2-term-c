@@ -181,8 +181,10 @@ const sort_by field, const char *key, int *result)
 
         *result =  date - film.year;
     }
+    else
+        return ERR_UNKNOWN;
 
-    return ERR_UNKNOWN;
+    return OK;
 }
 
 int get_index_by_field_and_key(const movie *films, const int num_of_films,
