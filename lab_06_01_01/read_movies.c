@@ -113,11 +113,18 @@ int read_year_from_file(FILE *file, movie *film)
     if (fgets(tmp_year, sizeof(tmp_year), file) == NULL)
         return ERR_FILE_STRUCT_YEAR;
 
-    if (tmp_year[strlen(tmp_year) - 1] != '\n')
-        return ERR_MAX_STRING_LNG;
-
     if ((film->year = atoi(tmp_year)) == 0)
         return ERR_FILE_STRUCT_YEAR;
+
+    if (feof(file))
+        return ERR_NOTHING_TO_READ;
+
+    if (tmp_year[strlen(tmp_year) - 1] != '\n')
+    {
+        printf("%s", tmp_year);
+
+        return ERR_MAX_STRING_LNG;
+    }
 
     return OK;
 }
@@ -147,7 +154,7 @@ int read_movies_from_file(const char *filename, movie *films,
     if (file == NULL)
         return ERR_NO_SUCH_FILE;
 
-    for (int i = 0; ; i++)
+    while(1)
     {
         int err;
         movie film;
