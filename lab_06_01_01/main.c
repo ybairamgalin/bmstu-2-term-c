@@ -34,11 +34,10 @@ int main(const int argc, const char *argv[])
         if (error == ERR_MOVIE_NOT_FOUND)
         {
             printf("Not found\n");
-            return error;
         }
         else if (error == ERR_KEY_CANNOT_BE_READ)
         {
-            printf("Not found\n");
+            // printf("Not found\n");
             return error;
         }
         else if (error != OK)
