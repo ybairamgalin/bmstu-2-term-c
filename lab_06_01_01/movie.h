@@ -19,7 +19,7 @@
 #define MAX_FIlMS 100
 #define MAX_TITLE_LNG 26
 #define MAX_NAME_LNG 26
-#define MAX_YEAR_LNG 10
+#define MAX_YEAR_LNG 5
 
 typedef struct
 {

@@ -112,10 +112,6 @@ int read_year_from_file(FILE *file, movie *film)
     if (film->year <= 0)
         return ERR_FILE_STRUCT_YEAR;
 
-    if (tmp_year[strlen(tmp_year) - 1] != '\n')
-        if (!feof(file))
-            return ERR_MAX_STRING_LNG;
-
     return OK;
 }
 
