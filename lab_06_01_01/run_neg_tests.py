@@ -68,7 +68,7 @@ def main():
             out_file.close()
 
             if reality == expected and return_code != 0:
-                print("NEG_TEST_{}\tPASSED".format(total_tests))
+                print("NEG_TEST_{}\tPASSED".format(total_tests), end="\t")
                 print("\treturn code {}".format(return_code))
                 total_passed += 1
             else:

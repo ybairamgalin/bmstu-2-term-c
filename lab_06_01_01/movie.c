@@ -97,6 +97,12 @@ const sort_by field, const char *key, int *result)
 int find_movie_by_key(const movie *films, movie *found, const int num_of_films,
 const sort_by field, const char *key)
 {
+    if (key == NULL)
+        return ERR_COMMAND_LINE_ARGS_CONTENT;
+
+    if (strlen(key) == 0)
+        return ERR_KEY_CANNOT_BE_READ;
+
     int index;
     int error;
 

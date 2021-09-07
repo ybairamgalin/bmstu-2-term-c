@@ -31,21 +31,24 @@ int main(const int argc, const char *argv[])
         error = find_movie_by_key(films, &found_film,
             num_of_films, field, argv[3]);
 
-        if (error != OK)
+        if (error == ERR_MOVIE_NOT_FOUND)
         {
-            if (error == ERR_MOVIE_NOT_FOUND)
-            {
-                printf("Not found\n");
-                return OK;
-            }
-
-            if (error == ERR_KEY_CANNOT_BE_READ)
-                printf("Not found\n");
-
+            printf("Not found\n");
             return error;
         }
-
-        print_movies(&found_film, 1);
+        else if (error == ERR_KEY_CANNOT_BE_READ)
+        {
+            printf("Not found\n");
+            return error;
+        }
+        else if (error != OK)
+        {
+            return error;
+        }
+        else
+        {
+            print_movies(&found_film, 1);
+        }
     }
 
     return OK;
