@@ -17,7 +17,7 @@
 
 #define MIN_COMMAND_LINE_ARGS 3
 #define MAX_COMMAND_LINE_ARGS 4
-#define MAX_FIlMS 15
+#define MAX_FILMS 15
 #define MAX_TITLE_LNG 26
 #define MAX_NAME_LNG 26
 #define MAX_YEAR_LNG 5

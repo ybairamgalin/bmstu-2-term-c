@@ -29,9 +29,8 @@ sort_by set_field_from_str(const char *str)
 
 void print_movies(const movie *films, const int sz)
 {
-    for (int i = 0; i < sz; i++) {
+    for (int i = 0; i < sz; i++)
         printf("%s\n%s\n%d\n", films[i].title, films[i].name, films[i].year);
-    }
 }
 
 int cmp_film_with_key(const movie film,
@@ -52,7 +51,7 @@ const sort_by field, const char *key, int *result)
         if ((date = atoi(key)) == 0)
             return ERR_KEY_CANNOT_BE_READ;
 
-        *result =  date - film.year;
+        *result = date - film.year;
     }
     else
         return ERR_UNKNOWN;
@@ -106,8 +105,8 @@ const sort_by field, const char *key)
     int index;
     int error;
 
-    if ((error  = get_index_by_field_and_key(films, num_of_films, field,
-                                            key, &index)) != OK)
+    if ((error = get_index_by_field_and_key(films, num_of_films, field,
+    key, &index)) != OK)
         return error;
 
     *found = films[index];

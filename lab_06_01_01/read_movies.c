@@ -36,11 +36,11 @@ void shift_arr_right(movie *arr, const int from, const int arr_sz)
         arr[i + 1] = arr[i];
 }
 
-void insert_elem_in_sorted_arr_by_key(movie *arr, const movie element,
-                                      const int cur_sz, const sort_by field)
+void insert_elem_in_arr_by_key(movie *arr, const movie element,
+const int cur_sz, const sort_by field)
 {
     int (*get_ins_pos)(const movie *arr, const movie film,
-                       const int arr_sz) = NULL;
+    const int arr_sz) = NULL;
 
     if (field == title)
     {
@@ -140,7 +140,7 @@ int *num_of_films, const sort_by field, const int max_films)
     if (file == NULL)
         return ERR_NO_SUCH_FILE;
 
-    while(1)
+    while( 1 )
     {
         int error;
         movie film;
@@ -151,10 +151,10 @@ int *num_of_films, const sort_by field, const int max_films)
         if (error != 0)
             return error;
 
-        if (*num_of_films >= MAX_FIlMS)
-            return max_films;
+        if (*num_of_films >= max_films)
+            return ERR_TOO_MANY_FILMS;
 
-        insert_elem_in_sorted_arr_by_key(films, film, *num_of_films, field);
+        insert_elem_in_arr_by_key(films, film, *num_of_films, field);
         (*num_of_films)++;
     }
 

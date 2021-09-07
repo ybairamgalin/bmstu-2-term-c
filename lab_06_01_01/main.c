@@ -7,7 +7,7 @@ int main(const int argc, const char *argv[])
     if (argc < MIN_COMMAND_LINE_ARGS || argc > MAX_COMMAND_LINE_ARGS)
         return ERR_COMMAND_LINE_ARGS_COUNT;
 
-    movie films[MAX_FIlMS];
+    movie films[MAX_FILMS];
     sort_by field;
     int num_of_films;
     int error;
@@ -16,7 +16,7 @@ int main(const int argc, const char *argv[])
         return ERR_COMMAND_LINE_ARGS_CONTENT;
 
     if ((error = read_movies_from_file(argv[1],
-            films, &num_of_films, field, MAX_FIlMS)) != OK)
+    films, &num_of_films, field, MAX_FILMS)) != OK)
         return error;
 
     if (num_of_films == 0)
@@ -29,7 +29,7 @@ int main(const int argc, const char *argv[])
     {
         movie found_film;
         error = find_movie_by_key(films, &found_film,
-            num_of_films, field, argv[3]);
+        num_of_films, field, argv[3]);
 
         if (error == ERR_MOVIE_NOT_FOUND)
         {
