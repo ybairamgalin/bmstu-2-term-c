@@ -83,8 +83,8 @@ int read_movie_title_from_file(FILE *file, movie *film)
     {
         if (feof(file))
             return ERR_NOTHING_TO_READ;
-//        else
-//            return ERR_EMPTY_STRING;
+        else
+            return ERR_EMPTY_STRING;
     }
 
     return OK;

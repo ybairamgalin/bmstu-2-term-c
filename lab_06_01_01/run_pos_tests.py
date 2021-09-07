@@ -22,6 +22,12 @@ def parse_args(args_str):
     return args_arr
 
 
+def parse_data(output):
+    data = list((str(output)[2:-1]).split("\\n"))
+    data = "\n".join(data)
+    return data
+
+
 def main():
     args_file_names = [file for file in listdir(POS_ARGS_WAY)
                        if isfile(join(POS_ARGS_WAY, file))]
@@ -46,8 +52,7 @@ def main():
 
             exec_result = subprocess.run(args, capture_output=True)
             return_code = exec_result.returncode
-            reality = list((str(exec_result.stdout)[2:-1]).split("\\n"))
-            reality = "\n".join(reality)
+            reality = parse_data(exec_result.stdout)
 
             out_file = open(POS_TESTS_OUT + out_filename, "r")
             expected = out_file.read()
@@ -63,8 +68,7 @@ def main():
                 print("\treality\n{}".format(reality))
 
         except FileNotFoundError:
-            # TODO
-            pass
+            print("Check files!")
 
 
 if __name__ == '__main__':

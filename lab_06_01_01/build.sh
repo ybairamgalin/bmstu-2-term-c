@@ -1,3 +1,4 @@
+#!/bin/bash
 gcc main.c -std=c99 -Wall -Werror -Wpedantic -c;
 gcc movie.c -std=c99 -Wall -Werror -Wpedantic -c;
 gcc read_movies.c -std=c99 -Wall -Werror -Wpedantic -c;
