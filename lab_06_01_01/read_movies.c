@@ -113,6 +113,9 @@ int read_year_from_file(FILE *file, movie *film)
     if (fgets(tmp_year, sizeof(tmp_year), file) == NULL)
         return ERR_FILE_STRUCT_YEAR;
 
+    if (strchr(tmp_year, '.') != NULL || strchr(tmp_year, ',') != NULL)
+        return ERR_FILE_STRUCT_YEAR;
+
     if ((film->year = atoi(tmp_year)) == 0)
         return ERR_FILE_STRUCT_YEAR;
 
