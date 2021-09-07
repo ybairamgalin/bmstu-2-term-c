@@ -50,7 +50,7 @@ const sort_by field, const char *key, int *result)
         int date;
 
         if ((date = atoi(key)) == 0)
-            return ERR_COMMAND_LINE_ARGS_CONTENT;
+            return ERR_KEY_CANNOT_BE_READ;
 
         *result =  date - film.year;
     }

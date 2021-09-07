@@ -54,10 +54,10 @@ def main():
             out_file.close()
 
             if reality == expected and return_code == 0:
-                print("POS_TEST_{} PASSED".format(total_tests))
+                print("POS_TEST_{}\tPASSED".format(total_tests))
                 total_passed += 1
             else:
-                print("POS_TEST_{} FAILED".format(total_tests))
+                print("POS_TEST_{}\tFAILED".format(total_tests))
                 print("\treturn code {}".format(return_code))
                 print("\texpected\n{}".format(expected))
                 print("\treality\n{}".format(reality))
