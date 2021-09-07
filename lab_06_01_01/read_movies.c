@@ -140,14 +140,11 @@ int *num_of_films, const sort_by field, const int max_films)
     if (file == NULL)
         return ERR_NO_SUCH_FILE;
 
-    while( 1 )
+    int error;
+    movie film;
+
+    while((error = read_movie_from_file(file, &film)) != ERR_NOTHING_TO_READ)
     {
-        int error;
-        movie film;
-
-        if ((error = read_movie_from_file(file, &film)) == ERR_NOTHING_TO_READ)
-            break;
-
         if (error != 0)
             return error;
 
