@@ -80,6 +80,10 @@ def main():
         except FileNotFoundError:
             print("Check files!", total_tests, in_filename, out_filename)
 
+    print("TESTING {}. PASSED {} of {}".format(
+        "PASSED" if (total_tests == total_passed) else "FAILED",
+        total_passed, total_tests))
+
 
 if __name__ == '__main__':
     main()

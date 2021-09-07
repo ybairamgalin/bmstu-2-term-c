@@ -67,12 +67,7 @@ void insert_elem_in_sorted_arr_by_key(movie *arr, const movie element,
 int read_movie_title_from_file(FILE *file, movie *film)
 {
     if (fgets(film->title, sizeof(film->title), file) == NULL)
-    {
-        if (feof(file))
-            return ERR_NOTHING_TO_READ;
-        else
-            return ERR_UNKNOWN;
-    }
+        return ERR_NOTHING_TO_READ;
 
     if (film->title[strlen(film->title) - 1] != '\n')
         return ERR_MAX_STRING_LNG;
@@ -80,12 +75,7 @@ int read_movie_title_from_file(FILE *file, movie *film)
     film->title[strlen(film->title) - 1] = '\0';
 
     if (strlen(film->title) == 0)
-    {
-        if (feof(file))
-            return ERR_NOTHING_TO_READ;
-        else
-            return ERR_EMPTY_STRING;
-    }
+        return ERR_EMPTY_STRING;
 
     return OK;
 }
@@ -119,16 +109,12 @@ int read_year_from_file(FILE *file, movie *film)
     if ((film->year = atoi(tmp_year)) == 0)
         return ERR_FILE_STRUCT_YEAR;
 
-    if (tmp_year[strlen(tmp_year) - 1] != '\n')
-    {
-        if (feof(file))
-            return OK;
-
-        return ERR_MAX_STRING_LNG;
-    }
-
     if (film->year <= 0)
         return ERR_FILE_STRUCT_YEAR;
+
+    if (tmp_year[strlen(tmp_year) - 1] != '\n')
+        if (!feof(file))
+            return ERR_MAX_STRING_LNG;
 
     return OK;
 }
