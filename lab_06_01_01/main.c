@@ -36,7 +36,7 @@ int main(const int argc, const char *argv[])
             if (error == ERR_MOVIE_NOT_FOUND)
             {
                 printf("Not found\n");
-                return OK;
+//                return OK;
             }
 
             if (error == ERR_KEY_CANNOT_BE_READ)
