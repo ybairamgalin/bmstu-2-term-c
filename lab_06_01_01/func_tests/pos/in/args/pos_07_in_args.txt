@@ -1,0 +1,1 @@
+./main.exe func_tests/pos/in/data/four_movies_no_new_line.txt year 2004

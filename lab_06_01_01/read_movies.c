@@ -116,12 +116,10 @@ int read_year_from_file(FILE *file, movie *film)
     if ((film->year = atoi(tmp_year)) == 0)
         return ERR_FILE_STRUCT_YEAR;
 
-    if (feof(file))
-        return ERR_NOTHING_TO_READ;
-
     if (tmp_year[strlen(tmp_year) - 1] != '\n')
     {
-        printf("%s", tmp_year);
+        if (feof(file))
+            return OK;
 
         return ERR_MAX_STRING_LNG;
     }
@@ -146,7 +144,7 @@ int read_movie_from_file(FILE *file, movie *film)
 }
 
 int read_movies_from_file(const char *filename, movie *films,
-                          int *num_of_films, const sort_by field)
+int *num_of_films, const sort_by field)
 {
     FILE *file = fopen(filename, "r");
     *num_of_films = 0;
