@@ -143,7 +143,7 @@ int *num_of_films, const sort_by field, const int max_films)
     int error;
     movie film;
 
-    while((error = read_movie_from_file(file, &film)) != ERR_NOTHING_TO_READ)
+    while ((error = read_movie_from_file(file, &film)) != ERR_NOTHING_TO_READ)
     {
         if (error != 0)
             return error;
