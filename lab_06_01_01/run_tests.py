@@ -31,7 +31,6 @@ def main():
                       if isfile(join(POS_TESTS_OUT, file))]
     out_file_names.sort()
 
-
     total_tests = 0
     total_passed = 0
 

@@ -43,7 +43,7 @@ const sort_by field, const char *key, int *result)
     }
     else if (field == name)
     {
-        *result = strcmp(key, film.title);
+        *result = strcmp(key, film.name);
     }
     else if (field == year)
     {
