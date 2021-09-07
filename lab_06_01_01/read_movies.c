@@ -132,7 +132,7 @@ int read_movie_from_file(FILE *file, movie *film)
 }
 
 int read_movies_from_file(const char *filename, movie *films,
-int *num_of_films, const sort_by field)
+int *num_of_films, const sort_by field, const int max_films)
 {
     FILE *file = fopen(filename, "r");
     *num_of_films = 0;
@@ -142,14 +142,17 @@ int *num_of_films, const sort_by field)
 
     while(1)
     {
-        int err;
+        int error;
         movie film;
 
-        if ((err = read_movie_from_file(file, &film)) == ERR_NOTHING_TO_READ)
+        if ((error = read_movie_from_file(file, &film)) == ERR_NOTHING_TO_READ)
             break;
 
-        if (err != 0)
-            return err;
+        if (error != 0)
+            return error;
+
+        if (*num_of_films >= MAX_FIlMS)
+            return max_films;
 
         insert_elem_in_sorted_arr_by_key(films, film, *num_of_films, field);
         (*num_of_films)++;
