@@ -78,7 +78,7 @@ def main():
                 print("\treality\n{}".format(reality))
 
         except FileNotFoundError:
-            print("Check files!")
+            print("Check files!", total_tests, in_filename, out_filename)
 
 
 if __name__ == '__main__':

@@ -127,6 +127,9 @@ int read_year_from_file(FILE *file, movie *film)
         return ERR_MAX_STRING_LNG;
     }
 
+    if (film->year <= 0)
+        return ERR_FILE_STRUCT_YEAR;
+
     return OK;
 }
 
