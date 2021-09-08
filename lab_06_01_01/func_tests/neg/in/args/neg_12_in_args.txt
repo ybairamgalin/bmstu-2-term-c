@@ -1,1 +1,1 @@
-./main.exe func_tests/neg/in/data/wrong_name_and_title.txt 123
+./main.exe func_tests/neg/in/data/wrong_name_and_title.txt meow
