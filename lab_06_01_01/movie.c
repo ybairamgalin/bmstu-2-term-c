@@ -115,11 +115,11 @@ const sort_by field, const char *key)
 }
 
 int print_movie_by_key(const movie *films, const int num_of_films,
-                       const sort_by field, const char *key)
+const sort_by field, const char *key)
 {
     movie found_film;
     int error = find_movie_by_key(films, &found_film,
-        num_of_films, field, key);
+    num_of_films, field, key);
 
     if (error == ERR_MOVIE_NOT_FOUND)
     {

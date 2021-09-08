@@ -43,15 +43,15 @@ ins_pos_func_t *get_ins_pos_func(const sort_by field)
 {
     if (field == title)
     {
-         return &get_ins_pos_by_title;
+        return &get_ins_pos_by_title;
     }
     else if (field == name)
     {
-         return &get_ins_pos_by_name;
+        return &get_ins_pos_by_name;
     }
     else if (field == year)
     {
-         return &get_ins_pos_by_year;
+        return &get_ins_pos_by_year;
     }
 
     return NULL;
