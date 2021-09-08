@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf main.exe
 gcc main.c -std=c99 -Wpedantic -Wall -Werror -c
 gcc read_movies.c -std=c99 -Wpedantic -Wall -Werror -c
 gcc movie.c -std=c99 -Wpedantic -Wall -Werror -c

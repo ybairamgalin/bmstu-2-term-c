@@ -37,11 +37,10 @@ void shift_arr_right(movie *arr, const int from, const int arr_sz)
         arr[i + 1] = arr[i];
 }
 
-void insert_elem_in_arr_by_key(movie *arr, const movie element,
-                               const int cur_sz, const sort_by field)
+int insert_elem_in_arr_by_key(movie *arr, const movie element,
+const int cur_sz, const sort_by field)
 {
-    int (*get_ins_pos)(const movie *arr, const movie film,
-                       const int arr_sz) = NULL;
+    int (*get_ins_pos)(const movie*, const movie, const int) = NULL;
 
     if (field == title)
     {
@@ -57,10 +56,12 @@ void insert_elem_in_arr_by_key(movie *arr, const movie element,
     }
 
     if (get_ins_pos == NULL)
-        exit(1);
+        return ERR_FIELD_IS_WRONG;
 
     int ins_pos = get_ins_pos(arr, element, cur_sz);
 
     shift_arr_right(arr, ins_pos, cur_sz);
     arr[ins_pos] = element;
+
+    return OK;
 }

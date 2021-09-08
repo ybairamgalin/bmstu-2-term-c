@@ -23,24 +23,9 @@ int main(const int argc, const char *argv[])
         print_movies(films, num_of_films);
 
     if (argc == 4)
-    {
-        movie found_film;
-        error = find_movie_by_key(films, &found_film,
-        num_of_films, field, argv[3]);
-
-        if (error == ERR_MOVIE_NOT_FOUND)
-        {
-            printf("Not found\n");
-        }
-        else if (error != OK)
-        {
+        if ((error = print_movie_by_key(films, num_of_films, field,
+        argv[3])) != OK)
             return error;
-        }
-        else
-        {
-            print_movies(&found_film, 1);
-        }
-    }
 
     return OK;
 }

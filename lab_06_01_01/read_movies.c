@@ -92,7 +92,10 @@ int *num_of_films, const sort_by field, const int max_films)
         if (*num_of_films >= max_films)
             return ERR_TOO_MANY_FILMS;
 
-        insert_elem_in_arr_by_key(films, film, *num_of_films, field);
+        if ((error = insert_elem_in_arr_by_key(films, film, *num_of_films,
+        field)) != OK)
+            return error;
+
         (*num_of_films)++;
     }
 
