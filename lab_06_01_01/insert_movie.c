@@ -4,6 +4,8 @@
 #include "movie.h"
 #include "insert_movie.h"
 
+typedef int (ins_pos_func_t)(const movie*, const movie, const int);
+
 int get_ins_pos_by_title(const movie *arr, const movie film, const int arr_sz)
 {
     for (int i = 0; i < arr_sz; i++)
@@ -37,23 +39,31 @@ void shift_arr_right(movie *arr, const int from, const int arr_sz)
         arr[i + 1] = arr[i];
 }
 
-int insert_elem_in_arr_by_key(movie *arr, const movie element,
-const int cur_sz, const sort_by field)
+ins_pos_func_t *get_ins_pos_func(const sort_by field)
 {
-    int (*get_ins_pos)(const movie*, const movie, const int) = NULL;
-
     if (field == title)
     {
-        get_ins_pos = get_ins_pos_by_title;
+         return &get_ins_pos_by_title;
     }
     else if (field == name)
     {
-        get_ins_pos = get_ins_pos_by_name;
+         return &get_ins_pos_by_name;
     }
     else if (field == year)
     {
-        get_ins_pos = get_ins_pos_by_year;
+         return &get_ins_pos_by_year;
     }
+
+    return NULL;
+}
+
+int insert_elem_in_arr_by_key(movie *arr, const movie element,
+const int cur_sz, const sort_by field)
+{
+    if (cur_sz >= MAX_FILMS)
+        return ERR_TOO_MANY_FILMS;
+
+    ins_pos_func_t *get_ins_pos = get_ins_pos_func(field);
 
     if (get_ins_pos == NULL)
         return ERR_FIELD_IS_WRONG;

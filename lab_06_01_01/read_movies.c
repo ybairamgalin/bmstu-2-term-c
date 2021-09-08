@@ -84,20 +84,13 @@ int *num_of_films, const sort_by field, const int max_films)
     int error;
     movie film;
 
-    while ((error = read_movie_from_file(file, &film)) != ERR_NOTHING_TO_READ)
-    {
-        if (error != 0)
-            return error;
-
-        if (*num_of_films >= max_films)
-            return ERR_TOO_MANY_FILMS;
-
-        if ((error = insert_elem_in_arr_by_key(films, film, *num_of_films,
+    while ((error = read_movie_from_file(file, &film)) == OK)
+        if ((error = insert_elem_in_arr_by_key(films, film, (*num_of_films)++,
         field)) != OK)
             return error;
 
-        (*num_of_films)++;
-    }
+    if (error != ERR_NOTHING_TO_READ)
+        return error;
 
     if (*num_of_films == 0)
         return ERR_FILE_IS_EMPTY;
