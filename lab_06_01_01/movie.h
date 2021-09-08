@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _MOVIE_H_
+#define _MOVIE_H_
 
 #define OK 0
 #define ERR_COMMAND_LINE_ARGS_COUNT 1
@@ -43,3 +44,5 @@ int *num_of_films, const sort_by field, const int max_films);
 void print_movies(const movie *films, const int sz);
 int find_movie_by_key(const movie *films, movie *found, const int num_of_films,
 const sort_by field, const char *key);
+
+#endif

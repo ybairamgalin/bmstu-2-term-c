@@ -2,67 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "movie.h"
-
-int get_ins_pos_by_title(const movie *arr, const movie film, const int arr_sz)
-{
-    for (int i = 0; i < arr_sz; i++)
-        if (strcmp(arr[i].title, film.title) > 0)
-            return i;
-
-    return arr_sz;
-}
-
-int get_ins_pos_by_name(const movie *arr, const movie film, const int arr_sz)
-{
-    for (int i = 0; i < arr_sz; i++)
-        if (strcmp(arr[i].name, film.name) > 0)
-            return i;
-
-    return arr_sz;
-}
-
-int get_ins_pos_by_year(const movie *arr, const movie film, const int arr_sz)
-{
-    for (int i = 0; i < arr_sz; i++)
-        if (arr[i].year > film.year)
-            return i;
-
-    return arr_sz;
-}
-
-void shift_arr_right(movie *arr, const int from, const int arr_sz)
-{
-    for (int i = arr_sz - 1; i >= from; i--)
-        arr[i + 1] = arr[i];
-}
-
-void insert_elem_in_arr_by_key(movie *arr, const movie element,
-const int cur_sz, const sort_by field)
-{
-    int (*get_ins_pos)(const movie *arr, const movie film,
-    const int arr_sz) = NULL;
-
-    if (field == title)
-    {
-        get_ins_pos = get_ins_pos_by_title;
-    }
-    else if (field == name)
-    {
-        get_ins_pos = get_ins_pos_by_name;
-    }
-    else if (field == year)
-    {
-        get_ins_pos = get_ins_pos_by_year;
-    }
-
-    if (get_ins_pos == NULL)
-        exit(1);
-
-    int ins_pos = get_ins_pos(arr, element, cur_sz);
-
-    shift_arr_right(arr, ins_pos, cur_sz);
-    arr[ins_pos] = element;
-}
+#include "read_movies.h"
+#include "insert_movie.h"
 
 int read_movie_title_from_file(FILE *file, movie *film)
 {
@@ -154,6 +95,9 @@ int *num_of_films, const sort_by field, const int max_films)
         insert_elem_in_arr_by_key(films, film, *num_of_films, field);
         (*num_of_films)++;
     }
+
+    if (*num_of_films == 0)
+        return ERR_FILE_IS_EMPTY;
 
     fclose(file);
 

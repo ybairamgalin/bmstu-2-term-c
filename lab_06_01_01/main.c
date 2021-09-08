@@ -19,9 +19,6 @@ int main(const int argc, const char *argv[])
     films, &num_of_films, field, MAX_FILMS)) != OK)
         return error;
 
-    if (num_of_films == 0)
-        return ERR_FILE_IS_EMPTY;
-
     if (argc == 3)
         print_movies(films, num_of_films);
 
