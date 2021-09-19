@@ -16,7 +16,7 @@ int main(const int argc, const char *argv[])
         return ERR_COMMAND_LINE_ARGS_CONTENT;
 
     if ((error = read_movies_from_file(argv[1],
-    films, &num_of_films, field, MAX_FILMS)) != OK)
+    films, &num_of_films, field, MAX_FILMS)) != EXIT_SUCCESS)
         return error;
 
     if (argc == 3)
@@ -24,8 +24,8 @@ int main(const int argc, const char *argv[])
 
     if (argc == 4)
         if ((error = print_movie_by_key(films, num_of_films, field,
-        argv[3])) != OK)
+        argv[3])) != EXIT_SUCCESS)
             return error;
 
-    return OK;
+    return EXIT_SUCCESS;
 }

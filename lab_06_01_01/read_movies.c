@@ -18,7 +18,7 @@ int read_movie_title_from_file(FILE *file, movie *film)
     if (strlen(film->title) == 0)
         return ERR_EMPTY_STRING;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int read_name_from_file(FILE *file, movie *film)
@@ -34,7 +34,7 @@ int read_name_from_file(FILE *file, movie *film)
     if (strlen(film->name) == 0)
         return ERR_EMPTY_STRING;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int read_year_from_file(FILE *file, movie *film)
@@ -53,23 +53,23 @@ int read_year_from_file(FILE *file, movie *film)
     if (film->year <= 0)
         return ERR_FILE_STRUCT_YEAR;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int read_movie_from_file(FILE *file, movie *film)
 {
     int error;
 
-    if ((error = read_movie_title_from_file(file, film)) != OK)
+    if ((error = read_movie_title_from_file(file, film)) != EXIT_SUCCESS)
         return error;
 
-    if ((error = read_name_from_file(file, film)) != OK)
+    if ((error = read_name_from_file(file, film)) != EXIT_SUCCESS)
         return error;
 
-    if ((error = read_year_from_file(file, film)) != OK)
+    if ((error = read_year_from_file(file, film)) != EXIT_SUCCESS)
         return error;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int read_movies_from_file(const char *filename, movie *films,
@@ -84,9 +84,9 @@ int *num_of_films, const sort_by field, const int max_films)
     int error;
     movie film;
 
-    while ((error = read_movie_from_file(file, &film)) == OK)
+    while ((error = read_movie_from_file(file, &film)) == EXIT_SUCCESS)
         if ((error = insert_elem_in_arr_by_key(films, film, (*num_of_films)++,
-        field)) != OK)
+        field)) != EXIT_SUCCESS)
             return error;
 
     if (error != ERR_NOTHING_TO_READ)
@@ -97,5 +97,5 @@ int *num_of_films, const sort_by field, const int max_films)
 
     fclose(file);
 
-    return OK;
+    return EXIT_SUCCESS;
 }

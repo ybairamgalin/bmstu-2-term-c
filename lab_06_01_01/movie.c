@@ -27,10 +27,15 @@ sort_by set_field_from_str(const char *str)
     return result;
 }
 
+void print_movie(const movie film)
+{
+    printf("%s\n%s\n%d\n", films.title, films.name, films.year);
+}
+
 void print_movies(const movie *films, const int sz)
 {
     for (int i = 0; i < sz; i++)
-        printf("%s\n%s\n%d\n", films[i].title, films[i].name, films[i].year);
+        print_movie(films[i]);
 }
 
 int cmp_film_with_key(const movie film,
@@ -56,7 +61,7 @@ const sort_by field, const char *key, int *result)
     else
         return ERR_UNKNOWN;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int get_index_by_field_and_key(const movie *films, const int num_of_films,
@@ -71,7 +76,7 @@ const sort_by field, const char *key, int *result)
         int cmp;
         int error;
 
-        if ((error = cmp_film_with_key(films[center], field, key, &cmp)) != OK)
+        if ((error = cmp_film_with_key(films[center], field, key, &cmp)) != EXIT_SUCCESS)
             return error;
 
         if (cmp < 0)
@@ -86,7 +91,7 @@ const sort_by field, const char *key, int *result)
         {
             *result = center;
 
-            return OK;
+            return EXIT_SUCCESS;
         }
     }
 
@@ -106,12 +111,12 @@ const sort_by field, const char *key)
     int error;
 
     if ((error = get_index_by_field_and_key(films, num_of_films, field,
-    key, &index)) != OK)
+    key, &index)) != EXIT_SUCCESS)
         return error;
 
     *found = films[index];
 
-    return OK;
+    return EXIT_SUCCESS;
 }
 
 int print_movie_by_key(const movie *films, const int num_of_films,
@@ -125,7 +130,7 @@ const sort_by field, const char *key)
     {
         printf("Not found\n");
     }
-    else if (error != OK)
+    else if (error != EXIT_SUCCESS)
     {
         return error;
     }
@@ -134,5 +139,5 @@ const sort_by field, const char *key)
         print_movies(&found_film, 1);
     }
 
-    return OK;
+    return EXIT_SUCCESS;
 }

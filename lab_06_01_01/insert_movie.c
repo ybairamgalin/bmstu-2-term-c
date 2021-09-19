@@ -73,5 +73,5 @@ const int cur_sz, const sort_by field)
     shift_arr_right(arr, ins_pos, cur_sz);
     arr[ins_pos] = element;
 
-    return OK;
+    return EXIT_SUCCESS;
 }
