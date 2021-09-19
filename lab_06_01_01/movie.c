@@ -29,7 +29,7 @@ sort_by_t set_field_from_str(const char *str)
 
 void print_movie(const movie_t film)
 {
-    printf("%s\n%s\n%d\n", films.title, films.name, films.year);
+    printf("%s\n%s\n%d\n", film.title, film.name, film.year);
 }
 
 void print_movies(const movie_t *films, const int sz)
