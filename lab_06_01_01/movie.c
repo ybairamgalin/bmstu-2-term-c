@@ -3,9 +3,9 @@
 #include <string.h>
 #include "movie.h"
 
-sort_by set_field_from_str(const char *str)
+sort_by_t set_field_from_str(const char *str)
 {
-    sort_by result;
+    sort_by_t result;
 
     if (strcmp(str, "title") == 0)
     {
@@ -27,19 +27,19 @@ sort_by set_field_from_str(const char *str)
     return result;
 }
 
-void print_movie(const movie film)
+void print_movie(const movie_t film)
 {
     printf("%s\n%s\n%d\n", films.title, films.name, films.year);
 }
 
-void print_movies(const movie *films, const int sz)
+void print_movies(const movie_t *films, const int sz)
 {
     for (int i = 0; i < sz; i++)
         print_movie(films[i]);
 }
 
-int cmp_film_with_key(const movie film,
-const sort_by field, const char *key, int *result)
+int cmp_film_with_key(const movie_t film,
+const sort_by_t field, const char *key, int *result)
 {
     if (field == title)
     {
@@ -64,8 +64,8 @@ const sort_by field, const char *key, int *result)
     return EXIT_SUCCESS;
 }
 
-int get_index_by_field_and_key(const movie *films, const int num_of_films,
-const sort_by field, const char *key, int *result)
+int get_index_by_field_and_key(const movie_t *films, const int num_of_films,
+const sort_by_t field, const char *key, int *result)
 {
     int left = 0, right = num_of_films - 1, center;
 
@@ -98,8 +98,8 @@ const sort_by field, const char *key, int *result)
     return ERR_MOVIE_NOT_FOUND;
 }
 
-int find_movie_by_key(const movie *films, movie *found, const int num_of_films,
-const sort_by field, const char *key)
+int find_movie_by_key(const movie_t *films, movie_t *found, const int num_of_films,
+const sort_by_t field, const char *key)
 {
     if (key == NULL)
         return ERR_COMMAND_LINE_ARGS_CONTENT;
@@ -119,10 +119,10 @@ const sort_by field, const char *key)
     return EXIT_SUCCESS;
 }
 
-int print_movie_by_key(const movie *films, const int num_of_films,
-const sort_by field, const char *key)
+int print_movie_by_key(const movie_t *films, const int num_of_films,
+const sort_by_t field, const char *key)
 {
-    movie found_film;
+    movie_t found_film;
     int error = find_movie_by_key(films, &found_film,
     num_of_films, field, key);
 

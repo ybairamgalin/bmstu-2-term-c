@@ -5,7 +5,7 @@
 #include "read_movies.h"
 #include "insert_movie.h"
 
-int read_movie_title_from_file(FILE *file, movie *film)
+int read_movie_title_from_file(FILE *file, movie_t *film)
 {
     if (fgets(film->title, sizeof(film->title), file) == NULL)
         return ERR_NOTHING_TO_READ;
@@ -21,7 +21,7 @@ int read_movie_title_from_file(FILE *file, movie *film)
     return EXIT_SUCCESS;
 }
 
-int read_name_from_file(FILE *file, movie *film)
+int read_name_from_file(FILE *file, movie_t *film)
 {
     if (fgets(film->name, sizeof(film->name), file) == NULL)
         return ERR_FILE_STRUCT_NAME;
@@ -37,7 +37,7 @@ int read_name_from_file(FILE *file, movie *film)
     return EXIT_SUCCESS;
 }
 
-int read_year_from_file(FILE *file, movie *film)
+int read_year_from_file(FILE *file, movie_t *film)
 {
     char tmp_year[MAX_YEAR_LNG + 1];
 
@@ -56,7 +56,7 @@ int read_year_from_file(FILE *file, movie *film)
     return EXIT_SUCCESS;
 }
 
-int read_movie_from_file(FILE *file, movie *film)
+int read_movie_from_file(FILE *file, movie_t *film)
 {
     int error;
 
@@ -72,8 +72,8 @@ int read_movie_from_file(FILE *file, movie *film)
     return EXIT_SUCCESS;
 }
 
-int read_movies_from_file(const char *filename, movie *films,
-int *num_of_films, const sort_by field, const int max_films)
+int read_movies_from_file(const char *filename, movie_t *films,
+int *num_of_films, const sort_by_t field, const int max_films)
 {
     FILE *file = fopen(filename, "r");
     *num_of_films = 0;
@@ -82,7 +82,7 @@ int *num_of_films, const sort_by field, const int max_films)
         return ERR_NO_SUCH_FILE;
 
     int error;
-    movie film;
+    movie_t film;
 
     while ((error = read_movie_from_file(file, &film)) == EXIT_SUCCESS)
         if ((error = insert_elem_in_arr_by_key(films, film, (*num_of_films)++,

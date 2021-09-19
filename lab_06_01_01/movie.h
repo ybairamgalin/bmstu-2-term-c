@@ -29,7 +29,7 @@ typedef struct
     char title[MAX_TITLE_LNG + 1];
     char name[MAX_NAME_LNG + 1];
     unsigned int year;
-} movie;
+} movie_t;
 
 typedef enum
 {
@@ -37,13 +37,13 @@ typedef enum
     name,
     year,
     err
-} sort_by;
+} sort_by_t;
 
-sort_by set_field_from_str(const char *str);
-int read_movies_from_file(const char *filename, movie *films,
-int *num_of_films, const sort_by field, const int max_films);
-void print_movies(const movie *films, const int sz);
-int print_movie_by_key(const movie *films, const int num_of_films,
-const sort_by field, const char *key);
+sort_by_t set_field_from_str(const char *str);
+int read_movies_from_file(const char *filename, movie_t *films,
+int *num_of_films, const sort_by_t field, const int max_films);
+void print_movies(const movie_t *films, const int sz);
+int print_movie_by_key(const movie_t *films, const int num_of_films,
+const sort_by_t field, const char *key);
 
 #endif

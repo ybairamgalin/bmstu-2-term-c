@@ -7,8 +7,8 @@ int main(const int argc, const char *argv[])
     if (argc < MIN_COMMAND_LINE_ARGS || argc > MAX_COMMAND_LINE_ARGS)
         return ERR_COMMAND_LINE_ARGS_COUNT;
 
-    movie films[MAX_FILMS];
-    sort_by field;
+    movie_t films[MAX_FILMS];
+    sort_by_t field;
     int num_of_films;
     int error;
 
