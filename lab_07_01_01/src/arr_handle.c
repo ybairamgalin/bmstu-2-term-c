@@ -57,6 +57,9 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if (pb_src >= pe_src)
         return ERR_WRONG_POINTERS_VAL;
 
+    if (((char *)pe_src - (char *)pb_src) % sizeof(int) != 0)
+        return ERR_WRONG_POINTERS_VAL;
+
     size_t first_min_index = INDEX_NOT_SET, first_max_index = INDEX_NOT_SET;
     size_t src_sz = pe_src - pb_src;
 

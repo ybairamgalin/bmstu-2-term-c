@@ -9,6 +9,7 @@
 #define ERR_FILE_DOES_NOT_EXIST 1
 #define ERR_COMMAND_LINE_ARGS_COUNT 2
 #define ERR_FILE_IS_EMPTY 3
+#define ERR_COMMAND_LINE_ARGS_CONTENT 9
 
 int get_number_of_int_in_file(const char *filename, int *result);
 int read_nums_from_file(const char *filename, int *dest_start, int *dest_end);

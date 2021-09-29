@@ -9,6 +9,9 @@ int main(const int argc, const char *argv[])
     if (argc > MAX_COMMAND_LINE_ARGS || argc < MIN_COMMAND_LINE_ARGS)
         return ERR_COMMAND_LINE_ARGS_COUNT;
 
+    if (argc == MAX_COMMAND_LINE_ARGS && strcmp(argv[3], "f") != 0)
+        return ERR_COMMAND_LINE_ARGS_CONTENT;
+
     int error;
     int nums_in_file;
 
