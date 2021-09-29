@@ -70,11 +70,11 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     {
         if (first_min_index == INDEX_NOT_SET)
             if (*(pb_src + i) <= *(pb_src + i - 1) &&
-                    *(pb_src + i) < *(pb_src + i + 1))
+                *(pb_src + i) < *(pb_src + i + 1))
                 first_min_index = i;
         if (first_max_index == INDEX_NOT_SET)
             if (*(pb_src + i) > *(pb_src + i - 1) &&
-                    *(pb_src + i) >= *(pb_src + i + 1))
+                *(pb_src + i) >= *(pb_src + i + 1))
                 first_max_index = i;
     }
 
