@@ -2,7 +2,7 @@
 #define __IO_FILE_H__
 
 #define MIN_COMMAND_LINE_ARGS 3
-#define MAX_COMMAND_LINE_ARGS 4
+#define MAX_COMMAND_LINE_ARGS 3
 
 #define MAX_LINE_LNG 20
 
