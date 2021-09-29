@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/six_nums.txt output.txt f

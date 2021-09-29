@@ -6,6 +6,7 @@ START_TEST (test_key_normal)
 {
     const int src_lng = 5;
     const int arr[src_lng] = { 5, 6, 7, 8, 0 };
+
     const int expected_lng = 2;
     int expected[expected_lng] = { 6, 7 };
 
@@ -17,6 +18,8 @@ START_TEST (test_key_normal)
     ck_assert_int_eq(expected[1], res_start[1]);
 
     ck_assert_ptr_eq(res_end, res_start + expected_lng);
+
+    free(res_start);
 }
 END_TEST
 
@@ -28,7 +31,6 @@ START_TEST (test_key_one_elem)
     const int expected_lng = 1;
     int expected[expected_lng] = { 1 };
 
-
     int *res_start = NULL, *res_end = NULL;
 
     key(arr, arr + src_lng, &res_start, &res_end);
@@ -36,6 +38,8 @@ START_TEST (test_key_one_elem)
     ck_assert_int_eq(expected[0], res_start[0]);
 
     ck_assert_ptr_eq(res_end, res_start + expected_lng);
+
+    free(res_start);
 }
 END_TEST
 
@@ -56,6 +60,8 @@ START_TEST (test_key_whole_array)
     ck_assert_int_eq(expected[2], res_start[2]);
 
     ck_assert_ptr_eq(res_end, res_start + expected_lng);
+
+    free(res_start);
 }
 END_TEST
 
@@ -67,11 +73,18 @@ START_TEST (test_key_null_pointer)
 }
 END_TEST
 
-START_TEST (test_key_null)
+START_TEST (test_key_eq_elements)
 {
-    int rc = key(NULL, NULL, NULL, NULL);
+    const int src_lng = 5;
+    const int arr[src_lng] = { 0, 0, 0, 0, 0 };
+
+    int *res_start = NULL, *res_end = NULL;
+
+    int rc = key(arr, arr + src_lng, &res_start, &res_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
+
+    free(res_start);
 }
 END_TEST
 
@@ -96,6 +109,7 @@ Suite *test_key_suite(void)
     tc_neg = tcase_create("negatives");
 
     tcase_add_test(tc_neg, test_key_null_pointer);
+    tcase_add_test(tc_neg, test_key_eq_elements);
 
     suite_add_tcase(s, tc_neg);
 
