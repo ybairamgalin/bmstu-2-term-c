@@ -24,16 +24,6 @@ int get_number_of_int_in_file(const char *filename, int *result)
     return EXIT_SUCCESS;
 }
 
-int get_mem(int **pArr, const int sz)
-{
-    *pArr = malloc(sizeof(int) * sz);
-
-    if (*pArr == NULL)
-        return ERR_NULL_MEM_POINTER;
-
-    return EXIT_SUCCESS;
-}
-
 int read_nums_from_file(const char *filename, int *dest_start, int *dest_end)
 {
     FILE *file = fopen(filename, "r");
