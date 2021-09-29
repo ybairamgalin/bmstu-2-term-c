@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../inc/read_file.h"
+#include "../inc/io_file.h"
+#include "../inc/arr_handle.h"
 
 int main(const int argc, const char *argv[])
 {
@@ -20,6 +21,9 @@ int main(const int argc, const char *argv[])
         return error;
 
     read_nums_from_file(argv[1], arr, arr + nums_in_file);
+    mysort(arr, nums_in_file, sizeof(int), int_cmp);
+    put_int_arr_in_file(argv[2], arr, arr + nums_in_file);
+
     free(arr);
 
     return EXIT_SUCCESS;

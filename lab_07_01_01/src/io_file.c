@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "../inc/read_file.h"
+#include "../inc/io_file.h"
 
 int get_number_of_int_in_file(const char *filename, int *result)
 {
@@ -40,6 +40,20 @@ int read_nums_from_file(const char *filename, int *dest_start, int *dest_end)
 
     for (size_t i = 0; dest_start + i != dest_end; i++)
         fscanf(file, "%d", dest_start + i);
+
+    return EXIT_SUCCESS;
+}
+
+int put_int_arr_in_file(const char *filename, int *arr_start,
+int *arr_end)
+{
+    FILE *file = fopen(filename, "w");
+
+    if (file == NULL)
+        return EXIT_FAILURE;
+
+    for (int *i = arr_start; i < arr_end; i++)
+        fprintf(file, "%d\n", *i);
 
     return EXIT_SUCCESS;
 }
