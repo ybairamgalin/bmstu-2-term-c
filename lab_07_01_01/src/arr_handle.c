@@ -81,11 +81,15 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if (pb_src >= pe_src)
         return ERR_WRONG_POINTERS_VAL;
 
-    if (((char *)pe_src - (char *)pb_src) % sizeof(int) != 0)
+    if ((((char *)pe_src - (char *)pb_src)) % sizeof(int) != 0)
         return ERR_WRONG_POINTERS_VAL;
 
     size_t index_of_max = first_max_index(pb_src, pe_src);
+    int max_elem = *(pb_src + index_of_max);
+
     size_t index_of_min = first_min_index(pb_src, pe_src);
+    int min_elem = *(pb_src + index_of_min);
+
     size_t start = index_of_min + 1, end = index_of_max;
 
     if (index_of_min > index_of_max)
@@ -106,8 +110,9 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 
     int wrote = 0;
 
-    for (size_t i = 0; i < new_arr_sz && pb_src; i++)
-        if (*(pb_src + start + i) != *(pb_src + start - 1))
+    for (size_t i = 0; i < new_arr_sz; i++)
+        if (*(pb_src + start + i) != min_elem &&
+        *(pb_src + start + i) != max_elem)
             *(*pb_dst + wrote++) = *(pb_src + start + i);
 
     *pe_dst = *pb_dst + wrote;
