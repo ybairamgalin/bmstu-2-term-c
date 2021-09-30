@@ -4,6 +4,12 @@
 #include "../inc/io_file.h"
 #include "../inc/arr_handle.h"
 
+//int use_filter(const int *src_arr_start, const int *src_arr_end,
+//int *dst_arr_start, int *dst_arr_end)
+//{
+//
+//}
+
 int main(const int argc, const char *argv[])
 {
     if (argc > MAX_COMMAND_LINE_ARGS || argc < MIN_COMMAND_LINE_ARGS)

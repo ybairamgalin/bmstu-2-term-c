@@ -9,10 +9,10 @@ int get_number_of_int_in_file(const char *filename, int *result)
     if (file == NULL)
         return ERR_FILE_DOES_NOT_EXIST;
 
-    char line[MAX_LINE_LNG];
+    int num;
     int number_of_elements = 0;
 
-    while (fgets(line, sizeof(line), file) != NULL)
+    while (fscanf(file, "%d", &num) == 1)
         number_of_elements++;
 
     if (number_of_elements == 0)
@@ -42,8 +42,12 @@ int *arr_end)
     if (file == NULL)
         return EXIT_FAILURE;
 
-    for (int *i = arr_start; i < arr_end; i++)
-        fprintf(file, "%d ", *i);
+    fprintf(file, "%d", *arr_start);
+
+    for (int *i = arr_start + 1; i < arr_end; i++)
+        fprintf(file, " %d", *i);
+
+    fprintf(file, "\n");
 
     return EXIT_SUCCESS;
 }
