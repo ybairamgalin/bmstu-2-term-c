@@ -49,52 +49,6 @@ int (*comp)(const void *, const void *))
     }
 }
 
-int find_max(const int *start, const int *end)
-{
-    int value = *start;
-
-    for (int i = 0; start + i != end; i++)
-        if (*(start + i) > value)
-            value = *(start + i);
-
-    return value;
-}
-
-int find_min(const int *start, const int *end)
-{
-    int value = *start;
-
-    for (int i = 0; start + i != end; i++)
-        if (*(start + i) < value)
-            value = *(start + i);
-
-    return value;
-}
-
-size_t first_min_index(const int *arr_start, const int *arr_end)
-{
-    size_t sz = arr_end - arr_start;
-    size_t min_index = 0;
-
-    for (size_t i = 0; i < sz; i++)
-        if (*(arr_start + i) < *(arr_start + min_index))
-            min_index = i;
-
-    return min_index;
-}
-
-size_t first_max_index(const int *arr_start, const int *arr_end)
-{
-    size_t sz = arr_end - arr_start;
-    size_t max_index = 0;
-
-    for (size_t i = 0; i < sz; i++)
-        if (*(arr_start + i) > *(arr_start + max_index))
-            max_index = i;
-
-    return max_index;
-}
-
 int is_valid_int_arr(const int *start, const int *end)
 {
     if (start == NULL || end == NULL)
@@ -109,6 +63,28 @@ int is_valid_int_arr(const int *start, const int *end)
     return EXIT_SUCCESS;
 }
 
+int max_index(const int *start, const int *end)
+{
+    int index = 0;
+
+    for (int i = 0; start + i != end; i++)
+        if (*(start + i) > *(start + index))
+            index = i;
+
+    return index;
+}
+
+int min_index(const int *start, const int *end)
+{
+    int index = 0;
+
+    for (int i = 0; start + i != end; i++)
+        if (*(start + i) < *(start + index))
+            index = i;
+
+    return index;
+}
+
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int error;
@@ -116,39 +92,18 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if ((error = is_valid_int_arr(pb_src, pe_src)) != EXIT_SUCCESS)
         return error;
 
-    size_t index_of_max = first_max_index(pb_src, pe_src);
-    int max_elem = *(pb_src + index_of_max);
+    int src_max_index = max_index(pb_src, pe_src);
+    int src_min_index = min_index(pb_src, pe_src);
 
-    size_t index_of_min = first_min_index(pb_src, pe_src);
-    int min_elem = *(pb_src + index_of_min);
+    size_t dst_sz = src_max_index - src_min_index - 1;
 
-    size_t start = index_of_min + 1, end = index_of_max;
-
-    if (index_of_min > index_of_max)
-    {
-        start = index_of_max + 1;
-        end = index_of_min;
-    }
-
-    size_t new_arr_sz = end - start;
-
-    if (new_arr_sz == 0)
-        return ERR_NOT_ENOUGH_ELEMENTS;
-
-    if ((error = get_mem(pb_dst, new_arr_sz)) != EXIT_SUCCESS)
+    if ((error = get_mem(pb_dst, dst_sz)) != EXIT_SUCCESS)
         return error;
 
-    int wrote = 0;
+    *pe_dst = *pb_dst + dst_sz;
 
-    for (size_t i = 0; i < new_arr_sz; i++)
-        if (*(pb_src + start + i) != min_elem &&
-            *(pb_src + start + i) != max_elem)
-            *(*pb_dst + wrote++) = *(pb_src + start + i);
-
-    *pe_dst = *pb_dst + wrote;
-
-    if (*pe_dst == *pb_dst)
-        return ERR_NOT_ENOUGH_ELEMENTS;
+    for (size_t i = 0; i < dst_sz; i++)
+        *(*pb_dst + i) = *(pb_src + src_min_index + i + 1);
 
     return EXIT_SUCCESS;
 }

@@ -12,8 +12,6 @@ START_TEST (test_key_first_arg_null)
     int rc = key(NULL, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -27,8 +25,6 @@ START_TEST (test_key_second_arg_null)
     int rc = key(arr, NULL, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -42,8 +38,6 @@ START_TEST (test_key_pointers_order)
     int rc = key(arr + arr_sz, arr, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -57,8 +51,6 @@ START_TEST (test_key_non_int_pointer)
     int rc = key(arr, (const int *)((char *)arr + 1), &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -72,8 +64,6 @@ START_TEST (test_key_src_one_elem)
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -87,8 +77,6 @@ START_TEST (test_key_src_two_elem)
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -102,23 +90,19 @@ START_TEST (test_key_src_only_min_max)
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
 START_TEST (test_key_src_only_min_max_reversed)
 {
     const int arr_sz = 3;
-    const int arr[arr_sz] = { 1, 1, 0 };
+    const int arr[arr_sz] = { 1, 1, 1 };
 
     int *p_start = NULL, *p_end = NULL;
 
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 
@@ -132,8 +116,6 @@ START_TEST (test_key_src_no_gap_min_max)
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_ne(rc, EXIT_SUCCESS);
-
-    free(p_start);
 }
 END_TEST
 

@@ -39,7 +39,6 @@ int main(const int argc, const char *argv[])
         if ((error = key(arr, arr + nums_in_file, &new_arr_start, &new_arr_end))
                 != EXIT_SUCCESS)
         {
-            free(new_arr_start);
             free(arr);
             return error;
         }
