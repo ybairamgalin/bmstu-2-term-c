@@ -28,7 +28,7 @@ out/arr_handle.o : src/arr_handle.c inc/arr_handle.h
 .PHONY : func_tests
 
 func_tests :
-	python func_tests/run_tests.py
+	python3 func_tests/run_tests.py
 
 .PHONY : clean
 

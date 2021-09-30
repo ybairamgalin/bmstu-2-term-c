@@ -43,7 +43,7 @@ int *arr_end)
         return EXIT_FAILURE;
 
     for (int *i = arr_start; i < arr_end; i++)
-        fprintf(file, "%d\n", *i);
+        fprintf(file, "%d ", *i);
 
     return EXIT_SUCCESS;
 }

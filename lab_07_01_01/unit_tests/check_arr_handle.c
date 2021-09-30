@@ -88,6 +88,21 @@ START_TEST (test_key_eq_elements)
 }
 END_TEST
 
+START_TEST (test_key_same_pointer)
+{
+    const int src_lng = 5;
+    const int arr[src_lng] = { 0, 1, 2, 3, 4 };
+
+    int *res_start = NULL, *res_end = NULL;
+
+    int rc = key(arr, arr, &res_start, &res_end);
+
+    ck_assert_int_ne(rc, EXIT_SUCCESS);
+
+    free(res_start);
+}
+END_TEST
+
 Suite *test_key_suite(void)
 {
     Suite *s;
@@ -110,6 +125,7 @@ Suite *test_key_suite(void)
 
     tcase_add_test(tc_neg, test_key_null_pointer);
     tcase_add_test(tc_neg, test_key_eq_elements);
+    tcase_add_test(tc_neg, test_key_same_pointer);
 
     suite_add_tcase(s, tc_neg);
 
