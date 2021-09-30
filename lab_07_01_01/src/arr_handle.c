@@ -71,6 +71,30 @@ int find_min(const int *start, const int *end)
     return value;
 }
 
+size_t first_min_index(const int *arr_start, const int *arr_end)
+{
+    size_t sz = arr_end - arr_start;
+    size_t min_index = 0;
+
+    for (size_t i = 0; i < sz; i++)
+        if (*(arr_start + i) < *(arr_start + min_index))
+            min_index = i;
+
+    return min_index;
+}
+
+size_t first_max_index(const int *arr_start, const int *arr_end)
+{
+    size_t sz = arr_end - arr_start;
+    size_t max_index = 0;
+
+    for (size_t i = 0; i < sz; i++)
+        if (*(arr_start + i) > *(arr_start + max_index))
+            max_index = i;
+
+    return max_index;
+}
+
 int is_valid_int_arr(const int *start, const int *end)
 {
     if (start == NULL || end == NULL)
@@ -85,18 +109,6 @@ int is_valid_int_arr(const int *start, const int *end)
     return EXIT_SUCCESS;
 }
 
-void cpy_until_except(const int *pb_src, const int *pe_src, int **pb_dst,
-int **pe_dst, const int until, const int except)
-{
-    int wrote = 0;
-
-    for (int i = 0; pb_src + i != pe_src && *(pb_src + i) != until; i++)
-        if (*(pb_src + i) != except)
-            *(*pb_dst + wrote++) = *(pb_src + i);
-
-    *pe_dst = *pb_dst + wrote;
-}
-
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int error;
@@ -104,37 +116,39 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if ((error = is_valid_int_arr(pb_src, pe_src)) != EXIT_SUCCESS)
         return error;
 
-    size_t src_sz = pe_src - pb_src;
-    int src_max = find_max(pb_src, pe_src);
-    int src_min = find_min(pb_src, pe_src);
+    size_t index_of_max = first_max_index(pb_src, pe_src);
+    int max_elem = *(pb_src + index_of_max);
 
-    if (src_max == src_min)
+    size_t index_of_min = first_min_index(pb_src, pe_src);
+    int min_elem = *(pb_src + index_of_min);
+
+    size_t start = index_of_min + 1, end = index_of_max;
+
+    if (index_of_min > index_of_max)
+    {
+        start = index_of_max + 1;
+        end = index_of_min;
+    }
+
+    size_t new_arr_sz = end - start;
+
+    if (new_arr_sz == 0)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
-    if ((error = get_mem(pb_dst, src_sz)) != EXIT_SUCCESS)
+    if ((error = get_mem(pb_dst, new_arr_sz)) != EXIT_SUCCESS)
         return error;
 
-    for (int i = 0; pb_src + i != pe_src; i++)
-    {
-        if (*(pb_src + i) == src_min)
-        {
-            cpy_until_except(pb_src + i, pe_src, pb_dst, pe_dst,
-                             src_max, src_min);
-            break;
-        }
+    int wrote = 0;
 
-        if (*(pb_src + i) == src_max)
-        {
-            cpy_until_except(pb_src + i, pe_src, pb_dst, pe_dst,
-                             src_min, src_max);
-            break;
-        }
+    for (size_t i = 0; i < new_arr_sz; i++)
+        if (*(pb_src + start + i) != min_elem &&
+            *(pb_src + start + i) != max_elem)
+            *(*pb_dst + wrote++) = *(pb_src + start + i);
 
-    }
+    *pe_dst = *pb_dst + wrote;
 
     if (*pe_dst == *pb_dst)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
     return EXIT_SUCCESS;
 }
-
