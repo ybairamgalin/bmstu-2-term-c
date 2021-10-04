@@ -103,7 +103,14 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if ((error = get_mem(pb_dst, dst_sz)))
         return error;
 
-    *pe_dst = *pb_dst + dst_sz;
+    *pe_dst = *pb_dst;
+
+    for (size_t i = 0; i < dst_sz; i++)
+        if (*(pb_src + src_min_index + 1 + i) != (*(pb_src + src_min_index)))
+        {
+            *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
+            (*pe_dst)++;
+        }
 
     for (size_t i = 0; i < dst_sz; i++)
         *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
