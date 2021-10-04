@@ -99,9 +99,9 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     if (dst_sz <= 0)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
-    pb_dst = malloc(dst_sz * sizeof(int));
+    *pb_dst = malloc(dst_sz * sizeof(int));
 
-    if (pb_dst == NULL)
+    if (*pb_dst == NULL)
         return ERR_NULL_MEM_POINTER;
 
     *pe_dst = *pb_dst + dst_sz;

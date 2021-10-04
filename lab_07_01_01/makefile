@@ -1,11 +1,12 @@
 CFLAGS := -std=c99 -Wall -Werror -Wpedantic
-CHECK_FLAGS := -lcheck -lpthread
+CHECK_FLAGS := -lcheck
 
 
 release : app.exe
 debug : app.exe func_tests
 
 unit : unit_tests.exe
+	./unit_tests.exe
 
 app.exe : out/main.o out/io_file.o out/arr_handle.o
 	gcc $(CFLAGS) -o app.exe out/main.o out/io_file.o out/arr_handle.o
@@ -14,10 +15,10 @@ unit_tests.exe : out/arr_handle.o out/check_arr_handle.o out/check_main.o
 	gcc $(CHECK_FLAGS) -o unit_tests.exe out/arr_handle.o out/check_arr_handle.o out/check_main.o
 
 out/check_main.o : unit_tests/check_main.c inc/check_arr_handle.h
-	gcc -o out/check_main.o -c unit_tests/check_main.c
+	gcc -o $(CFLAGS) out/check_main.o -c unit_tests/check_main.c
 
 out/check_arr_handle.o : unit_tests/check_arr_handle.c inc/arr_handle.h
-	gcc -o out/check_arr_handle.o -c unit_tests/check_arr_handle.c
+	gcc -o $(CFLAGS) out/check_arr_handle.o -c unit_tests/check_arr_handle.c
 
 out/main.o : src/main.c inc/io_file.h inc/arr_handle.h
 	gcc $(CFLAGS) -o out/main.o -c src/main.c
