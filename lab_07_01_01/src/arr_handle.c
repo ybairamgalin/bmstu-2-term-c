@@ -94,23 +94,20 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 
     int src_max_index = max_index(pb_src, pe_src);
     int src_min_index = min_index(pb_src, pe_src);
+    int dst_sz = src_max_index - src_min_index - 1;
 
-    if (src_max_index - src_min_index - 1 <= 0 )
+    if (dst_sz <= 0)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
-    size_t dst_sz = src_max_index - src_min_index - 1;
+    pb_dst = malloc(dst_sz * sizeof(int));
 
-    if ((error = get_mem(pb_dst, dst_sz)))
-        return error;
+    if (pb_dst == NULL)
+        return ERR_NULL_MEM_POINTER;
 
-    *pe_dst = *pb_dst;
+    *pe_dst = *pb_dst + dst_sz;
 
     for (size_t i = 0; i < dst_sz; i++)
-        if (*(pb_src + src_min_index + 1 + i) != (*(pb_src + src_min_index)))
-        {
-            *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
-            (*pe_dst)++;
-        }
+        *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
 
     return EXIT_SUCCESS;
 }
