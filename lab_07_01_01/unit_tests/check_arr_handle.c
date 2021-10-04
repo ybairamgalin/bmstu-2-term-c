@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <check.h>
+#include "../inc/check_arr_handle.h"
 #include "../inc/arr_handle.h"
 
 START_TEST (test_key_first_arg_null)
@@ -221,7 +222,7 @@ Suite *test_key_suite(void)
     return s;
 }
 
-int main()
+int run_check_arr_handle()
 {
     int no_failed = 0;
     struct Suite *s;

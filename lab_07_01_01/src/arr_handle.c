@@ -95,15 +95,18 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     int src_max_index = max_index(pb_src, pe_src);
     int src_min_index = min_index(pb_src, pe_src);
 
+    if (src_max_index - src_min_index - 1 <= 0 )
+        return ERR_NOT_ENOUGH_ELEMENTS;
+
     size_t dst_sz = src_max_index - src_min_index - 1;
 
-    if ((error = get_mem(pb_dst, dst_sz)) != EXIT_SUCCESS)
+    if ((error = get_mem(pb_dst, dst_sz)))
         return error;
 
     *pe_dst = *pb_dst + dst_sz;
 
     for (size_t i = 0; i < dst_sz; i++)
-        *(*pb_dst + i) = *(pb_src + src_min_index + i + 1);
+        *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
 
     return EXIT_SUCCESS;
 }

@@ -7,8 +7,6 @@
 #define ERR_NOT_ENOUGH_ELEMENTS 7
 #define ERR_NO_MAX_MIN_VAL_IN_ARR 8
 
-#define INDEX_NOT_SET -1
-
 void mysort(void *ptr, size_t count, size_t size,
 int (*comp)(const void *, const void *));
 int int_cmp(const void *a, const void *b);
