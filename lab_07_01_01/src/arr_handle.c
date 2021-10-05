@@ -111,22 +111,3 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 
     return EXIT_SUCCESS;
 }
-
-int filter_del_src(int *src_start, int *src_end, int **dst_start,
-int **dst_end)
-{
-    int error;
-    int *filtered_start = NULL, *filtered_end = NULL;
-
-    if ((error = key(src_start, src_end, dst_start, dst_end)) != EXIT_SUCCESS)
-    {
-        free(src_start);
-        return error;
-    }
-
-    free(src_start);
-    *dst_start = filtered_start;
-    *dst_end = filtered_end;
-
-    return EXIT_SUCCESS;
-}
