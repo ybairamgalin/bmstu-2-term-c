@@ -213,36 +213,36 @@ START_TEST (test_mysort_normal)
         ck_assert_int_eq(arr[i], expected[i]);
 }
 END_TEST
-
-START_TEST (test_mysort_reversed)
-{
-    int arr_sz = 4;
-    int arr[4] = { 4, 3, 2, 1 };
-
-    const int expected_lng = 4;
-    const int expected[4] = { 1, 2, 3, 4 };
-
-    mysort(arr, arr_sz, sizeof(int), int_cmp);
-
-    for (int i = 0; i < expected_lng; i++)
-        ck_assert_int_eq(arr[i], expected[i]);
-}
-END_TEST
-
-START_TEST (test_mysort_same_elements)
-{
-    int arr_sz = 4;
-    int arr[4] = { 1, 0, 1, 0 };
-
-    const int expected_lng = 4;
-    const int expected[4] = { 0, 0, 1, 1 };
-
-    mysort(arr, arr_sz, sizeof(int), int_cmp);
-
-    for (int i = 0; i < expected_lng; i++)
-        ck_assert_int_eq(arr[i], expected[i]);
-}
-END_TEST
+//
+//START_TEST (test_mysort_reversed)
+//{
+//    int arr_sz = 4;
+//    int arr[4] = { 4, 3, 2, 1 };
+//
+//    const int expected_lng = 4;
+//    const int expected[4] = { 1, 2, 3, 4 };
+//
+//    mysort(arr, arr_sz, sizeof(int), int_cmp);
+//
+//    for (int i = 0; i < expected_lng; i++)
+//        ck_assert_int_eq(arr[i], expected[i]);
+//}
+//END_TEST
+//
+//START_TEST (test_mysort_same_elements)
+//{
+//    int arr_sz = 4;
+//    int arr[4] = { 1, 0, 1, 0 };
+//
+//    const int expected_lng = 4;
+//    const int expected[4] = { 0, 0, 1, 1 };
+//
+//    mysort(arr, arr_sz, sizeof(int), int_cmp);
+//
+//    for (int i = 0; i < expected_lng; i++)
+//        ck_assert_int_eq(arr[i], expected[i]);
+//}
+//END_TEST
 
 
 Suite *test_mysort_suite(void )
@@ -255,8 +255,8 @@ Suite *test_mysort_suite(void )
     tc_pos = tcase_create("positives");
 
     tcase_add_test(tc_pos, test_mysort_normal);
-    tcase_add_test(tc_pos, test_mysort_reversed);
-    tcase_add_test(tc_pos, test_mysort_same_elements);
+//    tcase_add_test(tc_pos, test_mysort_reversed);
+//    tcase_add_test(tc_pos, test_mysort_same_elements);
 
     suite_add_tcase(s, tc_pos);
 

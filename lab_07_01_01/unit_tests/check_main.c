@@ -4,5 +4,5 @@
 int main(void)
 {
     run_check_arr_handle();
-    run_check_io_file();
+    //run_check_io_file();
 }

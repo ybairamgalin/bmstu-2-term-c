@@ -48,6 +48,7 @@ int *arr_end)
         fprintf(file, " %d", *i);
 
     fprintf(file, "\n");
+    fclose(file);
 
     return EXIT_SUCCESS;
 }
