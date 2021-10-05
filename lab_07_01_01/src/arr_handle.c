@@ -105,10 +105,10 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     int src_max_index = max_index(pb_src, pe_src);
     int src_min_index = min_index(pb_src, pe_src);
     int cpy_start_index = min(src_max_index, src_min_index) + 1;
-    size_t dst_sz = max(src_max_index, src_min_index) -
+    int dst_sz = max(src_max_index, src_min_index) -
         min(src_max_index, src_min_index) - 1;
 
-    if (dst_sz == 0)
+    if (dst_sz <= 0)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
     *pb_dst = malloc(dst_sz * sizeof(int));
