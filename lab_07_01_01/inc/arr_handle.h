@@ -12,7 +12,5 @@ int (*comp)(const void *, const void *));
 int int_cmp(const void *a, const void *b);
 int get_mem(int **p_arr, const size_t sz);
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst);
-int filter_del_src(int *src_start, int *src_end, int **dst_start,
-int **dst_end);
 
 #endif
