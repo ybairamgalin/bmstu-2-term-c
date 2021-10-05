@@ -85,6 +85,16 @@ int min_index(const int *start, const int *end)
     return index;
 }
 
+int min(const int a, const int b)
+{
+    return (a <= b) ? a : b;
+}
+
+int max(const int a, const int b)
+{
+    return (a >= b) ? a : b;
+}
+
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int error;
@@ -94,9 +104,11 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 
     int src_max_index = max_index(pb_src, pe_src);
     int src_min_index = min_index(pb_src, pe_src);
-    int dst_sz = src_max_index - src_min_index - 1;
+    int cpy_start_index = min(src_max_index, src_min_index) + 1;
+    size_t dst_sz = max(src_max_index, src_min_index) -
+        min(src_max_index, src_min_index) - 1;
 
-    if (dst_sz <= 0)
+    if (dst_sz == 0)
         return ERR_NOT_ENOUGH_ELEMENTS;
 
     *pb_dst = malloc(dst_sz * sizeof(int));
@@ -107,7 +119,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     *pe_dst = *pb_dst + dst_sz;
 
     for (int i = 0; i < dst_sz; i++)
-        *(*pb_dst + i) = *(pb_src + src_min_index + 1 + i);
+        *(*pb_dst + i) = *(pb_src + cpy_start_index + i);
 
     return EXIT_SUCCESS;
 }
