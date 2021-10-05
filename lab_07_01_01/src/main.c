@@ -4,12 +4,6 @@
 #include "../inc/io_file.h"
 #include "../inc/arr_handle.h"
 
-//int use_filter(const int *src_arr_start, const int *src_arr_end,
-//int *dst_arr_start, int *dst_arr_end)
-//{
-//
-//}
-
 int main(const int argc, const char *argv[])
 {
     if (argc > MAX_COMMAND_LINE_ARGS || argc < MIN_COMMAND_LINE_ARGS)
@@ -18,14 +12,12 @@ int main(const int argc, const char *argv[])
     if (argc == MAX_COMMAND_LINE_ARGS && strcmp(argv[3], "f") != 0)
         return ERR_COMMAND_LINE_ARGS_CONTENT;
 
-    int error;
-    int nums_in_file;
+    int nums_in_file, error;
+    int *arr = NULL;
 
     if ((error = get_number_of_int_in_file(argv[1], &nums_in_file)) !=
             EXIT_SUCCESS)
         return error;
-
-    int *arr = NULL;
 
     if ((error = get_mem(&arr, nums_in_file)) != EXIT_SUCCESS)
         return error;

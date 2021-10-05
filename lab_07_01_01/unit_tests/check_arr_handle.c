@@ -18,7 +18,6 @@ END_TEST
 
 START_TEST (test_key_second_arg_null)
 {
-    const int arr_sz = 3;
     const int arr[3] = { 0, 1, 2};
 
     int *p_start = NULL, *p_end = NULL;
@@ -32,7 +31,7 @@ END_TEST
 START_TEST (test_key_pointers_order)
 {
     const int arr_sz = 3;
-    const int arr[arr_sz] = { 0, 1, 2};
+    const int arr[3] = { 0, 1, 2};
 
     int *p_start = NULL, *p_end = NULL;
 
