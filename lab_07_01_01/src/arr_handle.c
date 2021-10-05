@@ -3,16 +3,6 @@
 #include <string.h>
 #include "../inc/arr_handle.h"
 
-int get_mem(int **p_arr, const size_t sz)
-{
-    *p_arr = malloc(sizeof(int) * sz);
-
-    if (*p_arr == NULL)
-        return ERR_NULL_MEM_POINTER;
-
-    return EXIT_SUCCESS;
-}
-
 int int_cmp(const void *a, const void *b)
 {
     int first = *(const int *)a;

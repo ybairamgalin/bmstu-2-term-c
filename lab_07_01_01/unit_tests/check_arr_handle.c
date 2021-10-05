@@ -204,13 +204,13 @@ START_TEST (test_mysort_normal)
     int arr_sz = 4;
     int arr[4] = { 4, 1, 2, 3 };
 
-    const int expected_lng = 4;
-    const int expected[4] = { 1, 2, 3, 4 };
-
     mysort(arr, arr_sz, sizeof(int), int_cmp);
 
-    for (int i = 0; i < expected_lng; i++)
-        ck_assert_int_eq(arr[i], expected[i]);
+    ck_assert_int_eq(arr[0], 1);
+    ck_assert_int_eq(arr[1], 2);
+    ck_assert_int_eq(arr[2], 3);
+    ck_assert_int_eq(arr[3], 4);
+
 }
 END_TEST
 //
@@ -245,7 +245,7 @@ END_TEST
 //END_TEST
 
 
-Suite *test_mysort_suite(void )
+Suite *test_mysort_suite(void)
 {
     Suite *s;
 
@@ -283,5 +283,5 @@ int run_check_arr_handle()
 
     no_failed += srunner_ntests_failed(runner);
 
-    return 0;
+    return (no_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
