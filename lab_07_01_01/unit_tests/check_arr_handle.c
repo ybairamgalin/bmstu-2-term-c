@@ -269,19 +269,19 @@ int run_check_arr_handle()
     struct Suite *s;
     SRunner *runner;
 
-//    s = test_key_suite();
-//    runner = srunner_create(s);
-//    srunner_run_all(runner, CK_VERBOSE);
-//    srunner_free(runner);
-//
-//    no_failed += srunner_ntests_failed(runner);
-
-    s = test_mysort_suite();
+    s = test_key_suite();
     runner = srunner_create(s);
     srunner_run_all(runner, CK_VERBOSE);
     srunner_free(runner);
 
     no_failed += srunner_ntests_failed(runner);
+
+//    s = test_mysort_suite();
+//    runner = srunner_create(s);
+//    srunner_run_all(runner, CK_VERBOSE);
+//    srunner_free(runner);
+//
+//    no_failed += srunner_ntests_failed(runner);
 
     return (no_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
