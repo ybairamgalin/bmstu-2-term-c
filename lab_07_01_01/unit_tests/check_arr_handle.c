@@ -42,7 +42,7 @@ END_TEST
 
 START_TEST (test_key_non_int_pointer)
 {
-    const int arr[3] = { 0, 1, 2};
+    const int arr[3] = { 0, 1, 2 };
 
     int *p_start = NULL, *p_end = NULL;
 

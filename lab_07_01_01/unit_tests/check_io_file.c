@@ -12,6 +12,7 @@ START_TEST(test_get_number_of_int_in_file_six_nums)
     ck_assert_int_eq(rc, EXIT_SUCCESS);
     ck_assert_int_eq(received, 6);
 }
+END_TEST
 
 Suite* get_number_of_int_in_file_suite(void)
 {
