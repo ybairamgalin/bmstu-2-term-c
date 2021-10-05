@@ -19,7 +19,6 @@ END_TEST
 START_TEST (test_key_second_arg_null)
 {
     const int arr[3] = { 0, 1, 2};
-
     int *p_start = NULL, *p_end = NULL;
 
     int rc = key(arr, NULL, &p_start, &p_end);
@@ -89,6 +88,8 @@ START_TEST (test_key_src_only_min_max)
     int rc = key(arr, arr + arr_sz, &p_start, &p_end);
 
     ck_assert_int_eq(rc, EXIT_SUCCESS);
+
+    free(p_start);
 }
 END_TEST
 

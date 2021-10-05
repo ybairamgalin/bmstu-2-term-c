@@ -51,3 +51,23 @@ int *arr_end)
 
     return EXIT_SUCCESS;
 }
+
+int read_ints_file(const char *filename, int **start, int **end)
+{
+    int error;
+    int nums_in_file;
+
+    if ((error = get_number_of_int_in_file(filename, &nums_in_file)) !=
+        EXIT_SUCCESS)
+        return error;
+
+    *start = malloc(nums_in_file * sizeof(int));
+
+    if (*start == NULL)
+        return ERR_MEMORY;
+
+    *end = *start + nums_in_file;
+    read_nums_from_file(filename, *start, *end);
+
+    return EXIT_SUCCESS;
+}
