@@ -166,22 +166,20 @@ END_TEST
 Suite *test_key_suite(void)
 {
     Suite *s;
-
     s = suite_create("key");
 
     TCase *tc_pos;
 
     tc_pos = tcase_create("positives");
-
+    tcase_add_test(tc_pos, test_key_normal_reversed);
 //    tcase_add_test(tc_pos, test_key_normal);
 //    tcase_add_test(tc_pos, test_key_src_only_min_max);
-    tcase_add_test(tc_pos, test_key_normal_reversed);
 
     suite_add_tcase(s, tc_pos);
-
-    TCase *tc_neg;
-
-    tc_neg = tcase_create("negatives");
+//
+//    TCase *tc_neg;
+//
+//    tc_neg = tcase_create("negatives");
 
 //    tcase_add_test(tc_neg, test_key_first_arg_null);
 //    tcase_add_test(tc_neg, test_key_second_arg_null);
@@ -191,9 +189,9 @@ Suite *test_key_suite(void)
 //    tcase_add_test(tc_neg, test_key_src_two_elem);
 //    tcase_add_test(tc_neg, test_key_src_same_elem);
 //    tcase_add_test(tc_neg, test_key_src_no_gap_min_max);
-
-
-    suite_add_tcase(s, tc_neg);
+//
+//
+//    suite_add_tcase(s, tc_neg);
 
     return s;
 }
@@ -263,10 +261,10 @@ Suite *test_mysort_suite(void)
     return s;
 }
 
-int run_check_arr_handle()
+int run_check_arr_handle(void)
 {
     int no_failed = 0;
-    struct Suite *s;
+    Suite *s;
     SRunner *runner;
 
     s = test_key_suite();
