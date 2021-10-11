@@ -42,7 +42,7 @@ unit_tests.exe : $(UNITOBJS)
 $(OBJDIR)/check_arr_handle.o : unit_tests/check_arr_handle.c inc/arr_handle.h inc/check_arr_handle.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_io_file.h out_folder
+$(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_io_file.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJDIR)/check_io_file.o : unit_tests/check_io_file.c inc/check_io_file.h inc/io_file.h
