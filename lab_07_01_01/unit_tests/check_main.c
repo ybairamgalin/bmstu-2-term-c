@@ -1,5 +1,5 @@
-#include "../inc/check_io_file.h"
-#include "../inc/check_arr_handle.h"
+#include "check_io_file.h"
+#include "check_arr_handle.h"
 
 int main(void)
 {

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
-#include "../inc/check_io_file.h"
-#include "../inc/io_file.h"
+#include "check_io_file.h"
+#include "io_file.h"
 
 START_TEST(test_get_number_of_int_in_file_six_nums)
 {

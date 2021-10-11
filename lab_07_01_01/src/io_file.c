@@ -1,6 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
-#include "../inc/io_file.h"
+#include "io_file.h"
 
 int get_number_of_int_in_file(const char *filename, int *result)
 {

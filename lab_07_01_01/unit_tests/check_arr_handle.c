@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <check.h>
-#include "../inc/check_arr_handle.h"
-#include "../inc/arr_handle.h"
+#include "check_arr_handle.h"
+#include "arr_handle.h"
 
 START_TEST (test_key_first_arg_null)
 {
