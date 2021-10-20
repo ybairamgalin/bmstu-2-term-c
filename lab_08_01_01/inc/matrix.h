@@ -14,5 +14,7 @@ int input_matrix(matrix_t *matrix);
 void print_matrix(const matrix_t matrix);
 void free_matrix(matrix_t *matrix);
 void make_square_matrix(matrix_t *matrix);
+int expand_matrix(matrix_t *matrix, const int new_sz);
+matrix_t multiply_matrix(const matrix_t first, const matrix_t second);
 
 #endif

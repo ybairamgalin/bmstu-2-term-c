@@ -136,6 +136,106 @@ void make_square_matrix(matrix_t *matrix)
     }
 }
 
+
+// to test
+int avg_matrix_col(matrix_t *matrix, const int col)
+{
+    int sum = 0;
+
+    for (int i = 0; i < matrix->rows; i++)
+        sum += matrix->values[i][col];
+
+    return (int)((double)sum / (double)matrix->rows);
+}
+
+// check for null when called
+int add_rows_avg(matrix_t *matrix, const int count_new)
+{
+    int total_rows = matrix->rows + count_new;
+
+    matrix->values = realloc(matrix->values, sizeof(int *) * total_rows);
+
+    if (matrix->values == NULL)
+        return MEM_ERR;
+
+    for (int i = matrix->rows; i < total_rows; i++)
+    {
+        matrix->values[i] = malloc(sizeof(int) * matrix->cols);
+
+        if (matrix->values[i] == NULL)
+            return MEM_ERR;
+
+        for (int j = 0; j < matrix->cols; j++)
+            matrix->values[i][j] = avg_matrix_col(matrix, j);
+
+        (matrix->rows)++;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int max_in_row(const matrix_t matrix, const int row)
+{
+    int max = matrix.values[row][0];
+
+    for (int i = 0; i < matrix.cols; i++)
+        if (matrix.values[row][i] > max)
+            max = matrix.values[row][i];
+
+    return max;
+}
+
+int add_cols_max(matrix_t *matrix, const int count_new)
+{
+    int total_cols = matrix->cols + count_new;
+
+    for (int i = 0; i < matrix->rows; i++)
+    {
+        matrix->values[i] = realloc(matrix->values[i],
+                                    sizeof(int) * total_cols);
+
+        if (matrix->values[i] == NULL)
+            return MEM_ERR;
+
+        for (int j = matrix->cols; j < total_cols; j++)
+            matrix->values[i][j] = max_in_row(*matrix, i);
+    }
+
+    matrix->cols = total_cols;
+
+    return EXIT_SUCCESS;
+}
+
+int expand_matrix(matrix_t *matrix, const int new_sz)
+{
+    int error;
+
+    if ((error = add_rows_avg(matrix, new_sz - matrix->rows)) != EXIT_SUCCESS)
+        return error;
+
+    if ((error = add_cols_max(matrix, new_sz - matrix->cols)) != EXIT_SUCCESS)
+        return error;
+
+    return EXIT_SUCCESS;
+}
+
+matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
+{
+    matrix_t result;
+    create_matrix(&result, second.cols, first.rows);
+
+    for (int i = 0; i < result.rows; i++)
+        for (int j = 0; j < result.cols; j++)
+        {
+            result.values[i][j] = 0;
+
+            for (int k = 0; k < first.cols; k++)
+                result.values[i][j] += first.values[i][k] * second.values[k][j];
+        }
+
+    return result;
+}
+
 void print_matrix(const matrix_t matrix)
 {
     for (int i = 0; i < matrix.rows; i++)
