@@ -10,7 +10,6 @@ CHECK_FLAGS := -lcheck
 
 OUTDIR := $(shell mkdir -p out)
 OBJS := $(OBJDIR)/main.o $(OBJDIR)/matrix.o
-#UNITOBJS := $(OBJDIR)/check_main.o $(OBJDIR)/check_io_file.o $(OBJDIR)/check_arr_handle.o $(OBJDIR)/io_file.o $(OBJDIR)/arr_handle.o
 
 .PHONY : clean func_tests unit release debug
 
@@ -30,38 +29,14 @@ lastrelease:
 	rm -rf app.exe $(OBJDIR)/*
 	rm -rf lastdebug
 
-#unit : unit_tests.exe
-#	./unit_tests.exe
-
 app.exe : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS)
-
-#unit_tests.exe : $(UNITOBJS)
-#	$(CC) $(CHECK_FLAGS) -o $@ $^
-
-#$(OBJDIR)/check_arr_handle.o : unit_tests/check_arr_handle.c inc/arr_handle.h inc/check_arr_handle.h
-#	$(CC) $(CFLAGS) -o $@ -c $<
-#
-#$(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_io_file.h
-#	$(CC) $(CFLAGS) -o $@ -c $<
-#
-#$(OBJDIR)/check_io_file.o : unit_tests/check_io_file.c inc/check_io_file.h inc/io_file.h
-#	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJDIR)/main.o : src/main.c inc/matrix.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJDIR)/matrix.o : src/matrix.c inc/matrix.h
 	$(CC) $(CFLAGS) -o $@ -c $<
-
-#$(OBJDIR)/io_file.o : src/io_file.c inc/io_file.h
-#	$(CC) $(CFLAGS) -o $@ -c $<
-#
-#$(OBJDIR)/arr_handle.o : src/arr_handle.c inc/arr_handle.h
-#	$(CC) $(CFLAGS) -o $@ -c $<
-
-#func_tests :
-#	python3 func_tests/run_tests.py
 
 clean :
 	rm -rf *.exe
