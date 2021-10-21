@@ -285,6 +285,7 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
 
     if (pow == 1)
     {
+        create_matrix(&result, matrix.cols, matrix.rows);
         matrix_cpy(&result, matrix);
         return result;
     }
