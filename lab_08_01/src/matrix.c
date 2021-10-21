@@ -52,10 +52,16 @@ int input_matrix(matrix_t *matrix)
 {
     int cols, rows;
 
-    if (scanf("%d%d", &rows, &cols) != 2)
+    if (scanf("%d", &rows) != 1)
         return INPUT_ERR;
 
-    if (rows < 0 || cols < 0)
+    if (rows <= 0)
+        return INPUT_ERR;
+
+    if (scanf("%d", &cols) != 1)
+        return INPUT_ERR;
+
+    if (cols <= 0)
         return INPUT_ERR;
 
     if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
@@ -73,10 +79,16 @@ int input_matrix(matrix_t *matrix)
 
 int input_powers(int *p, int *q)
 {
-    if (scanf("%d%d", p, q) != 2)
+    if (scanf("%d", p) != 1)
         return INPUT_ERR;
 
-    if (*p < 0 || *q < 0)
+    if (*p < 0)
+        return INPUT_ERR;
+
+    if (scanf("%d", q) != 1)
+        return INPUT_ERR;
+
+    if (*q < 0)
         return INPUT_ERR;
 
     return EXIT_SUCCESS;
@@ -270,7 +282,6 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
         return identity_matrix(matrix.cols);
 
     matrix_t result;
-    create_matrix(&result, matrix.cols, matrix.rows);
 
     if (pow == 1)
     {
