@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "matrix.h"
 
 int create_matrix(matrix_t *matrix, const int cols, const int rows)
@@ -54,12 +55,26 @@ int input_matrix(matrix_t *matrix)
     if (scanf("%d%d", &rows, &cols) != 2)
         return INPUT_ERR;
 
+    if (rows < 0 || cols < 0)
+        return INPUT_ERR;
+
     if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
         return MEM_ERR;
 
     for (int i = 0; i < matrix->rows; i++)
         if (input_row(matrix, i) != EXIT_SUCCESS)
             return INPUT_ERR;
+
+    return EXIT_SUCCESS;
+}
+
+int input_powers(int *p, int *q)
+{
+    if (scanf("%d%d", p, q) != 2)
+        return INPUT_ERR;
+
+    if (p < 0 || q < 0)
+        return INPUT_ERR;
 
     return EXIT_SUCCESS;
 }
@@ -145,7 +160,7 @@ int avg_matrix_col(matrix_t *matrix, const int col)
     for (int i = 0; i < matrix->rows; i++)
         sum += matrix->values[i][col];
 
-    return (int)((double)sum / (double)matrix->rows);
+    return (int)(floor((double)sum / (double)matrix->rows));
 }
 
 // check for null when called
@@ -217,6 +232,61 @@ int expand_matrix(matrix_t *matrix, const int new_sz)
         return error;
 
     return EXIT_SUCCESS;
+}
+
+matrix_t identity_matrix(const int dims)
+{
+    matrix_t result;
+
+    create_matrix(&result, dims, dims);
+
+    for (int i = 0; i < result.rows; i++)
+        for (int j = 0; j < result.cols; j++)
+            if (i == j)
+                result.values[i][j] = 1;
+            else
+                result.values[i][j] = 0;
+
+    return result;
+}
+
+void matrix_cpy(matrix_t *dest, const matrix_t src)
+{
+    dest->rows = src.rows;
+    dest->cols = src.cols;
+
+    for (int i = 0; i < src.rows; i++)
+        for (int j = 0; j < src.cols; j++)
+            dest->values[i][j] = src.values[i][j];
+}
+
+// pow == 1
+matrix_t pow_matrix(const matrix_t matrix, const int pow)
+{
+    if (pow == 0)
+        return identity_matrix(matrix.cols);
+
+    matrix_t result;
+    create_matrix(&result, matrix.cols, matrix.rows);
+
+    if (pow == 1)
+    {
+        matrix_cpy(&result, matrix);
+        return result;
+    }
+
+    matrix_t prev;
+    create_matrix(&prev, matrix.cols, matrix.rows);
+    matrix_cpy(&prev, matrix);
+
+    for (int i = 1; i < pow; i++)
+    {
+        result = multiply_matrix(prev, matrix);
+        free_matrix(&prev);
+        prev = result;
+    }
+
+    return result;
 }
 
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
