@@ -3,7 +3,7 @@ CC := gcc
 OBJDIR := out
 INCDIR := inc
 
-CFLAGS := -std=c99 -Wall -Werror -I$(INCDIR)
+CFLAGS := -std=c99 -Wall -Werror -Wpedantic -I$(INCDIR)
 DEBUGFLAGS := -g3
 RELEASEFLAGS := -DNDEBUG -g0
 CHECK_FLAGS := -lcheck

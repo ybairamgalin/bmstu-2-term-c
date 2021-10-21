@@ -63,7 +63,10 @@ int input_matrix(matrix_t *matrix)
 
     for (int i = 0; i < matrix->rows; i++)
         if (input_row(matrix, i) != EXIT_SUCCESS)
+        {
+            free_matrix(matrix);
             return INPUT_ERR;
+        }
 
     return EXIT_SUCCESS;
 }
@@ -73,7 +76,7 @@ int input_powers(int *p, int *q)
     if (scanf("%d%d", p, q) != 2)
         return INPUT_ERR;
 
-    if (p < 0 || q < 0)
+    if (*p < 0 || *q < 0)
         return INPUT_ERR;
 
     return EXIT_SUCCESS;
