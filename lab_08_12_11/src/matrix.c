@@ -399,6 +399,8 @@ int save_matrix_to_file(const char *filename, const matrix_t matrix)
     if (file == NULL)
         return NO_SUCH_FILE_ERR;
 
+    fprintf(file, "%d %d\n", matrix.rows, matrix.cols);
+
     for (int i = 0; i < matrix.rows; i++)
     {
         fprintf(file, "%d", matrix.values[i][0]);
