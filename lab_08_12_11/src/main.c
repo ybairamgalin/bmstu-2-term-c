@@ -29,6 +29,6 @@ int main(const int argc, const char **argv)
     else
         return INVALID_OPERATION;
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 

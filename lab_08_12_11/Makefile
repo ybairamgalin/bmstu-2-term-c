@@ -4,7 +4,7 @@ OBJDIR := out
 INCDIR := inc
 
 CFLAGS := -std=c99 -Wall -Werror -I$(INCDIR)
-DEBUGFLAGS := -g -fno-inline -fno-omit-frame-pointer -ggdb
+DEBUGFLAGS := -g -fno-inline -fno-omit-frame-pointer
 RELEASEFLAGS := -DNDEBUG -g0
 CHECK_FLAGS := -lcheck
 
