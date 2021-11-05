@@ -1,11 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "matrix.h"
-
-#define ARGS_COUNT_ERR 6
-#define INVALID_OPERATION 7
-#define WRONG_DIMS 8
 
 int main(const int argc, const char **argv)
 {
@@ -14,105 +9,25 @@ int main(const int argc, const char **argv)
     if (argc > 5 || argc < 4)
         return ARGS_COUNT_ERR;
 
-    if (strcmp(argv[1], "a") == 0)
+    if (strcmp(argv[1], "a") == 0 && argc == 5)
     {
-        if (argc != 5)
-            return ARGS_COUNT_ERR;
-
-        matrix_t first, second;
-
-        if ((error = read_matrix_from_file(argv[2], &first)) != EXIT_SUCCESS)
+        if ((error = add_matrices_from_file(argv[2], argv[3],argv[4])) !=
+        EXIT_SUCCESS)
             return error;
-
-        if ((error = read_matrix_from_file(argv[3], &second)) != EXIT_SUCCESS)
-        {
-            free_matrix(&first);
-            return error;
-        }
-
-        if (first.rows != second.rows || first.cols != second.cols)
-        {
-            free_matrix(&first);
-            free_matrix(&second);
-            return WRONG_DIMS;
-        }
-
-        matrix_t result = add_matrix(first, second);
-        free_matrix(&first);
-        free_matrix(&second);
-
-        if ((error = save_matrix_to_file(argv[4], result)) != EXIT_SUCCESS)
-        {
-            free_matrix(&result);
-            return error;
-        }
-
-        free_matrix(&result);
     }
-    else if (strcmp(argv[1], "m") == 0)
+    else if (strcmp(argv[1], "m") == 0 && argc == 5)
     {
-        if (argc != 5)
-            return ARGS_COUNT_ERR;
-
-        matrix_t first, second;
-
-        if ((error = read_matrix_from_file(argv[2], &first)) != EXIT_SUCCESS)
+        if ((error = multiply_matrices_from_file(argv[2], argv[3], argv[4])) !=
+        EXIT_SUCCESS)
             return error;
-
-        if ((error = read_matrix_from_file(argv[3], &second)) != EXIT_SUCCESS)
-        {
-            free_matrix(&first);
-            return error;
-        }
-
-        if (first.cols != second.rows)
-        {
-            free_matrix(&first);
-            free_matrix(&second);
-            return WRONG_DIMS;
-        }
-
-        matrix_t result = multiply_matrix(first, second);
-        free_matrix(&first);
-        free_matrix(&second);
-
-        if ((error = save_matrix_to_file(argv[4], result)) != EXIT_SUCCESS)
-        {
-            free_matrix(&result);
-            return error;
-        }
-
-        free_matrix(&result);
     }
-    else if (strcmp(argv[1], "o") == 0)
+    else if (strcmp(argv[1], "o") == 0 && argc == 4)
     {
-        if (argc != 4)
-            return ARGS_COUNT_ERR;
-
-        matrix_t matrix;
-        double det;
-
-        if ((error = read_matrix_from_file(argv[2], &matrix)) != EXIT_SUCCESS)
+        if ((error = det_matrix_from_file(argv[2], argv[3])))
             return error;
-
-        if ((error = matrix_det(matrix, &det) != EXIT_SUCCESS))
-        {
-            free_matrix(&matrix);
-            return error;
-        }
-
-        if ((error = save_num_to_file(argv[3], det)) != EXIT_SUCCESS)
-        {
-            free_matrix(&matrix);
-            return error;
-        }
-
-        free_matrix(&matrix);
     }
     else
-    {
         return INVALID_OPERATION;
-    }
 
 	return EXIT_SUCCESS;
 }

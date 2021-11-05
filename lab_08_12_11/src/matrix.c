@@ -205,7 +205,7 @@ double matrix_det(const matrix_t matrix, double *result)
         matrix_t complement;
 
         if (create_matrix(&complement, matrix.rows,
-            matrix.cols) != EXIT_SUCCESS)
+        matrix.cols) != EXIT_SUCCESS)
         {
             return EXIT_FAILURE;
         }
@@ -250,4 +250,104 @@ matrix_t add_matrix(const matrix_t first, const matrix_t second)
             result.values[i][j] = first.values[i][j] + second.values[i][j];
 
     return result;
+}
+
+int add_matrices_from_file(const char *filename_1, const char *filename_2,
+const char *dest_file)
+{
+    int error;
+    matrix_t first, second;
+
+    if ((error = read_matrix_from_file(filename_1, &first)) != EXIT_SUCCESS)
+        return error;
+
+    if ((error = read_matrix_from_file(filename_2, &second)) != EXIT_SUCCESS)
+    {
+        free_matrix(&first);
+        return error;
+    }
+
+    if (first.rows != second.rows || first.cols != second.cols)
+    {
+        free_matrix(&first);
+        free_matrix(&second);
+        return WRONG_DIMS;
+    }
+
+    matrix_t result = add_matrix(first, second);
+    free_matrix(&first);
+    free_matrix(&second);
+
+    if ((error = save_matrix_to_file(dest_file, result)) != EXIT_SUCCESS)
+    {
+        free_matrix(&result);
+        return error;
+    }
+
+    free_matrix(&result);
+
+    return EXIT_SUCCESS;
+}
+
+int multiply_matrices_from_file(const char *filename_1, const char *filename_2,
+const char *dest_file)
+{
+    int error;
+    matrix_t first, second;
+
+    if ((error = read_matrix_from_file(filename_1, &first)) != EXIT_SUCCESS)
+        return error;
+
+    if ((error = read_matrix_from_file(filename_2, &second)) != EXIT_SUCCESS)
+    {
+        free_matrix(&first);
+        return error;
+    }
+
+    if (first.cols != second.rows)
+    {
+        free_matrix(&first);
+        free_matrix(&second);
+        return WRONG_DIMS;
+    }
+
+    matrix_t result = multiply_matrix(first, second);
+    free_matrix(&first);
+    free_matrix(&second);
+
+    if ((error = save_matrix_to_file(dest_file, result)) != EXIT_SUCCESS)
+    {
+        free_matrix(&result);
+        return error;
+    }
+
+    free_matrix(&result);
+
+    return EXIT_SUCCESS;
+}
+
+int det_matrix_from_file(const char *filename, const char *dest_file)
+{
+    int error;
+    matrix_t matrix;
+    double det;
+
+    if ((error = read_matrix_from_file(filename, &matrix)) != EXIT_SUCCESS)
+        return error;
+
+    if ((error = matrix_det(matrix, &det) != EXIT_SUCCESS))
+    {
+        free_matrix(&matrix);
+        return error;
+    }
+
+    if ((error = save_num_to_file(dest_file, det)) != EXIT_SUCCESS)
+    {
+        free_matrix(&matrix);
+        return error;
+    }
+
+    free_matrix(&matrix);
+
+    return EXIT_SUCCESS;
 }
