@@ -38,6 +38,9 @@ $(OBJDIR)/main.o : src/main.c inc/matrix.h
 $(OBJDIR)/matrix.o : src/matrix.c inc/matrix.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
+func_tests :
+	python3 func_tests/run_tests.py
+
 clean :
 	rm -rf *.exe
 	rm -rf $(OBJDIR)/*.o

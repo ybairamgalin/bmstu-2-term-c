@@ -50,7 +50,7 @@ int input_row(matrix_t *matrix, const int row)
 
 int input_matrix(matrix_t *matrix)
 {
-    int cols, rows;
+    int rows, cols;
 
     if (scanf("%d", &rows) != 1)
         return INPUT_ERR;
@@ -73,6 +73,66 @@ int input_matrix(matrix_t *matrix)
             free_matrix(matrix);
             return INPUT_ERR;
         }
+
+    return EXIT_SUCCESS;
+}
+
+int read_row_from_file(FILE *file, matrix_t *matrix, const int row)
+{
+    for (int i = 0; i < matrix->cols; i++)
+        if (fscanf(file, "%d", &matrix->values[row][i]) != 1)
+            return FILE_FORMAT_ERR;
+
+    return EXIT_SUCCESS;
+}
+
+int read_matrix_from_file(const char *filename, matrix_t *matrix)
+{
+    FILE *file = fopen(filename, "r");
+
+    if (file == NULL)
+        return NO_SUCH_FILE_ERR;
+
+    int rows, cols;
+
+    if (fscanf(file, "%d", &rows) != 1)
+    {
+        fclose(file);
+        return FILE_FORMAT_ERR;
+    }
+
+    if (rows <= 0)
+    {
+        fclose(file);
+        return INPUT_ERR;
+    }
+
+    if (fscanf(file, "%d", &cols) != 1)
+    {
+        fclose(file);
+        return FILE_FORMAT_ERR;
+    }
+
+    if (cols <= 0)
+    {
+        fclose(file);
+        return INPUT_ERR;
+    }
+
+    if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
+    {
+        fclose(file);
+        return MEM_ERR;
+    }
+
+    for (int i = 0; i < matrix->cols; i++)
+        if (read_row_from_file(file, matrix, i) != EXIT_SUCCESS)
+        {
+                fclose(file);
+                return FILE_FORMAT_ERR;
+        }
+
+    fclose(file);
 
     return EXIT_SUCCESS;
 }
@@ -332,6 +392,26 @@ void print_matrix(const matrix_t matrix)
     }
 }
 
+int save_matrix_to_file(const char *filename, const matrix_t matrix)
+{
+    FILE *file = fopen(filename, "w");
+
+    if (file == NULL)
+        return NO_SUCH_FILE_ERR;
+
+    for (int i = 0; i < matrix.rows; i++)
+    {
+        fprintf(file, "%d", matrix.values[i][0]);
+
+        for (int j = 1; j < matrix.cols; j++)
+            fprintf(file, " %d", matrix.values[i][j]);
+
+        fprintf(file, "\n");
+    }
+
+    return EXIT_SUCCESS;
+}
+
 long long matrix_det(const matrix_t matrix, long long *result)
 {
     if (matrix.rows != matrix.cols)
@@ -366,4 +446,28 @@ long long matrix_det(const matrix_t matrix, long long *result)
     *result = res;
 
     return EXIT_SUCCESS;
+}
+
+int save_num_to_file(const char *filename, const long long num)
+{
+    FILE *file = fopen(filename, "w");
+
+    if (file == NULL)
+        return NO_SUCH_FILE_ERR;
+
+    fprintf(file, "%lld\n", num);
+
+    return EXIT_SUCCESS;
+}
+
+matrix_t add_matrix(const matrix_t first, const matrix_t second)
+{
+    matrix_t result;
+    create_matrix(&result, first.cols, first.rows);
+
+    for (int i = 0; i < first.rows; i++)
+        for (int j = 0; j < first.cols; j++)
+            result.values[i][j] = first.values[i][j] + second.values[i][j];
+
+    return result;
 }
