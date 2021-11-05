@@ -30,7 +30,7 @@ int main(const int argc, const char **argv)
             return error;
         }
 
-        if (first.rows != second.rows || first.cols != second.rows)
+        if (first.rows != second.rows || first.cols != second.cols)
         {
             free_matrix(&first);
             free_matrix(&second);

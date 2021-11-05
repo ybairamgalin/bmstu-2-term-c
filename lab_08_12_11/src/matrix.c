@@ -3,10 +3,10 @@
 #include <math.h>
 #include "matrix.h"
 
-int create_matrix(matrix_t *matrix, const int cols, const int rows)
+int create_matrix(matrix_t *matrix, const int rows, const int cols)
 {
-    matrix->cols = cols;
     matrix->rows = rows;
+    matrix->cols = cols;
 
     matrix->values = malloc(matrix->rows * sizeof(double*));
 
@@ -37,44 +37,6 @@ void free_matrix(matrix_t *matrix)
         free(matrix->values[i]);
 
     free(matrix->values);
-}
-
-int input_row(matrix_t *matrix, const int row)
-{
-    for (int i = 0; i < matrix->cols; i++)
-        if (scanf("%lf", &matrix->values[row][i]) != 1)
-            return INPUT_ERR;
-
-    return EXIT_SUCCESS;
-}
-
-int input_matrix(matrix_t *matrix)
-{
-    int rows, cols;
-
-    if (scanf("%d", &rows) != 1)
-        return INPUT_ERR;
-
-    if (rows <= 0)
-        return INPUT_ERR;
-
-    if (scanf("%d", &cols) != 1)
-        return INPUT_ERR;
-
-    if (cols <= 0)
-        return INPUT_ERR;
-
-    if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
-        return MEM_ERR;
-
-    for (int i = 0; i < matrix->rows; i++)
-        if (input_row(matrix, i) != EXIT_SUCCESS)
-        {
-            free_matrix(matrix);
-            return INPUT_ERR;
-        }
-
-    return EXIT_SUCCESS;
 }
 
 int read_row_from_file(FILE *file, matrix_t *matrix, const int row)
@@ -119,54 +81,23 @@ int read_matrix_from_file(const char *filename, matrix_t *matrix)
         return INPUT_ERR;
     }
 
-    if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
+    if (create_matrix(matrix, rows, cols) != EXIT_SUCCESS)
     {
         fclose(file);
         return MEM_ERR;
     }
 
-    for (int i = 0; i < matrix->cols; i++)
+    for (int i = 0; i < matrix->rows; i++)
         if (read_row_from_file(file, matrix, i) != EXIT_SUCCESS)
         {
-                fclose(file);
-                return FILE_FORMAT_ERR;
+            free_matrix(matrix);
+            fclose(file);
+            return FILE_FORMAT_ERR;
         }
 
     fclose(file);
 
     return EXIT_SUCCESS;
-}
-
-int row_max_elem(const matrix_t matrix)
-{
-    double max = matrix.values[0][0];
-    int max_index = 0;
-
-    for (int i = 0; i < matrix.rows; i++)
-        for (int j = 0; j < matrix.cols; j++)
-            if (matrix.values[i][j] > max)
-            {
-                max = matrix.values[i][j];
-                max_index = i;
-            }
-
-    return max_index;
-}
-
-int col_max_elem(const matrix_t matrix)
-{
-    double max = matrix.values[0][0];
-    int max_index = 0;
-
-    for (int i = 0; i < matrix.rows; i++)
-        for (int j = 0; j < matrix.cols; j++)
-            if (matrix.values[i][j] > max)
-            {
-                max = matrix.values[i][j];
-                max_index = j;
-            }
-
-    return max_index;
 }
 
 void delete_matrix_row(matrix_t *matrix, const int row)
@@ -186,8 +117,8 @@ void delete_matrix_col(matrix_t *matrix, const int col)
         for (int j = col; j < matrix->cols - 1; j++)
             matrix->values[i][j] = matrix->values[i][j + 1];
 
-        matrix->values[i] = realloc(matrix->values[i], sizeof(double)
-            * matrix->cols - 1);
+        matrix->values[i] = realloc(matrix->values[i], sizeof(double) *
+            matrix->cols - 1);
     }
 
     (matrix->cols)--;
@@ -217,7 +148,7 @@ void matrix_cpy(matrix_t *dest, const matrix_t src)
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, second.cols, first.rows);
+    create_matrix(&result, first.rows, second.cols);
 
     for (int i = 0; i < result.rows; i++)
         for (int j = 0; j < result.cols; j++)
@@ -263,7 +194,7 @@ double matrix_det(const matrix_t matrix, double *result)
     if (matrix.cols == 1)
     {
         *result = matrix.values[0][0];
-        return EXIT_SUCCESS;
+        return EXIT_FAILURE;
     }
 
     double res = 0;
@@ -272,7 +203,12 @@ double matrix_det(const matrix_t matrix, double *result)
     for (int i = 0; i < matrix.cols; i++)
     {
         matrix_t complement;
-        create_matrix(&complement, matrix.cols, matrix.rows);
+
+        if (create_matrix(&complement, matrix.rows,
+            matrix.cols) != EXIT_SUCCESS)
+        {
+            return EXIT_FAILURE;
+        }
 
         matrix_cpy(&complement, matrix);
         delete_matrix_row(&complement, 0);
@@ -307,7 +243,7 @@ int save_num_to_file(const char *filename, const double num)
 matrix_t add_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, first.cols, first.rows);
+    create_matrix(&result, first.rows, first.cols);
 
     for (int i = 0; i < first.rows; i++)
         for (int j = 0; j < first.cols; j++)
