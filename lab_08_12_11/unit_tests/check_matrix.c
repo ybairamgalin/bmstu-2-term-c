@@ -166,7 +166,9 @@ int run_check_matrix(void)
     srunner_run_all(runner, CK_VERBOSE);
     not_failed += srunner_ntests_failed(runner);
 
-    s= test_add_matrix_suite();
+    srunner_free(runner);
+
+    s = test_add_matrix_suite();
     runner = srunner_create(s);
     srunner_run_all(runner, CK_VERBOSE);
     not_failed += srunner_ntests_failed(runner);
