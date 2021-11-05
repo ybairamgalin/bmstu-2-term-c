@@ -53,7 +53,7 @@ def main():
         total_tests += 1
         total_passed += run_test(in_filename, out_filename)
 
-    print("TESTING {}. PASSED {} of {}".format(
+    print("FUNCTIONAL TESTING {}. PASSED {} of {}".format(
         "\033[32mPASSED\033[0m" if (total_tests == total_passed) else "\033[31mFAILED\033[0m",
         total_passed, total_tests))
 

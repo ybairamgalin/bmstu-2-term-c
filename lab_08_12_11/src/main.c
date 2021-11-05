@@ -6,9 +6,6 @@ int main(const int argc, const char **argv)
 {
     int error;
 
-    if (argc > 5 || argc < 4)
-        return ARGS_COUNT_ERR;
-
     if (strcmp(argv[1], "a") == 0 && argc == 5)
     {
         if ((error = add_matrices_from_file(argv[2], argv[3], argv[4])) !=
@@ -27,7 +24,7 @@ int main(const int argc, const char **argv)
             return error;
     }
     else
-        return INVALID_OPERATION;
+        return INVALID_ARGS;
 
     return EXIT_SUCCESS;
 }

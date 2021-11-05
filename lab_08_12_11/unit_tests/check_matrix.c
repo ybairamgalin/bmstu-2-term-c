@@ -21,10 +21,11 @@ START_TEST(test_meatrix_det_normal)
     matrix.values[2][2] = 0.9;
 
     double result;
-    matrix_det(matrix, &result);
+    int rc = matrix_det(matrix, &result);
     free_matrix(&matrix);
 
     ck_assert_double_eq_tol(0.018, result, EPS);
+    ck_assert_int_eq(rc, 0);
 }
 END_TEST
 
@@ -40,10 +41,11 @@ START_TEST(test_meatrix_det_2x2)
     matrix.values[1][1] = 0.01;
 
     double result;
-    matrix_det(matrix, &result);
+    int rc = matrix_det(matrix, &result);
     free_matrix(&matrix);
 
     ck_assert_double_eq_tol(-0.93899999, result, EPS);
+    ck_assert_int_eq(rc, 0);
 }
 END_TEST
 
@@ -56,10 +58,11 @@ START_TEST(test_meatrix_det_1x1)
     matrix.values[0][0] = 7.89;
 
     double result;
-    matrix_det(matrix, &result);
+    int rc = matrix_det(matrix, &result);
     free_matrix(&matrix);
 
     ck_assert_double_eq_tol(7.89, result, EPS);
+    ck_assert_int_eq(rc, 0);
 }
 END_TEST
 
@@ -157,23 +160,23 @@ Suite *test_add_matrix_suite(void)
 
 int run_check_matrix(void)
 {
-    int not_failed = 0;
+    int failed = 0;
     Suite *s;
     SRunner *runner;
 
     s = test_matrix_det_suite();
     runner = srunner_create(s);
     srunner_run_all(runner, CK_VERBOSE);
-    not_failed += srunner_ntests_failed(runner);
+    failed += srunner_ntests_failed(runner);
 
     srunner_free(runner);
 
     s = test_add_matrix_suite();
     runner = srunner_create(s);
     srunner_run_all(runner, CK_VERBOSE);
-    not_failed += srunner_ntests_failed(runner);
+    failed += srunner_ntests_failed(runner);
 
     srunner_free(runner);
 
-    return EXIT_SUCCESS;
+    return failed;
 }

@@ -186,7 +186,7 @@ int save_matrix_to_file(const char *filename, const matrix_t matrix)
     return EXIT_SUCCESS;
 }
 
-double matrix_det(const matrix_t matrix, double *result)
+int matrix_det(const matrix_t matrix, double *result)
 {
     if (matrix.rows != matrix.cols)
         return EXIT_FAILURE;
