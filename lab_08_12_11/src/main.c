@@ -90,7 +90,7 @@ int main(const int argc, const char **argv)
             return ARGS_COUNT_ERR;
 
         matrix_t matrix;
-        long long det;
+        double det;
 
         if ((error = read_matrix_from_file(argv[2], &matrix)) != EXIT_SUCCESS)
             return error;

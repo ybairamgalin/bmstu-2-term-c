@@ -10,7 +10,7 @@
 #define SIGN_TERM -1
 
 typedef struct {
-    int **values;
+    double **values;
     int rows;
     int cols;
 } matrix_t;
@@ -18,14 +18,10 @@ typedef struct {
 int input_matrix(matrix_t *matrix);
 void print_matrix(const matrix_t matrix);
 void free_matrix(matrix_t *matrix);
-void make_square_matrix(matrix_t *matrix);
-int expand_matrix(matrix_t *matrix, const int new_sz);
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second);
-int input_powers(int *p, int *q);
-matrix_t pow_matrix(const matrix_t matrix, const int pow);
-long long matrix_det(const matrix_t matrix, long long *result);
+double matrix_det(const matrix_t matrix, double *result);
 int read_matrix_from_file(const char *filename, matrix_t *matrix);
-int save_num_to_file(const char *filename, const long long num);
+int save_num_to_file(const char *filename, const double num);
 int save_matrix_to_file(const char *filename, const matrix_t matrix);
 matrix_t add_matrix(const matrix_t first, const matrix_t second);
 
