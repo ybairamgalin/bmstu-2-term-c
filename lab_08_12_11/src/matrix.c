@@ -194,7 +194,7 @@ double matrix_det(const matrix_t matrix, double *result)
     if (matrix.cols == 1)
     {
         *result = matrix.values[0][0];
-        return EXIT_FAILURE;
+        return EXIT_SUCCESS;
     }
 
     double res = 0;
