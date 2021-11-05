@@ -411,6 +411,8 @@ int save_matrix_to_file(const char *filename, const matrix_t matrix)
         fprintf(file, "\n");
     }
 
+    fclose(file);
+
     return EXIT_SUCCESS;
 }
 
@@ -458,6 +460,7 @@ int save_num_to_file(const char *filename, const long long num)
         return NO_SUCH_FILE_ERR;
 
     fprintf(file, "%lld\n", num);
+    fclose(file);
 
     return EXIT_SUCCESS;
 }
