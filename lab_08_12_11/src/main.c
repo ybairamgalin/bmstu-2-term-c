@@ -6,19 +6,19 @@ int main(const int argc, const char **argv)
 {
     int error;
 
-    if (strcmp(argv[1], "a") == 0 && argc == 5)
+    if (argc == 5 && strcmp(argv[1], "a") == 0)
     {
         if ((error = add_matrices_from_file(argv[2], argv[3], argv[4])) !=
         EXIT_SUCCESS)
             return error;
     }
-    else if (strcmp(argv[1], "m") == 0 && argc == 5)
+    else if (argc == 5 && strcmp(argv[1], "m") == 0)
     {
         if ((error = multiply_matrices_from_file(argv[2], argv[3], argv[4])) !=
         EXIT_SUCCESS)
             return error;
     }
-    else if (strcmp(argv[1], "o") == 0 && argc == 4)
+    else if (argc == 4 && strcmp(argv[1], "o") == 0)
     {
         if ((error = det_matrix_from_file(argv[2], argv[3])))
             return error;
