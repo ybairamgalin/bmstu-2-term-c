@@ -15,6 +15,7 @@ typedef struct {
     int cols;
 } matrix_t;
 
+int create_matrix(matrix_t *matrix, const int cols, const int rows);
 int input_matrix(matrix_t *matrix);
 void print_matrix(const matrix_t matrix);
 void free_matrix(matrix_t *matrix);
