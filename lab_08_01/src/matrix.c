@@ -3,10 +3,10 @@
 #include <math.h>
 #include "matrix.h"
 
-int create_matrix(matrix_t *matrix, const int cols, const int rows)
+int create_matrix(matrix_t *matrix, const int rows, const int cols)
 {
-    matrix->cols = cols;
     matrix->rows = rows;
+    matrix->cols = cols;
 
     matrix->values = malloc(matrix->rows * sizeof(int*));
 
@@ -64,7 +64,7 @@ int input_matrix(matrix_t *matrix)
     if (cols <= 0)
         return INPUT_ERR;
 
-    if (create_matrix(matrix, cols, rows) != EXIT_SUCCESS)
+    if (create_matrix(matrix, rows, cols) != EXIT_SUCCESS)
         return MEM_ERR;
 
     for (int i = 0; i < matrix->rows; i++)
@@ -143,7 +143,8 @@ void delete_matrix_col(matrix_t *matrix, const int col)
         for (int j = col; j < matrix->cols - 1; j++)
             matrix->values[i][j] = matrix->values[i][j + 1];
 
-        matrix->values[i] = realloc(matrix->values[i], sizeof(int) * matrix->cols - 1);
+        matrix->values[i] = realloc(matrix->values[i], sizeof(int) *
+            matrix->cols - 1);
     }
 
     (matrix->cols)--;
@@ -222,7 +223,7 @@ int add_cols_max(matrix_t *matrix, const int count_new)
     for (int i = 0; i < matrix->rows; i++)
     {
         matrix->values[i] = realloc(matrix->values[i],
-                                    sizeof(int) * total_cols);
+        sizeof(int) * total_cols);
 
         if (matrix->values[i] == NULL)
             return MEM_ERR;
@@ -285,13 +286,13 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
 
     if (pow == 1)
     {
-        create_matrix(&result, matrix.cols, matrix.rows);
+        create_matrix(&result, matrix.rows, matrix.cols);
         matrix_cpy(&result, matrix);
         return result;
     }
 
     matrix_t prev;
-    create_matrix(&prev, matrix.cols, matrix.rows);
+    create_matrix(&prev, matrix.rows, matrix.cols);
     matrix_cpy(&prev, matrix);
 
     for (int i = 1; i < pow; i++)
@@ -307,7 +308,7 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, second.cols, first.rows);
+    create_matrix(&result, first.rows, second.cols);
 
     for (int i = 0; i < result.rows; i++)
         for (int j = 0; j < result.cols; j++)

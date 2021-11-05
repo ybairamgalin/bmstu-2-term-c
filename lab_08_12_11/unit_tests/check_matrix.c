@@ -101,6 +101,7 @@ START_TEST(test_add_matrix_normal)
     free_matrix(&matrix_2);
     free_matrix(&result);
 }
+END_TEST
 
 START_TEST(test_add_matrix_one_col)
 {
@@ -125,6 +126,7 @@ START_TEST(test_add_matrix_one_col)
     free_matrix(&matrix_2);
     free_matrix(&result);
 }
+END_TEST
 
 Suite *test_matrix_det_suite(void)
 {
