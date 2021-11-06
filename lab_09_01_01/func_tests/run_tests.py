@@ -10,10 +10,10 @@ RES_FILE = "output.txt"
 
 def run_test(args_filename, out_filename):
     args_file = open(args_filename, "r")
-    args = args_file.readline().split()
+    args = args_file.readline()
     args_file.close()
 
-    exec = subprocess.run(args, capture_output=True)
+    exec = subprocess.run(args, capture_output=True, shell=True)
     res = None
     out = None
 

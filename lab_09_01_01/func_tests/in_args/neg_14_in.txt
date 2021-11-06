@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/too_many_films.txt name
