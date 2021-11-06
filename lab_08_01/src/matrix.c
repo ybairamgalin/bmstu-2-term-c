@@ -136,7 +136,7 @@ void delete_matrix_row(matrix_t *matrix, const int row)
     (matrix->rows)--;
 }
 
-void delete_matrix_col(matrix_t *matrix, const int col)
+int delete_matrix_col(matrix_t *matrix, const int col)
 {
     for (int i = 0; i < matrix->rows; i++)
     {
@@ -145,12 +145,17 @@ void delete_matrix_col(matrix_t *matrix, const int col)
 
         matrix->values[i] = realloc(matrix->values[i], sizeof(int) *
             matrix->cols - 1);
+
+        if (matrix->values[i] == NULL)
+            return MEM_ERR;
     }
 
     (matrix->cols)--;
+
+    return EXIT_SUCCESS;
 }
 
-void make_square_matrix(matrix_t *matrix)
+int make_square_matrix(matrix_t *matrix)
 {
     while (matrix->rows != matrix->cols)
     {
@@ -162,9 +167,13 @@ void make_square_matrix(matrix_t *matrix)
         else if (matrix->rows < matrix->cols)
         {
             int to_del_col = col_max_elem(*matrix);
-            delete_matrix_col(matrix, to_del_col);
+
+            if (delete_matrix_col(matrix, to_del_col) != EXIT_SUCCESS)
+                return MEM_ERR;
         }
     }
+
+    return EXIT_SUCCESS;
 }
 
 
@@ -286,13 +295,24 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
 
     if (pow == 1)
     {
-        create_matrix(&result, matrix.rows, matrix.cols);
+        if (create_matrix(&result, matrix.rows, matrix.cols) != EXIT_SUCCESS)
+        {
+            result.values = NULL;
+            return result;
+        }
+
         matrix_cpy(&result, matrix);
         return result;
     }
 
     matrix_t prev;
-    create_matrix(&prev, matrix.rows, matrix.cols);
+
+    if (create_matrix(&prev, matrix.rows, matrix.cols) != EXIT_SUCCESS)
+    {
+        result.values = NULL;
+        return result;
+    }
+
     matrix_cpy(&prev, matrix);
 
     for (int i = 1; i < pow; i++)
@@ -308,7 +328,12 @@ matrix_t pow_matrix(const matrix_t matrix, const int pow)
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, first.rows, second.cols);
+
+    if (create_matrix(&result, first.rows, second.cols) != EXIT_SUCCESS)
+    {
+        result.values = NULL;
+        return result;
+    }
 
     for (int i = 0; i < result.rows; i++)
         for (int j = 0; j < result.cols; j++)

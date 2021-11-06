@@ -18,7 +18,8 @@ int input_matrix(matrix_t *matrix);
 void print_matrix(const matrix_t matrix);
 void free_matrix(matrix_t *matrix);
 
-void make_square_matrix(matrix_t *matrix);
+int make_square_matrix(matrix_t *matrix);
+void delete_matrix_row(matrix_t *matrix, const int row);
 int expand_matrix(matrix_t *matrix, const int new_sz);
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second);
 int input_powers(int *p, int *q);
