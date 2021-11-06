@@ -26,10 +26,10 @@ int main(void)
     error += error || expand_matrix(&matrix_2, MAX(matrix_1.cols,
         matrix_2.cols)) != EXIT_SUCCESS;
     error += error || mem_allocated(raised_matrix_1 = pow_matrix(matrix_1,
-        first_pow)) != EXIT_SUCCESS;
+    first_pow)) != EXIT_SUCCESS;
     free_matrix(&matrix_1);
     error += error || mem_allocated(raised_matrix_2 = pow_matrix(matrix_2,
-        second_pow));
+    second_pow));
     free_matrix(&matrix_2);
 
     if (error)
