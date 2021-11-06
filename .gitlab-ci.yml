@@ -8,14 +8,4 @@ test:
     paths: [report.txt.enc]
     when: always
 
-rk_02:
-  image: gcc
-  stage: build
-  only:
-  - rk_02
-    script:
-  - cd rk_02_XXX
-    - gcc main.c -Wall -Werror -c
-    - gcc functions.c -Wall -Werror -c
-    - gcc main.o functions.o -o main.exe
 
