@@ -353,8 +353,10 @@ void print_matrix(const matrix_t matrix)
 {
     for (int i = 0; i < matrix.rows; i++)
     {
-        for (int j = 0; j < matrix.cols; j++)
-            printf("%d ", matrix.values[i][j]);
+        printf("%d", matrix.values[i][0]);
+
+        for (int j = 1; j < matrix.cols; j++)
+            printf(" %d", matrix.values[i][j]);
 
         printf("\n");
     }
