@@ -357,3 +357,11 @@ void print_matrix(const matrix_t matrix)
         printf("\n");
     }
 }
+
+int mem_allocated(const matrix_t matrix)
+{
+    if (matrix.values == NULL)
+        return EXIT_FAILURE;
+
+    return EXIT_SUCCESS;
+}

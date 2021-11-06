@@ -17,6 +17,7 @@ int main(void)
     }
 
     int first_pow, second_pow;
+    matrix_t raised_matrix_1, raised_matrix_2;
     error = input_powers(&first_pow, &second_pow) != EXIT_SUCCESS;
     error += error || make_square_matrix(&matrix_1) != EXIT_SUCCESS;
     error += error || make_square_matrix(&matrix_2) != EXIT_SUCCESS;
@@ -24,31 +25,15 @@ int main(void)
         matrix_2.cols)) != EXIT_SUCCESS;
     error += error || expand_matrix(&matrix_2, MAX(matrix_1.cols,
         matrix_2.cols)) != EXIT_SUCCESS;
-
-    if (error)
-    {
-        free_matrix(&matrix_1);
-        free_matrix(&matrix_2);
-        return error;
-    }
-
-    matrix_t raised_matrix_1 = pow_matrix(matrix_1, first_pow);
+    error += error || mem_allocated(raised_matrix_1 = pow_matrix(matrix_1,
+        first_pow)) != EXIT_SUCCESS;
     free_matrix(&matrix_1);
-
-    if (raised_matrix_1.values == NULL)
-    {
-        free_matrix(&matrix_2);
-        return MEM_ERR;
-    }
-
-    matrix_t raised_matrix_2 = pow_matrix(matrix_2, second_pow);
+    error += error || mem_allocated(raised_matrix_2 = pow_matrix(matrix_2,
+        second_pow));
     free_matrix(&matrix_2);
 
-    if (raised_matrix_2.values == NULL)
-    {
-        free_matrix(&raised_matrix_1);
-        return MEM_ERR;
-    }
+    if (error)
+        return error;
 
     matrix_t result = multiply_matrix(raised_matrix_1, raised_matrix_2);
     free_matrix(&raised_matrix_1);

@@ -24,5 +24,6 @@ int expand_matrix(matrix_t *matrix, const int new_sz);
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second);
 int input_powers(int *p, int *q);
 matrix_t pow_matrix(const matrix_t matrix, const int pow);
+int mem_allocated(const matrix_t matrix);
 
 #endif
