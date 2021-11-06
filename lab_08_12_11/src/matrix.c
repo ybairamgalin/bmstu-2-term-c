@@ -148,7 +148,12 @@ void matrix_cpy(matrix_t *dest, const matrix_t src)
 matrix_t multiply_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, first.rows, second.cols);
+
+    if (create_matrix(&result, first.rows, second.cols) != EXIT_SUCCESS)
+    {
+        result.values = NULL;
+        return result;
+    }
 
     for (int i = 0; i < result.rows; i++)
         for (int j = 0; j < result.cols; j++)
@@ -214,8 +219,17 @@ int matrix_det(const matrix_t matrix, double *result)
         delete_matrix_row(&complement, 0);
         delete_matrix_col(&complement, i);
 
+        if (complement.values == NULL)
+            return EXIT_FAILURE;
+
         double ith_det;
-        matrix_det(complement, &ith_det);
+
+        if (matrix_det(complement, &ith_det) != EXIT_SUCCESS)
+        {
+            free_matrix(&complement);
+            return EXIT_FAILURE;
+        }
+
         res += ith_det * matrix.values[0][i] * sign;
 
         free_matrix(&complement);
@@ -243,7 +257,12 @@ int save_num_to_file(const char *filename, const double num)
 matrix_t add_matrix(const matrix_t first, const matrix_t second)
 {
     matrix_t result;
-    create_matrix(&result, first.rows, first.cols);
+
+    if (create_matrix(&result, first.rows, first.cols) != EXIT_SUCCESS)
+    {
+        result.values = NULL;
+        return result;
+    }
 
     for (int i = 0; i < first.rows; i++)
         for (int j = 0; j < first.cols; j++)
@@ -277,6 +296,9 @@ const char *dest_file)
     matrix_t result = add_matrix(first, second);
     free_matrix(&first);
     free_matrix(&second);
+
+    if (result.values == NULL)
+        return MEM_ERR;
 
     if ((error = save_matrix_to_file(dest_file, result)) != EXIT_SUCCESS)
     {
@@ -314,6 +336,9 @@ const char *dest_file)
     matrix_t result = multiply_matrix(first, second);
     free_matrix(&first);
     free_matrix(&second);
+
+    if (result.values == NULL)
+        return MEM_ERR;
 
     if ((error = save_matrix_to_file(dest_file, result)) != EXIT_SUCCESS)
     {

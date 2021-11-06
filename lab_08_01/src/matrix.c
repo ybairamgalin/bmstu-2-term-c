@@ -176,8 +176,6 @@ int make_square_matrix(matrix_t *matrix)
     return EXIT_SUCCESS;
 }
 
-
-// to test
 int avg_matrix_col(matrix_t *matrix, const int col)
 {
     int sum = 0;
@@ -188,7 +186,6 @@ int avg_matrix_col(matrix_t *matrix, const int col)
     return (int)(floor((double)sum / (double)matrix->rows));
 }
 
-// check for null when called
 int add_rows_avg(matrix_t *matrix, const int count_new)
 {
     int total_rows = matrix->rows + count_new;
@@ -264,6 +261,11 @@ matrix_t identity_matrix(const int dims)
     matrix_t result;
 
     create_matrix(&result, dims, dims);
+
+    if (result.values == NULL)
+    {
+        return result;
+    }
 
     for (int i = 0; i < result.rows; i++)
         for (int j = 0; j < result.cols; j++)
