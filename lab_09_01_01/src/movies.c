@@ -30,7 +30,7 @@ static int movies_expand(movies_t *movies)
     int new_capacity = movies->capacity * EXPAND_TIMES;
 
     movies->movies = realloc(movies->movies,
-        sizeof(movie_t) * movies->capacity * new_capacity);
+    sizeof(movie_t) * movies->capacity * new_capacity);
 
     if (movies->movies == NULL)
         return EXIT_FAILURE;

@@ -3,7 +3,7 @@
 #include <string.h>
 #include "movie.h"
 
-int title_cmp(const void* first, const void *second)
+int title_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -11,7 +11,7 @@ int title_cmp(const void* first, const void *second)
     return strcmp((*first_movie).title, (*second_movie).title);
 }
 
-int name_cmp(const void* first, const void *second)
+int name_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -19,7 +19,7 @@ int name_cmp(const void* first, const void *second)
     return strcmp((*first_movie).name, (*second_movie).name);
 }
 
-int year_cmp(const void* first, const void *second)
+int year_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -154,7 +154,6 @@ static int read_year(FILE *file, movie_t *movie)
     movie_set_year(movie, (unsigned int)year);
 
     return EXIT_SUCCESS;
-
 }
 
 movie_t *movie_create()
