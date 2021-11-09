@@ -10,7 +10,7 @@ CHECK_FLAGS := -lcheck
 
 OUTDIR := $(shell mkdir -p out)
 OBJS := $(OBJDIR)/main.o $(OBJDIR)/movie.o $(OBJDIR)/movies.o
-UNITOBJS := $(OBJDIR)/check_movie.o $(OBJDIR)/check_main.o $(OBJDIR)/movie.o
+UNITOBJS := $(OBJDIR)/check_movie.o $(OBJDIR)/check_main.o $(OBJDIR)/movie.o $(OBJDIR)/movies.o
 CHECK_FLAGS := -lcheck -g3
 
 .PHONY : clean func_tests unit release debug
@@ -20,7 +20,9 @@ release : lastrelease | app.exe
 
 debug : CFLAGS += $(DEBUGFLAGS)
 debug : lastdebug | app.exe func_tests unit
+
 unit : unit_tests.exe
+	./unit_tests.exe
 
 lastdebug:
 	touch lastdebug

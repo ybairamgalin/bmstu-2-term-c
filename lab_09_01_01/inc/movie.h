@@ -31,8 +31,15 @@ int str_to_field(field_t *field, const char *str);
 cmp_t field_to_cmp(const field_t field);
 
 movie_t *movie_create();
-int movie_read(FILE *file, movie_t *movie);
 void movie_free(movie_t *movie);
+
+int movie_read(FILE *file, movie_t *movie);
 void movie_print(const movie_t *movie);
+
+int movie_set_title(movie_t *movie, const char *title);
+int movie_set_name(movie_t *movie, const char *name);
+int movie_set_year(movie_t *movie, const unsigned int year);
+
+
 
 #endif

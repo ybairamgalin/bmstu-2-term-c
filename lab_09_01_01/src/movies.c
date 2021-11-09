@@ -40,7 +40,7 @@ static int movies_expand(movies_t *movies)
     return EXIT_SUCCESS;
 }
 
-int get_ins_pos(movies_t *movies, movie_t *movie, cmp_t cmp)
+static int get_ins_pos(movies_t *movies, movie_t *movie, cmp_t cmp)
 {
     for (int i = 0; i < movies->cur_busy; i++)
         if (cmp(movies->movies[i], movie) > 0)

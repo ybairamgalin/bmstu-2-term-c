@@ -3,7 +3,7 @@
 #include <string.h>
 #include "movie.h"
 
-int title_cmp(const void *first, const void *second)
+static int title_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -11,7 +11,7 @@ int title_cmp(const void *first, const void *second)
     return strcmp((*first_movie).title, (*second_movie).title);
 }
 
-int name_cmp(const void *first, const void *second)
+static int name_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -19,7 +19,7 @@ int name_cmp(const void *first, const void *second)
     return strcmp((*first_movie).name, (*second_movie).name);
 }
 
-int year_cmp(const void *first, const void *second)
+static int year_cmp(const void *first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
@@ -75,11 +75,6 @@ int movie_set_year(movie_t *movie, const unsigned int year)
     return EXIT_SUCCESS;
 }
 
-//static cmp_t cmp_by_field(field_t field)
-//{
-//    return title_cmp;
-//}
-
 static int read_title(FILE *file, movie_t *movie)
 {
     char tmp[TMP_INPUT_SZ];
@@ -119,16 +114,11 @@ static int read_name(FILE *file, movie_t *movie)
     if (tmp[strlen(tmp) - 1] == '\r')
         tmp[strlen(tmp) - 1] = '\0';
 
-//    printf("\n%s %lu\n", tmp, strlen(tmp));
-
     if (strlen(tmp) == 0)
         return FILE_FORMAT_ERR;
 
     if (movie_set_name(movie, tmp) != EXIT_SUCCESS)
         return MEM_ERR;
-
-//    printf("%s ", movie->name);
-//    printf("%lu\n", strlen(movie->name));
 
     return EXIT_SUCCESS;
 }
