@@ -40,20 +40,6 @@ static int movies_expand(movies_t *movies)
     return EXIT_SUCCESS;
 }
 
-//int movies_push_back(movies_t *movies, movie_t *new)
-//{
-//    int new_busy = movies->cur_busy + 1;
-//
-//    if (new_busy > movies->capacity)
-//        if (movies_expand(movies) != EXIT_SUCCESS)
-//            return MEM_ERR;
-//
-//    movies->movies[(movies->cur_busy)++] = new;
-//    movies->cur_busy = new_busy;
-//
-//    return EXIT_SUCCESS;
-//}
-
 int get_ins_pos(movies_t *movies, movie_t *movie, cmp_t cmp)
 {
     for (int i = 0; i < movies->cur_busy; i++)
@@ -90,24 +76,30 @@ int movies_read(const char *filename, movies_t *movies, field_t field)
 {
     int error;
     FILE *file = fopen(filename, "r");
+    movie_t *new = NULL;
 
     if (file == NULL)
         return NO_SUCH_FILE_ERR;
 
     while (1)
     {
-        movie_t *new = movie_create();
+        new = movie_create();
+
+        if (new == NULL)
+            return MEM_ERR;
 
         if ((error = movie_read(file, new)) != EXIT_SUCCESS)
             break;
 
         if (insert_in_sorted(movies, new, field) != EXIT_SUCCESS)
         {
+            movie_free(new);
             fclose(file);
             return MEM_ERR;
         }
     }
 
+    movie_free(new);
     fclose(file);
 
     if (error != NOTHING_TO_READ)
