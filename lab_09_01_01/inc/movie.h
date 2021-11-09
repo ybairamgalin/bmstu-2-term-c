@@ -9,6 +9,8 @@
 
 #define TMP_INPUT_SZ 128
 
+#include <stdio.h>
+
 typedef int(*cmp_t)(const void*, const void*);
 
 typedef struct
