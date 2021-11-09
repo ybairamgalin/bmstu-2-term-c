@@ -9,7 +9,7 @@ RELEASEFLAGS := -DNDEBUG -g0
 CHECK_FLAGS := -lcheck
 
 OUTDIR := $(shell mkdir -p out)
-OBJS := $(OBJDIR)/main.o $(OBJDIR)/movie.o
+OBJS := $(OBJDIR)/main.o $(OBJDIR)/movie.o $(OBJDIR)/movies.o
 UNITOBJS := $(OBJDIR)/check_movie.o $(OBJDIR)/check_main.o $(OBJDIR)/movie.o
 CHECK_FLAGS := -lcheck -g3
 
@@ -42,6 +42,9 @@ $(OBJDIR)/main.o : src/main.c inc/movie.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJDIR)/movie.o : src/movie.c inc/movie.h
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+$(OBJDIR)/movies.o : src/movies.c inc/movies.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 $(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_movie.h
