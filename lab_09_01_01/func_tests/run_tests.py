@@ -31,8 +31,8 @@ def run_test(args_filename, out_filename):
             print("TEST {} \033[32mPASSED\033[0m".format(args_filename))
             return 1
 
-    print("TEST {} \033[31mFAILED\033[0m.\nEXPECTED\n{}\nRECEIVED\n{}\nRETURN CODE\n{}\n".format(
-        args_filename, out, res, exec.returncode))
+    print("TEST {} \033[31mFAILED\033[0m.\n{}\nEXPECTED\n{}\nRECEIVED\n{}\nRETURN CODE\n{}\n".format(
+        args_filename, args, out, res, exec.returncode))
 
     return 0
 

@@ -9,6 +9,8 @@
 
 #define TMP_INPUT_SZ 128
 
+typedef int(*cmp_t)(const void*, const void*);
+
 typedef struct
 {
     char *title;
@@ -24,6 +26,7 @@ typedef enum
 } field_t;
 
 int str_to_field(field_t *field, const char *str);
+cmp_t field_to_cmp(const field_t field);
 
 movie_t *movie_create();
 int movie_read(FILE *file, movie_t *movie);

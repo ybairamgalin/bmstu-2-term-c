@@ -3,14 +3,45 @@
 #include <string.h>
 #include "movie.h"
 
-typedef int(*cmp_t)(const void*, const void*);
-
 int title_cmp(const void* first, const void *second)
 {
     movie_t *first_movie = (movie_t*)first;
     movie_t *second_movie = (movie_t*)second;
 
     return strcmp((*first_movie).title, (*second_movie).title);
+}
+
+int name_cmp(const void* first, const void *second)
+{
+    movie_t *first_movie = (movie_t*)first;
+    movie_t *second_movie = (movie_t*)second;
+
+    return strcmp((*first_movie).name, (*second_movie).name);
+}
+
+int year_cmp(const void* first, const void *second)
+{
+    movie_t *first_movie = (movie_t*)first;
+    movie_t *second_movie = (movie_t*)second;
+
+    if (first_movie->year > second_movie->year)
+        return 1;
+
+    if (first_movie->year < second_movie->year)
+        return -1;
+
+    return 0;
+}
+
+cmp_t field_to_cmp(const field_t field)
+{
+    if (field == title)
+        return title_cmp;
+
+    if (field == name)
+        return name_cmp;
+
+    return year_cmp;
 }
 
 int movie_set_title(movie_t *movie, const char *title)

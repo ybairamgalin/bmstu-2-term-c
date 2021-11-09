@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "movie.h"
 #include "movies.h"
 
@@ -39,7 +40,37 @@ static int movies_expand(movies_t *movies)
     return EXIT_SUCCESS;
 }
 
-int movies_push_back(movies_t *movies, movie_t *new)
+//int movies_push_back(movies_t *movies, movie_t *new)
+//{
+//    int new_busy = movies->cur_busy + 1;
+//
+//    if (new_busy > movies->capacity)
+//        if (movies_expand(movies) != EXIT_SUCCESS)
+//            return MEM_ERR;
+//
+//    movies->movies[(movies->cur_busy)++] = new;
+//    movies->cur_busy = new_busy;
+//
+//    return EXIT_SUCCESS;
+//}
+
+int get_ins_pos(movies_t *movies, movie_t *movie, cmp_t cmp)
+{
+    for (int i = 0; i < movies->cur_busy; i++)
+        if (cmp(movies->movies[i], movie) > 0)
+            return i;
+
+    return movies->cur_busy;
+}
+
+static void shift_right(movies_t *movies, const int from)
+{
+    for (int i = movies->cur_busy; i > from; i--)
+        movies->movies[i] = movies->movies[i - 1];
+}
+
+static int insert_in_sorted(movies_t *movies, movie_t *movie,
+const field_t field)
 {
     int new_busy = movies->cur_busy + 1;
 
@@ -47,7 +78,9 @@ int movies_push_back(movies_t *movies, movie_t *new)
         if (movies_expand(movies) != EXIT_SUCCESS)
             return MEM_ERR;
 
-    movies->movies[(movies->cur_busy)++] = new;
+    int ins_pos = get_ins_pos(movies, movie, field_to_cmp(field));
+    shift_right(movies, ins_pos);
+    movies->movies[ins_pos] = movie;
     movies->cur_busy = new_busy;
 
     return EXIT_SUCCESS;
@@ -68,7 +101,7 @@ int movies_read(const char *filename, movies_t *movies, field_t field)
         if ((error = movie_read(file, new)) != EXIT_SUCCESS)
             break;
 
-        if (movies_push_back(movies, new) != EXIT_SUCCESS)
+        if (insert_in_sorted(movies, new, field) != EXIT_SUCCESS)
         {
             fclose(file);
             return MEM_ERR;
@@ -99,4 +132,51 @@ void movies_free(movies_t *movies)
 
     free(movies->movies);
     free(movies);
+}
+
+static int find_movie_index(movies_t *movies, field_t field, const char *value)
+{
+    if (field == year)
+    {
+        int year;
+
+        if ((year = atoi(value)) == 0)
+            return WRONG_FIND_VALUE_ERR;
+
+        for (int i = 0; i < movies->cur_busy; i++)
+            if (movies->movies[i]->year == year)
+                return i;
+
+        return FILM_NOT_FOUND_ERR;
+    }
+
+    if (field == title)
+    {
+        for (int i = 0; i < movies->cur_busy; i++)
+            if (strcmp(movies->movies[i]->title, value) == 0)
+                return i;
+
+        return FILM_NOT_FOUND_ERR;
+    }
+
+    for (int i = 0; i < movies->cur_busy; i++)
+        if (strcmp(movies->movies[i]->name, value) == 0)
+            return i;
+
+    return FILM_NOT_FOUND_ERR;
+}
+
+int movies_print_by_field(movies_t *movies, field_t field, const char *value)
+{
+    int index = find_movie_index(movies, field, value);
+
+    if (index == WRONG_FIND_VALUE_ERR)
+        return EXIT_FAILURE;
+
+    if (index == FILM_NOT_FOUND_ERR)
+        printf("Not found\n");
+    else
+        movie_print(movies->movies[index]);
+
+    return EXIT_SUCCESS;
 }

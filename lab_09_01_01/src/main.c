@@ -31,8 +31,10 @@ int main(const int argc, const char **argv)
     if (argc == 3)
         movies_print(movies);
 
-//    if (argc == 4)
-//        TODO
+    if (argc == 4)
+        if ((error = movies_print_by_field(movies, field,
+        argv[3])) != EXIT_SUCCESS)
+            return error;
 
     movies_free(movies);
 
