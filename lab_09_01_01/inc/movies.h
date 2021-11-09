@@ -4,8 +4,11 @@
 #define START_CAPACITY 16
 #define EXPAND_TIMES 2
 
-#define WRONG_FIND_VALUE_ERR -2
 #define FILM_NOT_FOUND_ERR -1
+#define WRONG_FIND_VALUE_ERR -2
+#define NO_SUCH_FILE_ERR 2
+
+#define FIELD_ERR 5
 
 #include "movie.h"
 

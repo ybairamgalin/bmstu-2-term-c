@@ -2,10 +2,8 @@
 #define _MOVIE_H_
 
 #define MEM_ERR -1
-#define NO_SUCH_FILE_ERR 2
 #define FILE_FORMAT_ERR 3
 #define NOTHING_TO_READ 4
-#define FIELD_ERR 5
 
 #define TMP_INPUT_SZ 128
 
@@ -39,7 +37,5 @@ void movie_print(const movie_t *movie);
 int movie_set_title(movie_t *movie, const char *title);
 int movie_set_name(movie_t *movie, const char *name);
 int movie_set_year(movie_t *movie, const unsigned int year);
-
-
 
 #endif
