@@ -90,6 +90,26 @@ START_TEST(test_find_no_element)
 
     node_free_all(head);
 }
+END_TEST
+
+START_TEST(test_pop_front_normal)
+{
+    int values[4] = { 1, 2, 3, 4};
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+    head = node_push_back(head, node_create(&values[1]));
+    head = node_push_back(head, node_create(&values[2]));
+    head = node_push_back(head, node_create(&values[3]));
+
+    int *data = pop_front(&head);
+
+    ck_assert_int_eq(*data, 1);
+    ck_assert_int_eq(*(int*)(head->data), 2);
+
+    node_free_all(head);
+}
+END_TEST
 
 Suite *test_node_push_back(void)
 {
@@ -115,6 +135,17 @@ Suite *test_find(void)
     return suite;
 }
 
+Suite *test_pop_front(void)
+{
+    Suite *suite = suite_create("pop_front");
+
+    TCase *pos = tcase_create("positive");
+    tcase_add_test(pos, test_pop_front_normal);
+    suite_add_tcase(suite, pos);
+
+    return suite;
+}
+
 int run_suite(Suite *(test_suite)(void))
 {
     Suite *s;
@@ -135,6 +166,7 @@ int run_check_linked_list(void)
 
     failed += run_suite(test_node_push_back);
     failed += run_suite(test_find);
+    failed += run_suite(test_pop_front);
 
     return failed;
 }

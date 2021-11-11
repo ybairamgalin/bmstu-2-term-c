@@ -55,16 +55,18 @@ int (*cmp)(const void*, const void*))
             return head;
 
     return NULL;
+}
 
-//    if (head == NULL)
-//        return NULL;
-//
-//    struct node *cur = head;
-//
-//    do {
-//        if (cmp(cur->data, data) == 0)
-//            return cur;
-//
-//        cur = cur->next;
-//    } while (cur->next);
+void *pop_front(node_t **head)
+{
+    if (head == NULL)
+        return NULL;
+
+    if (*head == NULL)
+        return NULL;
+
+    void *data = (*head)->data;
+    *head = (*head)->next;
+
+    return data;
 }
