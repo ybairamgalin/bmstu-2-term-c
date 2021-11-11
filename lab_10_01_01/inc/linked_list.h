@@ -14,9 +14,12 @@ void node_free(node_t *node);
 void node_free_all(node_t *head);
 
 node_t *node_push_back(node_t *head, node_t *elem);
+void *pop_front(node_t **head);
+
 node_t *find(node_t *head, const void *data,
 int (*cmp)(const void*, const void*));
-void *pop_front(node_t **head);
 int copy(node_t *head, node_t **new_head);
+
+void front_back_split(node_t *head, node_t **back);
 
 #endif

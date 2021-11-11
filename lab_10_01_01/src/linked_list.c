@@ -98,3 +98,41 @@ int copy(node_t *head, node_t **new_head)
 
     return EXIT_SUCCESS;
 }
+
+int list_count(node_t *head)
+{
+    int count = 0;
+
+    for ( ; head; head = head->next, count++);
+
+    return count;
+}
+
+void front_back_split(node_t *head, node_t **back)
+{
+    if (head == NULL)
+        return;
+
+    if (back == NULL)
+        return;
+
+    int count = list_count(head);
+    int new_list_index;
+
+    if (count % 2 == 0)
+        new_list_index = count / 2;
+    else
+        new_list_index = count / 2 + 1;
+
+    node_t *new_start = head;
+
+    for (int i = 0; i < new_list_index; i++, new_start = new_start->next);
+
+    if (copy(new_start, back) != EXIT_SUCCESS)
+        return;
+
+    for ( ; head->next != new_start; head = head->next);
+
+    head->next = NULL;
+    node_free_all(new_start);
+}

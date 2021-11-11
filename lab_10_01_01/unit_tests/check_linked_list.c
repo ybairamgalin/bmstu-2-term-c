@@ -138,6 +138,52 @@ START_TEST(test_copy_normal)
 }
 END_TEST
 
+START_TEST(test_front_back_split_even)
+{
+    int values[4] = { 1, 2, 3, 4};
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+    head = node_push_back(head, node_create(&values[1]));
+    head = node_push_back(head, node_create(&values[2]));
+    head = node_push_back(head, node_create(&values[3]));
+
+    node_t *back;
+
+    front_back_split(head, &back);
+
+    ck_assert_int_eq(*(int*)head->data, 1);
+    ck_assert_int_eq(*(int*)head->next->data, 2);
+    ck_assert_int_eq(*(int*)back->data, 3);
+    ck_assert_int_eq(*(int*)back->next->data, 4);
+
+    ck_assert_ptr_null(head->next->next);
+    ck_assert_ptr_null(back->next->next);
+}
+END_TEST
+
+START_TEST(test_front_back_split_odd)
+{
+    int values[3] = { 1, 2, 3 };
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+    head = node_push_back(head, node_create(&values[1]));
+    head = node_push_back(head, node_create(&values[2]));
+
+    node_t *back;
+
+    front_back_split(head, &back);
+
+    ck_assert_int_eq(*(int*)head->data, 1);
+    ck_assert_int_eq(*(int*)head->next->data, 2);
+    ck_assert_int_eq(*(int*)back->data, 3);
+
+    ck_assert_ptr_null(head->next->next);
+    ck_assert_ptr_null(back->next);
+}
+END_TEST
+
 Suite *test_node_push_back(void)
 {
     Suite *suite = suite_create("node_push_back");
@@ -184,6 +230,18 @@ Suite *test_copy(void)
     return suite;
 }
 
+Suite *test_front_back_split(void)
+{
+    Suite *suite = suite_create("front_back_split");
+
+    TCase *pos = tcase_create("positive");
+    tcase_add_test(pos, test_front_back_split_even);
+    tcase_add_test(pos, test_front_back_split_odd);
+    suite_add_tcase(suite, pos);
+
+    return suite;
+}
+
 int run_suite(Suite *(test_suite)(void))
 {
     Suite *s;
@@ -206,6 +264,7 @@ int run_check_linked_list(void)
     failed += run_suite(test_find);
     failed += run_suite(test_pop_front);
     failed += run_suite(test_copy);
+    failed += run_suite(test_front_back_split);
 
     return failed;
 }
