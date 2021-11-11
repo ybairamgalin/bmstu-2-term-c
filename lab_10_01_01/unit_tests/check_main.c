@@ -1,9 +1,14 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "check_linked_list.h"
 
 int main(void)
 {
-    run_check_linked_list();
+    int failed = run_check_linked_list();
 
-    return EXIT_SUCCESS;
+    printf("UNIT TESTING %s.\n",
+           failed == 0 ? "\033[32mPASSED\033[0m": "\033[31mFAILED\033[0m");
+
+    return failed;
 }
+
