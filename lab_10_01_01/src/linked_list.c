@@ -75,6 +75,12 @@ void *pop_front(node_t **head)
 
 int copy(node_t *head, node_t **new_head)
 {
+    if (head == NULL)
+        return EXIT_FAILURE;
+
+    if (new_head == NULL)
+        return EXIT_FAILURE;
+
     *new_head = NULL;
 
     for ( ; head; head = head->next)
