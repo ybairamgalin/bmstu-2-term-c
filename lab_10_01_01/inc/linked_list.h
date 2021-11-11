@@ -21,5 +21,7 @@ int (*cmp)(const void*, const void*));
 int copy(node_t *head, node_t **new_head);
 
 void front_back_split(node_t *head, node_t **back);
+node_t *sorted_merge(node_t **head_a, node_t **head_b,
+int (*cmp)(const void*, const void*));
 
 #endif

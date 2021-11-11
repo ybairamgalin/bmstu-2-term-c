@@ -9,10 +9,10 @@ int int_cmp(const void *first, const void *second)
     int *fir = (int*)first;
     int *sec = (int*)second;
 
-    if (*fir < *sec)
+    if (*fir > *sec)
         return 1;
 
-    if (*fir > *sec)
+    if (*fir < *sec)
         return -1;
 
     return 0;
@@ -190,6 +190,74 @@ START_TEST(test_front_back_split_odd)
 }
 END_TEST
 
+START_TEST(test_front_back_split_one_elem)
+{
+    int values[1] = { 1 };
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+
+    node_t *back;
+
+    front_back_split(head, &back);
+
+    ck_assert_int_eq(*(int*)head->data, 1);
+
+    ck_assert_ptr_null(head->next);
+    ck_assert_ptr_null(back);
+
+    node_free_all(head);
+    node_free_all(back);
+}
+END_TEST
+
+START_TEST(test_front_back_split_two_elems)
+{
+    int values[2] = { 1, 2 };
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+    head = node_push_back(head, node_create(&values[1]));
+
+    node_t *back;
+
+    front_back_split(head, &back);
+
+    ck_assert_int_eq(*(int*)head->data, 1);
+    ck_assert_int_eq(*(int*)back->data, 2);
+
+    ck_assert_ptr_null(head->next);
+    ck_assert_ptr_null(back->next);
+
+    node_free_all(head);
+    node_free_all(back);
+}
+END_TEST
+
+START_TEST(test_sorted_merge_normal)
+{
+    int values[4] = { 1, 2, 3, 4 };
+
+    node_t *first = NULL;
+    first = node_push_back(first, node_create(&values[0]));
+    first = node_push_back(first, node_create(&values[2]));
+
+    node_t *second = NULL;
+
+    second = node_push_back(second, node_create(&values[1]));
+    second = node_push_back(second, node_create(&values[3]));
+
+    node_t *sorted = sorted_merge(&first, &second, int_cmp);
+
+    ck_assert_int_eq(*(int*)sorted->data, 1);
+    ck_assert_int_eq(*(int*)sorted->next->data, 2);
+    ck_assert_int_eq(*(int*)sorted->next->next->data, 3);
+    ck_assert_int_eq(*(int*)sorted->next->next->next->data, 4);
+
+    node_free_all(sorted);
+}
+END_TEST
+
 Suite *test_node_push_back(void)
 {
     Suite *suite = suite_create("node_push_back");
@@ -243,6 +311,19 @@ Suite *test_front_back_split(void)
     TCase *pos = tcase_create("positive");
     tcase_add_test(pos, test_front_back_split_even);
     tcase_add_test(pos, test_front_back_split_odd);
+    tcase_add_test(pos, test_front_back_split_one_elem);
+    tcase_add_test(pos, test_front_back_split_two_elems);
+    suite_add_tcase(suite, pos);
+
+    return suite;
+}
+
+Suite *test_sorted_merge(void)
+{
+    Suite *suite = suite_create("sorted_merge");
+
+    TCase *pos = tcase_create("positive");
+    tcase_add_test(pos, test_sorted_merge_normal);
     suite_add_tcase(suite, pos);
 
     return suite;
@@ -271,6 +352,7 @@ int run_check_linked_list(void)
     failed += run_suite(test_pop_front);
     failed += run_suite(test_copy);
     failed += run_suite(test_front_back_split);
+    failed += run_suite(test_sorted_merge);
 
     return failed;
 }

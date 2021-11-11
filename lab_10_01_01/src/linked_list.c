@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "linked_list.h"
 
 node_t *node_create(void *data)
@@ -136,4 +137,37 @@ void front_back_split(node_t *head, node_t **back)
 
     head->next = NULL;
     node_free_all(new_start);
+}
+
+node_t *sorted_merge(node_t **head_a, node_t **head_b,
+int (*cmp)(const void*, const void*))
+{
+    if (head_a == NULL && head_b == NULL)
+        return NULL;
+
+    node_t *new = NULL;
+
+    while (*head_a && *head_b)
+    {
+        if (cmp((*head_a)->data, (*head_b)->data) <= 0)
+        {
+            new = node_push_back(new, node_create((*head_a)->data));
+            pop_front(head_a);
+        }
+        else
+        {
+            new = node_push_back(new, node_create((*head_b)->data));
+            pop_front(head_b);
+        }
+    }
+
+    if (*head_a)
+        for ( ; *head_a; pop_front(head_a))
+            new = node_push_back(new, node_create((*head_a)->data));
+
+    if (*head_b)
+        for ( ; *head_b; pop_front(head_b))
+            new = node_push_back(new, node_create((*head_b)->data));
+
+    return new;
 }
