@@ -164,6 +164,9 @@ int (*cmp)(const void*, const void*))
 
 node_t *sort(node_t *head, int (*cmp)(const void*, const void*))
 {
+    if (head == NULL)
+        return NULL;
+
     if (head->next == NULL)
         return head;
 
