@@ -111,6 +111,33 @@ START_TEST(test_pop_front_normal)
 }
 END_TEST
 
+START_TEST(test_copy_normal)
+{
+    int values[4] = { 1, 2, 3, 4};
+
+    node_t *head = NULL;
+    head = node_push_back(head, node_create(&values[0]));
+    head = node_push_back(head, node_create(&values[1]));
+    head = node_push_back(head, node_create(&values[2]));
+    head = node_push_back(head, node_create(&values[3]));
+
+    node_t *new_head;
+    int rc = copy(head, &new_head);
+
+    ck_assert_ptr_eq(head->data, new_head->data);
+    ck_assert_ptr_eq(head->next->data, new_head->next->data);
+    ck_assert_ptr_eq(new_head->next->next->data,
+    new_head->next->next->data);
+    ck_assert_ptr_eq(new_head->next->next->next->data,
+    new_head->next->next->next->data);
+
+    ck_assert_int_eq(rc, EXIT_SUCCESS);
+
+    node_free_all(head);
+    node_free_all(new_head);
+}
+END_TEST
+
 Suite *test_node_push_back(void)
 {
     Suite *suite = suite_create("node_push_back");
@@ -146,6 +173,17 @@ Suite *test_pop_front(void)
     return suite;
 }
 
+Suite *test_copy(void)
+{
+    Suite *suite = suite_create("copy");
+
+    TCase *pos = tcase_create("positive");
+    tcase_add_test(pos, test_copy_normal);
+    suite_add_tcase(suite, pos);
+
+    return suite;
+}
+
 int run_suite(Suite *(test_suite)(void))
 {
     Suite *s;
@@ -167,6 +205,7 @@ int run_check_linked_list(void)
     failed += run_suite(test_node_push_back);
     failed += run_suite(test_find);
     failed += run_suite(test_pop_front);
+    failed += run_suite(test_copy);
 
     return failed;
 }

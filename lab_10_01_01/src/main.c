@@ -18,5 +18,16 @@ int int_cmp(const void *first, const void *second)
 
 int main(void)
 {
+//    int values[4] = { 1, 2, 3, 4};
+//
+//    node_t *head = NULL;
+//    head = node_push_back(head, node_create(&values[0]));
+//    head = node_push_back(head, node_create(&values[1]));
+//    head = node_push_back(head, node_create(&values[2]));
+//    head = node_push_back(head, node_create(&values[3]));
+//
+//    node_t *new_head;
+//    int rc = copy(head, &new_head);
+
     return EXIT_SUCCESS;
 }

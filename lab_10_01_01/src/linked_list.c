@@ -72,3 +72,23 @@ void *pop_front(node_t **head)
 
     return data;
 }
+
+int copy(node_t *head, node_t **new_head)
+{
+    *new_head = NULL;
+
+    for ( ; head; head = head->next)
+    {
+        node_t *new = node_create(head->data);
+
+        if (new == NULL)
+        {
+            node_free_all(*new_head);
+            return EXIT_FAILURE;
+        }
+
+        *new_head = node_push_back(*new_head, new);
+    }
+
+    return EXIT_SUCCESS;
+}

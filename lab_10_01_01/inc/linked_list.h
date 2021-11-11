@@ -17,5 +17,6 @@ node_t *node_push_back(node_t *head, node_t *elem);
 node_t *find(node_t *head, const void *data,
 int (*cmp)(const void*, const void*));
 void *pop_front(node_t **head);
+int copy(node_t *head, node_t **new_head);
 
 #endif
