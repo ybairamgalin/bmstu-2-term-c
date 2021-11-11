@@ -159,6 +159,9 @@ START_TEST(test_front_back_split_even)
 
     ck_assert_ptr_null(head->next->next);
     ck_assert_ptr_null(back->next->next);
+
+    node_free_all(head);
+    node_free_all(back);
 }
 END_TEST
 
@@ -181,6 +184,9 @@ START_TEST(test_front_back_split_odd)
 
     ck_assert_ptr_null(head->next->next);
     ck_assert_ptr_null(back->next);
+
+    node_free_all(head);
+    node_free_all(back);
 }
 END_TEST
 

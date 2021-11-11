@@ -116,6 +116,7 @@ void front_back_split(node_t *head, node_t **back)
     if (back == NULL)
         return;
 
+    *back = NULL;
     int count = list_count(head);
     int new_list_index;
 
