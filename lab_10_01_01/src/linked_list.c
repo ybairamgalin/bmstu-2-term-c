@@ -62,6 +62,9 @@ void *pop_front(node_t **head)
     if (head == NULL)
         return NULL;
 
+    if (*head == NULL)
+        return NULL;
+
     node_t *old = *head;
     *head = old->next;
     void *data = old->data;
