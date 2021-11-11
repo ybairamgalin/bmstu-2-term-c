@@ -161,3 +161,18 @@ int (*cmp)(const void*, const void*))
 
     return new;
 }
+
+node_t *sort(node_t *head, int (*cmp)(const void*, const void*))
+{
+    if (head->next == NULL)
+        return head;
+
+    node_t *back = NULL;
+
+    front_back_split(head, &back);
+    head = sort(head, cmp);
+    back = sort(back, cmp);
+    head = sorted_merge(&head, &back, cmp);
+
+    return head;
+}
