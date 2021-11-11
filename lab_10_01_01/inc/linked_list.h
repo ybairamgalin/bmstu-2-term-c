@@ -10,6 +10,8 @@ struct node
 };
 
 node_t *node_create(void *data);
+void node_free_all(node_t *head);
+
 node_t *node_push_back(node_t *head, node_t *elem);
 node_t *find(node_t *head, const void *data,
 int (*cmp)(const void*, const void*));

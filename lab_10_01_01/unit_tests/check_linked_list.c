@@ -33,6 +33,8 @@ START_TEST(test_node_push_back_normal)
 
     ck_assert_str_eq((char*)head->next->data, new_data);
     ck_assert_ptr_null(head->next->next);
+
+    node_free_all(head);
 }
 END_TEST
 
@@ -45,6 +47,8 @@ START_TEST(test_node_push_back_null)
     head = node_push_back(head, new);
 
     ck_assert_ptr_eq(head, new);
+
+    node_free_all(head);
 }
 END_TEST
 
@@ -63,6 +67,8 @@ START_TEST(test_find_normal)
     node_t *found = find(head, &to_find, int_cmp);
 
     ck_assert_int_eq(*(int*)found->data, 3);
+
+    node_free_all(head);
 }
 END_TEST
 
@@ -81,6 +87,8 @@ START_TEST(test_find_no_element)
     node_t *found = find(head, &to_find, int_cmp);
 
     ck_assert_ptr_null(found);
+
+    node_free_all(head);
 }
 
 Suite *test_node_push_back(void)

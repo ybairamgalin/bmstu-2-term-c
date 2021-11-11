@@ -29,20 +29,42 @@ node_t *node_push_back(node_t *head, node_t *elem)
     return head;
 }
 
+void node_free(node_t *node)
+{
+    free(node);
+}
+
+void node_free_all(node_t *head)
+{
+    node_t *cur = head;
+
+    if (cur == NULL)
+        return;
+
+    if (cur->next != NULL)
+        node_free_all(cur->next);
+
+    node_free(cur);
+}
+
 node_t *find(node_t *head, const void *data,
 int (*cmp)(const void*, const void*))
 {
-    struct node *cur = head;
-
-    if (head == NULL)
-        return NULL;
-
-    do {
-        if (cmp(cur->data, data) == 0)
-            return cur;
-
-        cur = cur->next;
-    } while (cur->next);
+    for ( ; head; head = head->next)
+        if (cmp(head->data, data) == 0)
+            return head;
 
     return NULL;
+
+//    if (head == NULL)
+//        return NULL;
+//
+//    struct node *cur = head;
+//
+//    do {
+//        if (cmp(cur->data, data) == 0)
+//            return cur;
+//
+//        cur = cur->next;
+//    } while (cur->next);
 }
