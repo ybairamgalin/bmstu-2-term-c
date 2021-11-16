@@ -12,3 +12,5 @@
 **/.DS_Store
 createtests
 runtests
+lastrelease
+lastdebug
