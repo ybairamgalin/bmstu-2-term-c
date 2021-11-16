@@ -1,0 +1,1 @@
+./app.exe a func_tests/in_files/1x1matrix.txt func_tests/in_files/1x1matrix.txt output.txt
