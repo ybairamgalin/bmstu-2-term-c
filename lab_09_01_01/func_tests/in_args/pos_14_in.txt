@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/two_movies.txt title > output.txt

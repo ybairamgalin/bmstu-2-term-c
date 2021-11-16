@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/wrong_name_and_title.txt 123

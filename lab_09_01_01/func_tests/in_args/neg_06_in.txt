@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/normal_data.txt year year
