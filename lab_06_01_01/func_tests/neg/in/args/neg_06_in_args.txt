@@ -1,0 +1,1 @@
+./main.exe func_tests/neg/in/data/normal_data.txt year year
