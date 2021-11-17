@@ -181,4 +181,6 @@ void my_string_print(my_string_t *string)
         for (size_t i = 0; i < NODE_LNG; i++)
             if (string->head->data[i] != '\0')
                 printf("%c", string->head->data[i]);
+
+    printf("\n");
 }

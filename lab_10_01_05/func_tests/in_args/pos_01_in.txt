@@ -1,1 +1,1 @@
-./app.exe < func_tests/in_args/simple_out.txt
+./app.exe < func_tests/in_files/simple_out.txt > output.txt
