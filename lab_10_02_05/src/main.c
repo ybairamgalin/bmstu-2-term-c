@@ -102,9 +102,6 @@ int handle_operation(const char *operation)
         int index = my_string_find(string, substr);
         my_string_free(string);
 
-        if (index == SUBSTR_NOT_FOUND)
-            return SUBSTR_NOT_FOUND;
-
         printf("%d\n", index);
     }
     else

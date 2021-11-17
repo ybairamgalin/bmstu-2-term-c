@@ -8,12 +8,12 @@ static void string_part_free_all(string_part_t *part)
     if (part == NULL)
         return;
 
-    while (part != NULL)
-    {
-        string_part_t *old = part;
-        part = part->next;
-        free(old);
-    }
+    string_part_t *cur = part;
+
+    if (cur->next)
+        string_part_free_all(cur->next);
+
+    free(cur);
 }
 
 static string_part_t *string_part_create(const char *arr)
@@ -177,10 +177,12 @@ int my_string_find(const my_string_t *string, const char *substr)
 
 void my_string_print(my_string_t *string)
 {
-    for ( ; string->head; string->head = string->head->next)
+    string_part_t *head = string->head;
+
+    for ( ; head; head = head->next)
         for (size_t i = 0; i < NODE_LNG; i++)
-            if (string->head->data[i] != '\0')
-                printf("%c", string->head->data[i]);
+            if (head->data[i] != '\0')
+                printf("%c", head->data[i]);
 
     printf("\n");
 }
