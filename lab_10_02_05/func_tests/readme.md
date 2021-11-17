@@ -9,4 +9,8 @@
 
 ## Negative testing
 
-- 
+- wrong operation
+
+## Coverage
+- `main.c` - 78%
+- `my_string.c` - 90%

@@ -4,9 +4,9 @@ OBJDIR := out
 INCDIR := inc
 
 CFLAGS := -std=c99 -Wall -Werror -I$(INCDIR)
-DEBUGFLAGS := -g -fno-inline -fno-omit-frame-pointer
+DEBUGFLAGS := -g -fno-inline -fno-omit-frame-pointer -O0 -fprofile-arcs -ftest-coverage -fPIC
 RELEASEFLAGS := -DNDEBUG -g0
-CHECK_FLAGS := -lcheck -g3
+CHECK_FLAGS := -lcheck -g3 -fprofile-arcs
 
 OUTDIR := $(shell mkdir -p out)
 OBJS := $(OBJDIR)/main.o $(OBJDIR)/my_string.o
@@ -22,7 +22,7 @@ debug : lastdebug | app.exe
 
 tests : unit func
 
-unit : unit_tests.exe
+unit : debug | unit_tests.exe
 	./unit_tests.exe
 
 lastdebug:
@@ -55,9 +55,11 @@ $(OBJDIR)/check_my_string.o : unit_tests/check_my_string.c inc/check_my_string.h
 
 func : debug
 	python3 func_tests/run_tests.py
+	gcov $(OBJDIR)/*.gcno
 
 clean :
 	rm -rf *.exe
+	rm -rf *.gcov
 	rm -rf $(OBJDIR)/*.o
-	rm -rf $(OBJDIR)/.*gcda
-	rm -rf $(OBJDIR)/.*gcno
+	rm -rf $(OBJDIR)/*.gcda
+	rm -rf $(OBJDIR)/*.gcno
