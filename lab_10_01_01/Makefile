@@ -6,12 +6,11 @@ INCDIR := inc
 CFLAGS := -std=c99 -Wall -Werror -I$(INCDIR)
 DEBUGFLAGS := -g -fno-inline -fno-omit-frame-pointer
 RELEASEFLAGS := -DNDEBUG -g0
-CHECK_FLAGS := -lcheck
+CHECK_FLAGS := -lcheck -g3
 
 OUTDIR := $(shell mkdir -p out)
 OBJS := $(OBJDIR)/main.o $(OBJDIR)/linked_list.o
 UNITOBJS := $(OBJDIR)/check_linked_list.o $(OBJDIR)/check_main.o $(OBJDIR)/linked_list.o
-CHECK_FLAGS := -lcheck -g3
 
 .PHONY : clean func_tests unit release debug
 
@@ -19,7 +18,7 @@ release : CFLAGS += $(RELEASEFLAGS)
 release : lastrelease | app.exe
 
 debug : CFLAGS += $(DEBUGFLAGS)
-debug : lastdebug | app.exe unit
+debug : lastdebug | app.exe
 
 unit : unit_tests.exe
 	./unit_tests.exe
@@ -51,9 +50,6 @@ $(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_linked_list.h
 
 $(OBJDIR)/check_linked_list.o : unit_tests/check_linked_list.c inc/check_linked_list.h inc/linked_list.h
 	$(CC) $(CFLAGS) -o $@ -c $<
-
-func_tests :
-	python3 func_tests/run_tests.py
 
 clean :
 	rm -rf *.exe

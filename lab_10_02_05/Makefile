@@ -53,7 +53,7 @@ $(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_my_string.h
 $(OBJDIR)/check_my_string.o : unit_tests/check_my_string.c inc/check_my_string.h inc/my_string.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-func :
+func : debug
 	python3 func_tests/run_tests.py
 
 clean :
