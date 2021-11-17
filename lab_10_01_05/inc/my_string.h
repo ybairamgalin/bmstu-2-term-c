@@ -7,16 +7,25 @@
 
 typedef struct my_string my_string_t;
 
+struct string_part
+{
+    char data[NODE_LNG];
+    struct string_part *next;
+};
+
+typedef struct string_part string_part_t;
+
 struct my_string
 {
-    node_t *string_head;
-    size_t data_sz;
-    void *data;
+    string_part_t *head;
+    string_part_t *tail;
 };
 
 my_string_t *my_string_create(const char *str);
 void my_string_free(my_string_t *string);
 void my_string_print(my_string_t *string);
-my_string_t *my_string_concat(my_string_t *dest, const my_string_t *src);
+my_string_t *my_string_concat(my_string_t *first, my_string_t *second);
+my_string_t *my_string_del_spaces(my_string_t *string);
+int my_string_find(const my_string_t *string, const char *substr);
 
 #endif

@@ -3,20 +3,68 @@
 #include <string.h>
 #include "my_string.h"
 
+static void string_part_free_all(string_part_t *part)
+{
+    if (part == NULL)
+        return;
+
+    while (part != NULL)
+    {
+        string_part_t *old = part;
+        part = part->next;
+        free(old);
+    }
+}
+
+static string_part_t *string_part_create(const char *arr)
+{
+    string_part_t *part = malloc(sizeof(string_part_t));
+
+    if (part == NULL)
+        return NULL;
+
+    for (size_t i = 0; i < NODE_LNG; i++)
+        if (arr[i] == '\0')
+        {
+            for (size_t j = i; j < NODE_LNG; j++)
+                part->data[j] = '\0';
+
+            break;
+        }
+        else
+            part->data[i] = arr[i];
+
+    part->next = NULL;
+
+    return part;
+}
+
 void my_string_free(my_string_t *string)
 {
-    node_free_all(string->string_head);
-    free(string->data);
+    string_part_free_all(string->head);
     free(string);
 }
 
-static int end_of_line_in_node(const char *node)
+static my_string_t *string_part_push_back(my_string_t *string, string_part_t *new)
 {
-    for (int i = 0; i < NODE_LNG; i++)
-        if (node[i] == '\0')
-            return 1;
+    if (string == NULL)
+        return NULL;
 
-    return 0;
+    if (string->head == NULL)
+    {
+        string->head = new;
+        string->tail = new;
+        return string;
+    }
+
+    if (string->tail == NULL)
+        return NULL;
+
+    string->tail->next = new;
+
+    for ( ; string->tail->next; string->tail = string->tail->next);
+
+    return string;
 }
 
 my_string_t *my_string_create(const char *str)
@@ -26,76 +74,111 @@ my_string_t *my_string_create(const char *str)
     if (string == NULL)
         return NULL;
 
-    string->data_sz = sizeof(char) * strlen(str) + 1;
-    string->string_head = NULL;
-    string->data = malloc(string->data_sz);
+    string->head = NULL;
+    string->tail = NULL;
+    size_t lng = strlen(str) + 1;
 
-    if (string->data == NULL)
+    for (size_t i = 0; i < lng; i += NODE_LNG)
     {
-        free(string);
-        return NULL;
-    }
+        string_part_t *part = string_part_create(str + i);
 
-    memcpy(string->data, str, string->data_sz);
-    int cur_part = 0;
-
-    do {
-        node_t *new = node_create(string->data + cur_part * NODE_LNG);
-
-        if (new == NULL)
+        if (part == NULL)
         {
             my_string_free(string);
             return NULL;
         }
 
-        string->string_head = node_push_back(string->string_head, new);
-    } while (!end_of_line_in_node(string->data + (cur_part++) * NODE_LNG));
+        string = string_part_push_back(string, part);
+    }
 
     return string;
 }
 
-void my_string_print(my_string_t *string)
+my_string_t *my_string_concat(my_string_t *first, my_string_t *second)
 {
-    node_t *head = string->string_head;
+    first->tail->next = second->head;
+    first->tail = second->tail;
+    free(second);
 
-    for ( ; head; head = head->next)
-        for (int i = 0; i < NODE_LNG; i++)
-            if (*((char*)head->data + i) == '\0')
-                return;
-            else
-                printf("%c", *((char*)head->data + i));
+    return first;
 }
 
-my_string_t *my_string_concat(my_string_t *dest, const my_string_t *src)
+my_string_t *my_string_del_spaces(my_string_t *string)
 {
-    dest->data = realloc(dest->data, dest->data_sz + src->data_sz);
+    string_part_t *head = string->head;
 
-    if (dest->data == NULL) // todo add free
-        return NULL;
+    for ( ; head; head = head->next)
+    {
+        for (size_t i = 0; i < NODE_LNG - 1; i++)
+            if (head->data[i] == ' ' && head->data[i + 1] == ' ')
+                head->data[i] = '\0';
 
-    memcpy(dest->data + dest->data_sz, src->data - 1, src->data_sz);
-    node_t *head = dest->string_head;
+        if (head->next)
+            if (head->data[NODE_LNG - 1] == ' ' && head->next->data[0] == ' ')
+                head->data[NODE_LNG - 1] = '\0';
+    }
 
-    for ( ; head->next; head = head->next);
-    int cur_part = 0;
+    return string;
+}
 
+int starts_with(string_part_t *part, size_t index, const char *substr)
+{
+    size_t sub_len = strlen(substr);
 
+    for (size_t i = 0; i < sub_len; i++)
+    {
+        char cur = part->data[index];
 
-    do {
-        node_t *new = node_create(dest->data + dest->data_sz - 1
-                + cur_part * NODE_LNG);
-
-        if (new == NULL)
+        if (cur == '\0' || cur == substr[i])
         {
-            my_string_free(dest);
-            return NULL;
+            if (index < NODE_LNG - 1)
+            {
+                index++;
+                continue;
+            }
+
+            if (part->next)
+            {
+                index = 0;
+                part = part->next;
+                continue;
+            }
+
+            return 0;
         }
 
-        dest->string_head = node_push_back(dest->string_head, new);
-    } while (!end_of_line_in_node(dest->data + dest->data_sz - 1 +
-                (cur_part++) * NODE_LNG));
+        return 0;
+    }
 
-    dest->data_sz = dest->data_sz + src->data_sz - 1;
+    return 1;
+}
 
-    return dest;
+int my_string_find(const my_string_t *string, const char *substr)
+{
+    int str_index = 0;
+    size_t sub_len = strlen(substr);
+
+    if (sub_len == 0)
+        return -1;
+
+    string_part_t *part = string->head;
+
+    for ( ; part; part = part->next)
+        for (size_t i = 0; i < NODE_LNG; i++)
+        {
+            if (starts_with(part, i, substr))
+                return str_index;
+
+            str_index++;
+        }
+
+    return -1;
+}
+
+void my_string_print(my_string_t *string)
+{
+    for ( ; string->head; string->head = string->head->next)
+        for (size_t i = 0; i < NODE_LNG; i++)
+            if (string->head->data[i] != '\0')
+                printf("%c", string->head->data[i]);
 }
