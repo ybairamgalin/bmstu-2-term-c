@@ -205,6 +205,7 @@ Suite *test_my_string_find(void)
 
     TCase *neg = tcase_create("negative");
     tcase_add_test(neg, test_my_string_find_not_found);
+    suite_add_tcase(suite, neg);
 
     return suite;
 }
@@ -229,7 +230,7 @@ int run_check_my_string(void)
     failed += run_suite(test_my_string_create);
     failed += run_suite(test_my_string_concat);
     failed += run_suite(test_my_string_del_spaces);
-//    failed += run_suite(test_my_string_find);
+    failed += run_suite(test_my_string_find);
 
     return failed;
 }
