@@ -13,13 +13,13 @@ OBJS := $(OBJDIR)/main.o $(OBJDIR)/linked_list.o $(OBJDIR)/my_string.o
 UNITOBJS := $(OBJDIR)/check_my_string.o $(OBJDIR)/check_main.o $(OBJDIR)/my_string.o $(OBJDIR)/linked_list.o
 CHECK_FLAGS := -lcheck -g3
 
-.PHONY : clean func_tests unit release debug
+.PHONY : clean func unit release debug
 
 release : CFLAGS += $(RELEASEFLAGS)
 release : lastrelease | app.exe
 
 debug : CFLAGS += $(DEBUGFLAGS)
-debug : lastdebug | app.exe unit
+debug : lastdebug | app.exe unit func
 
 unit : unit_tests.exe
 	./unit_tests.exe
@@ -55,7 +55,7 @@ $(OBJDIR)/check_main.o : unit_tests/check_main.c inc/check_my_string.h
 $(OBJDIR)/check_my_string.o : unit_tests/check_my_string.c inc/check_my_string.h inc/my_string.h
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-func_tests :
+func :
 	python3 func_tests/run_tests.py
 
 clean :

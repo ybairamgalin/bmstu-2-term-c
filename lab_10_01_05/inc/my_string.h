@@ -5,6 +5,8 @@
 
 #define NODE_LNG 4
 
+#define SUBSTR_NOT_FOUND -1
+
 typedef struct my_string my_string_t;
 
 struct string_part

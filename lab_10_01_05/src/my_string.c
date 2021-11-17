@@ -159,7 +159,7 @@ int my_string_find(const my_string_t *string, const char *substr)
     size_t sub_len = strlen(substr);
 
     if (sub_len == 0)
-        return -1;
+        return SUBSTR_NOT_FOUND;
 
     string_part_t *part = string->head;
 
@@ -172,7 +172,7 @@ int my_string_find(const my_string_t *string, const char *substr)
             str_index++;
         }
 
-    return -1;
+    return SUBSTR_NOT_FOUND;
 }
 
 void my_string_print(my_string_t *string)
