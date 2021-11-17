@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/four_movies_no_new_line.txt title "Winx club" > output.txt

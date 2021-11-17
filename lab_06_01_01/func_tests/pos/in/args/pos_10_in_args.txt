@@ -1,0 +1,1 @@
+./main.exe func_tests/pos/in/data/one_movie.txt year 2002
