@@ -28,7 +28,6 @@ static string_part_t *string_part_create(const char *arr)
         {
             for (size_t j = i; j < NODE_LNG; j++)
                 part->data[j] = '\0';
-
             break;
         }
         else
@@ -62,7 +61,7 @@ static my_string_t *string_part_push_back(my_string_t *string, string_part_t *ne
 
     string->tail->next = new;
 
-    for ( ; string->tail->next; string->tail = string->tail->next);
+    for (; string->tail->next; string->tail = string->tail->next);
 
     return string;
 }
@@ -107,7 +106,7 @@ my_string_t *my_string_del_spaces(my_string_t *string)
 {
     string_part_t *head = string->head;
 
-    for ( ; head; head = head->next)
+    for (; head; head = head->next)
     {
         for (size_t i = 0; i < NODE_LNG - 1; i++)
             if (head->data[i] == ' ' && head->data[i + 1] == ' ')
@@ -163,7 +162,7 @@ int my_string_find(const my_string_t *string, const char *substr)
 
     string_part_t *part = string->head;
 
-    for ( ; part; part = part->next)
+    for (; part; part = part->next)
         for (size_t i = 0; i < NODE_LNG; i++)
         {
             if (starts_with(part, i, substr))
@@ -179,7 +178,7 @@ void my_string_print(my_string_t *string)
 {
     string_part_t *head = string->head;
 
-    for ( ; head; head = head->next)
+    for (; head; head = head->next)
         for (size_t i = 0; i < NODE_LNG; i++)
             if (head->data[i] != '\0')
                 printf("%c", head->data[i]);
