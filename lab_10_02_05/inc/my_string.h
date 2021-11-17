@@ -1,10 +1,7 @@
 #ifndef _MY_STRING_H_
 #define _MY_STRING_H_
 
-#include "linked_list.h"
-
 #define NODE_LNG 4
-
 #define SUBSTR_NOT_FOUND (-1)
 
 typedef struct my_string my_string_t;

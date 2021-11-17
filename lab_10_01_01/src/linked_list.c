@@ -119,7 +119,7 @@ void front_back_split(node_t *head, node_t **back)
 
     *back = NULL;
     int count = list_count(head);
-    int new_list_index;
+    size_t new_list_index;
 
     if (count % 2 == 0)
         new_list_index = count / 2;
@@ -128,7 +128,7 @@ void front_back_split(node_t *head, node_t **back)
 
     node_t *new_start = head;
 
-    for (int i = 0; i < new_list_index; i++, new_start = new_start->next);
+    for (size_t i = 0; i < new_list_index; i++, new_start = new_start->next);
 
     *back = new_start;
 
