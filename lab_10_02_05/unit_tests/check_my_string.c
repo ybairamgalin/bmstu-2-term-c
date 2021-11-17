@@ -228,7 +228,7 @@ int run_check_my_string(void)
     int failed = 0;
     failed += run_suite(test_my_string_create);
     failed += run_suite(test_my_string_concat);
-//    failed += run_suite(test_my_string_del_spaces);
+    failed += run_suite(test_my_string_del_spaces);
 //    failed += run_suite(test_my_string_find);
 
     return failed;
