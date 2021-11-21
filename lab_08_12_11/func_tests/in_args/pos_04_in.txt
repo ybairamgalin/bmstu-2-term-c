@@ -1,0 +1,1 @@
+./app.exe m func_tests/in_files/1x3matrix.txt func_tests/in_files/3x1matrix.txt output.txt

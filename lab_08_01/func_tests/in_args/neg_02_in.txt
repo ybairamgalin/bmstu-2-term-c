@@ -1,0 +1,1 @@
+./app.exe < func_tests/in_files/bad_filename.txt > output.txt

@@ -1,0 +1,1 @@
+./app.exe func_tests/in_files/one_movie.txt name "Steven Spielberg" > output.txt
